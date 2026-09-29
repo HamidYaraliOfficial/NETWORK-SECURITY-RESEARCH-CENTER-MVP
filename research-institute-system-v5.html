@@ -1,0 +1,2730 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>طرح جامع مهندسی سامانه مدیریت پژوهش | مجموعه شیت‌های فنی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{
+  --paper:#ECE9DE;
+  --paper-card:#F7F5EC;
+  --paper-line:#D6D0BE;
+  --ink:#20242E;
+  --ink-soft:#565C6B;
+  --navy:#152238;
+  --navy-2:#1E3454;
+  --navy-3:#2A4568;
+  --cyan:#6FA6B6;
+  --cyan-soft:#BFD8DD;
+  --copper:#AD6B3A;
+  --copper-2:#C88E5B;
+  --brick:#943F35;
+  --sage:#5B7A5D;
+  --font-display:'Vazirmatn',sans-serif;
+  --font-body:'Vazirmatn',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top:20px;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.9;
+}
+body.modal-open{overflow:hidden;}
+::selection{background:var(--copper-2);color:#fff;}
+
+.shell{
+  display:grid;
+  grid-template-columns: 1fr 250px;
+  max-width:1280px;
+  margin:0 auto;
+  align-items:start;
+  gap:28px;
+  padding:0 20px 80px;
+}
+@media (max-width:920px){
+  .shell{grid-template-columns:1fr;}
+  .toc{position:static !important; order:-1;}
+}
+
+.hero{
+  background:
+    radial-gradient(circle at 85% 15%, rgba(111,166,182,.16), transparent 45%),
+    linear-gradient(180deg,var(--navy) 0%, #101a2c 100%);
+  color:#EFEDE4;
+  padding:64px 44px 0;
+  margin-bottom:26px;
+  position:relative;
+  overflow:hidden;
+  border-bottom:6px solid var(--copper);
+}
+.hero-kicker{
+  font-family:var(--font-mono);
+  font-size:13px;
+  letter-spacing:.02em;
+  color:var(--cyan-soft);
+  margin-bottom:18px;
+}
+.hero h1{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:clamp(28px,4vw,46px);
+  line-height:1.35;
+  margin:0 0 18px;
+  max-width:820px;
+}
+.hero p.lead{
+  max-width:680px;
+  font-size:17px;
+  color:#D7D4C7;
+  margin:0 0 34px;
+}
+.hero-titleblock{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+  border-top:1px solid rgba(239,237,228,.25);
+  margin-top:10px;
+}
+.hero-titleblock div{
+  padding:16px 26px;
+  border-inline-start:1px solid rgba(239,237,228,.25);
+  min-width:150px;
+}
+.hero-titleblock div:first-child{border-inline-start:none;}
+.hero-titleblock .lbl{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:var(--cyan-soft);
+  margin-bottom:6px;
+}
+.hero-titleblock .val{font-size:14.5px; font-weight:600;}
+
+.toc{
+  position:sticky;
+  top:20px;
+  background:var(--paper-card);
+  border:1px solid var(--paper-line);
+  border-inline-end:5px solid var(--navy);
+  padding:20px 18px;
+}
+.toc h2{
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--ink-soft);
+  margin:0 0 12px;
+  letter-spacing:.02em;
+}
+.toc ol{list-style:none; margin:0; padding:0; counter-reset:sheetno;}
+.toc li{margin-bottom:2px;}
+.toc a{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--ink);
+  font-size:13.5px;
+  padding:7px 6px;
+  border-radius:2px;
+}
+.toc a:hover{background:rgba(21,34,56,.08);}
+.toc .n{
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:var(--copper);
+  min-width:22px;
+}
+
+main{min-width:0;}
+.intro-block{
+  background:var(--paper-card);
+  border:1px solid var(--paper-line);
+  padding:26px 30px;
+  margin-bottom:26px;
+}
+.intro-block h2{font-family:var(--font-display); font-size:20px; margin:0 0 12px;}
+.intro-block p{margin:0 0 10px; color:var(--ink-soft); max-width:78ch;}
+
+.sheet{
+  background:var(--paper-card);
+  border:1px solid var(--paper-line);
+  margin-bottom:30px;
+  box-shadow:7px 7px 0 rgba(21,34,56,.07);
+}
+.sheet-head{
+  padding:22px 28px 6px;
+}
+.sheet-eyebrow{
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--copper);
+  margin-bottom:6px;
+}
+.sheet-head h2{
+  font-family:var(--font-display);
+  font-size:23px;
+  font-weight:700;
+  margin:0 0 10px;
+}
+.sheet-head p{
+  color:var(--ink-soft);
+  max-width:82ch;
+  margin:0 0 8px;
+  font-size:15px;
+}
+.sheet-body{padding:6px 28px 26px;}
+.capture{
+  background:#fff;
+  border:1px solid var(--paper-line);
+  padding:18px;
+  overflow-x:auto;
+  position:relative;
+}
+.capture svg{display:block; width:100%; height:auto; min-width:640px;}
+.capture table.matrix{width:100%;}
+
+.title-block{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:0;
+  background:var(--navy);
+  color:#EFEDE4;
+  border-top:3px solid var(--copper);
+}
+.title-block > div{
+  padding:12px 20px;
+  border-inline-start:1px solid rgba(239,237,228,.2);
+}
+.title-block > div:first-child{border-inline-start:none;}
+.tb-num{font-family:var(--font-mono); font-size:13px; color:var(--cyan-soft); min-width:98px;}
+.tb-title{font-size:14px; font-weight:600; flex:1;}
+.tb-meta{font-family:var(--font-mono); font-size:12px; color:#B9B5A6;}
+.tb-actions{margin-inline-start:auto; padding:0 !important; border-inline-start:1px solid rgba(239,237,228,.2) !important; display:flex; align-items:stretch;}
+.tb-actions button{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:13.5px;
+  border:none;
+  padding:14px 20px;
+  cursor:pointer;
+  transition:background .15s ease;
+  color:#fff;
+}
+.tb-actions button.btn-fs{background:var(--navy-3); border-inline-end:1px solid rgba(255,255,255,.15);}
+.tb-actions button.btn-fs:hover{background:#3a5a80;}
+.tb-actions button.btn-dl{background:var(--copper);}
+.tb-actions button.btn-dl:hover{background:var(--copper-2);}
+.tb-actions button:focus-visible{outline:3px solid var(--cyan); outline-offset:-3px;}
+.tb-actions .status{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:10.5px;
+  color:var(--cyan-soft);
+  margin-top:2px;
+  min-height:12px;
+  padding:0 14px;
+}
+
+table.matrix{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13.5px;
+}
+table.matrix caption{
+  text-align:start;
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--ink-soft);
+  margin-bottom:10px;
+}
+table.matrix th, table.matrix td{
+  border:1px solid var(--paper-line);
+  padding:10px 12px;
+  text-align:center;
+}
+table.matrix thead th{
+  background:var(--navy);
+  color:#fff;
+  font-weight:600;
+  font-size:13px;
+}
+table.matrix tbody th{
+  text-align:start;
+  background:var(--paper);
+  font-weight:600;
+  white-space:nowrap;
+}
+table.matrix td.full{background:#E7EFE8; color:var(--sage); font-weight:700;}
+table.matrix td.proj{background:#F3E6DA; color:var(--copper); font-weight:700;}
+table.matrix td.self{background:#EAF0F3; color:var(--navy-3); font-weight:600;}
+table.matrix td.none{color:#B7B2A2;}
+
+.legend-row{display:flex; flex-wrap:wrap; gap:18px; margin-top:16px; font-size:13px; color:var(--ink-soft);}
+.legend-row span{display:inline-flex; align-items:center; gap:8px;}
+.legend-row i{width:14px; height:14px; display:inline-block; border-radius:2px;}
+
+.note{
+  border-inline-start:4px solid var(--brick);
+  background:#F4E9E5;
+  padding:12px 16px;
+  font-size:13.5px;
+  color:#5A2E27;
+  margin-top:14px;
+}
+.note.good{border-inline-start-color:var(--sage); background:#E9F0E9; color:#31462F;}
+.note.info{border-inline-start-color:var(--navy-3); background:#E7EEF3; color:#1E3A50;}
+
+footer{
+  max-width:1280px;
+  margin:0 auto;
+  padding:30px 20px 60px;
+  color:var(--ink-soft);
+  font-size:13px;
+  font-family:var(--font-mono);
+}
+
+text{font-family:var(--font-body);}
+.mono{font-family:var(--font-mono);}
+
+.capture svg{direction:ltr;}
+.capture svg text, .capture svg tspan{direction:ltr; unicode-bidi:embed;}
+
+/* ============ FULLSCREEN MODAL ============ */
+.fs-modal{
+  position:fixed;
+  inset:0;
+  background:#f4f1e6;
+  z-index:9999;
+  display:none;
+  flex-direction:column;
+  opacity:0;
+  transition:opacity .2s ease;
+}
+.fs-modal.open{display:flex; opacity:1;}
+.fs-modal-header{
+  background:var(--navy);
+  color:#fff;
+  padding:14px 22px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  border-bottom:4px solid var(--copper);
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  flex-shrink:0;
+}
+.fs-modal-header .fs-eyebrow{
+  font-family:var(--font-mono);
+  font-size:11.5px;
+  color:var(--cyan-soft);
+}
+.fs-modal-header .fs-title{
+  font-size:16px;
+  font-weight:700;
+}
+.fs-modal-actions{
+  margin-inline-start:auto;
+  display:flex;
+  gap:8px;
+}
+.fs-modal-actions button{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:13px;
+  background:var(--copper);
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  cursor:pointer;
+  border-radius:3px;
+  transition:background .15s;
+}
+.fs-modal-actions button:hover{background:var(--copper-2);}
+.fs-modal-actions button.close-btn{
+  background:transparent;
+  border:1.5px solid rgba(255,255,255,.4);
+  font-size:15px;
+  padding:6px 14px;
+}
+.fs-modal-actions button.close-btn:hover{background:rgba(255,255,255,.12);}
+.fs-modal-body{
+  flex:1;
+  overflow:auto;
+  padding:24px;
+  background:#f4f1e6;
+}
+.fs-modal-body .fs-content{
+  background:#fff;
+  border:1px solid var(--paper-line);
+  padding:26px;
+  max-width:2200px;
+  margin:0 auto;
+}
+.fs-modal-body svg{
+  display:block;
+  width:100%;
+  height:auto;
+  max-width:100%;
+  direction:ltr;
+}
+.fs-modal-body svg text,
+.fs-modal-body svg tspan{
+  direction:ltr; unicode-bidi:embed;
+}
+.fs-modal-body table.matrix{
+  font-size:14.5px;
+}
+.fs-modal-body h3{
+  margin-top:22px;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-kicker">مستند مهندسی نرم‌افزار &middot; مجموعه شیت‌های فنی سامانه</div>
+  <h1>سامانه یکپارچه مدیریت پژوهش، پروژه، سرباز و کارآموز پژوهشکده</h1>
+  <p class="lead">این سند، معماری نقش‌ها و سطوح دسترسی، ماژول‌های شش‌گانه، گردش‌کار هر ماژول و مدل کامل داده (ERD) سامانه را به‌صورت مجموعه‌ای از شیت‌های فنی ارائه می‌دهد. هر شیت را می‌توان جداگانه با کیفیت بالا به‌صورت تصویر دانلود کرد یا در حالت تمام‌صفحه مشاهده نمود.</p>
+  <div class="hero-titleblock">
+    <div><span class="lbl">نوع سند</span><span class="val">مستند تحلیل و طراحی سامانه</span></div>
+    <div><span class="lbl">تعداد شیت</span><span class="val">۲۱ شیت فنی</span></div>
+    <div><span class="lbl">نسخه</span><span class="val">نسخه ۱٫۵</span></div>
+    <div><span class="lbl">تاریخ</span><span class="val">مهر ۱۴۰۵</span></div>
+  </div>
+</div>
+
+<div class="shell">
+  <main>
+
+    <div class="intro-block">
+      <h2>درباره این سند</h2>
+      <p>سامانه بر پایه هشت نقش کاربری و شش ماژول اصلی طراحی شده است. اصل راهنمای طراحی این بوده که ماژول‌ها از نظر داده و کد <strong>مستقل</strong> باشند اما از طریق کلیدهای ارتباطی مشترک (شناسه کاربر، شناسه پروژه) به‌طور کامل به هم متصل بمانند، امکان <strong>ارتقا</strong>ی هرکدام بدون شکستن سایرین وجود داشته باشد و هیچ مسیر داده‌ای به <strong>بن‌بست</strong> ختم نشود — یعنی هر رکورد (سرباز، کارآموز، همکار، شرکت) همیشه قابل ردیابی، تبدیل و تاریخچه‌گیری است، نه حذف‌شدنی.</p>
+      <p>فهرست شیت‌ها در ستون کناری آمده است. زیر هر نمودار یا جدول، یک نوار عنوان مهندسی (Title Block) با دکمه‌های «نمایش تمام‌صفحه» و «دانلود تصویر» قرار دارد.</p>
+    </div>
+
+    <!-- ================= SHEET 01 – PRINCIPLES ================= -->
+    <section class="sheet" id="sheet-01">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">اصول طراحی</div>
+        <h2>روش‌شناسی: استقلال، اتصال، ارتقاپذیری، بدون بن‌بست</h2>
+        <p>پیش از ورود به جزئیات نقش‌ها و ماژول‌ها، چهار اصل زیر بر کل معماری سامانه — از پایگاه‌داده تا رابط کاربری — حاکم است.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-01">
+          <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <style>
+              .p-box{fill:#F7F5EC; stroke:#152238; stroke-width:2;}
+              .p-head{fill:#152238;}
+              .p-h-text{fill:#fff; font-size:15px; font-weight:700;}
+              .p-b-text{fill:#20242E; font-size:12.5px;}
+            </style>
+            <g transform="translate(20,20)">
+              <rect class="p-box" x="0" y="0" width="220" height="260" rx="2"/>
+              <rect class="p-head" x="0" y="0" width="220" height="46" rx="2"/>
+              <text class="p-h-text" x="110" y="29" text-anchor="middle">استقلال ماژول‌ها</text>
+              <text class="p-b-text" x="110" y="80" text-anchor="middle">هر ماژول دیتابیس، منطق</text>
+              <text class="p-b-text" x="110" y="98" text-anchor="middle">و رابط مخصوص به خود را</text>
+              <text class="p-b-text" x="110" y="116" text-anchor="middle">دارد و می‌تواند مستقل</text>
+              <text class="p-b-text" x="110" y="134" text-anchor="middle">تغییر یا نگهداری شود.</text>
+              <text class="p-b-text" x="110" y="170" text-anchor="middle" fill="#AD6B3A" font-weight="700">۶ ماژول مجزا</text>
+            </g>
+            <g transform="translate(262,20)">
+              <rect class="p-box" x="0" y="0" width="220" height="260" rx="2"/>
+              <rect class="p-head" x="0" y="0" width="220" height="46" rx="2"/>
+              <text class="p-h-text" x="110" y="29" text-anchor="middle">اتصال یکپارچه</text>
+              <text class="p-b-text" x="110" y="80" text-anchor="middle">شناسهٔ کاربر و شناسهٔ</text>
+              <text class="p-b-text" x="110" y="98" text-anchor="middle">پروژه به‌عنوان کلید</text>
+              <text class="p-b-text" x="110" y="116" text-anchor="middle">مشترک، همهٔ ماژول‌ها را</text>
+              <text class="p-b-text" x="110" y="134" text-anchor="middle">بدون کوپلینگ مستقیم</text>
+              <text class="p-b-text" x="110" y="152" text-anchor="middle">به هم متصل می‌کند.</text>
+              <text class="p-b-text" x="110" y="188" text-anchor="middle" fill="#AD6B3A" font-weight="700">FK های اشتراکی</text>
+            </g>
+            <g transform="translate(504,20)">
+              <rect class="p-box" x="0" y="0" width="220" height="260" rx="2"/>
+              <rect class="p-head" x="0" y="0" width="220" height="46" rx="2"/>
+              <text class="p-h-text" x="110" y="29" text-anchor="middle">ارتقاپذیری</text>
+              <text class="p-b-text" x="110" y="80" text-anchor="middle">افزودن نقش، فیلد یا</text>
+              <text class="p-b-text" x="110" y="98" text-anchor="middle">حتی ماژول جدید بدون</text>
+              <text class="p-b-text" x="110" y="116" text-anchor="middle">تغییر در ساختار موجود</text>
+              <text class="p-b-text" x="110" y="134" text-anchor="middle">امکان‌پذیر است (جداول</text>
+              <text class="p-b-text" x="110" y="152" text-anchor="middle">واسط + Lookup ها).</text>
+              <text class="p-b-text" x="110" y="188" text-anchor="middle" fill="#AD6B3A" font-weight="700">جداول Lookup / M:N</text>
+            </g>
+            <g transform="translate(746,20)">
+              <rect class="p-box" x="0" y="0" width="220" height="260" rx="2"/>
+              <rect class="p-head" x="0" y="0" width="220" height="46" rx="2"/>
+              <text class="p-h-text" x="110" y="29" text-anchor="middle">بدون بن‌بست</text>
+              <text class="p-b-text" x="110" y="80" text-anchor="middle">هیچ رکوردی حذف فیزیکی</text>
+              <text class="p-b-text" x="110" y="98" text-anchor="middle">نمی‌شود؛ فقط وضعیت آن</text>
+              <text class="p-b-text" x="110" y="116" text-anchor="middle">تغییر می‌کند (سرباز/</text>
+              <text class="p-b-text" x="110" y="134" text-anchor="middle">کارآموز → همکار پروژه)</text>
+              <text class="p-b-text" x="110" y="152" text-anchor="middle">و تاریخچه حفظ می‌شود.</text>
+              <text class="p-b-text" x="110" y="188" text-anchor="middle" fill="#AD6B3A" font-weight="700">Soft-status + Audit</text>
+            </g>
+          </svg>
+        </div>
+        <div class="note info">این چهار اصل در تمام شیت‌های بعدی — به‌ویژه در نمودار معماری ماژول‌ها (شیت ۰۴) و مدل کامل داده (شیت ۱۰) — به‌صورت عملی پیاده شده‌اند.</div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;01</div>
+        <div class="tb-title">اصول طراحی سامانه</div>
+        <div class="tb-meta">REV 1.0 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-01','SHEET 01 · اصول طراحی سامانه')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-01','01-اصول-طراحی')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-01" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <section class="sheet" id="sheet-02">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">نقش‌ها و سطوح دسترسی</div>
+        <h2>هشت نقش کاربری در چهار سطح دسترسی</h2>
+        <p>نقش‌های ۱ و ۲ دسترسی کامل به کل سامانه دارند. نقش‌های ۱ تا ۵ قابل ترکیب روی یک کاربرند (مثلاً معاون می‌تواند هم‌زمان پژوهشگر و در یک پروژهٔ دیگر کنترل‌پروژه باشد) و نقش‌های ۴ و ۵ می‌توانند به‌ازای هر پروژه متفاوت باشند. تخصیص نقش‌های ۱ تا ۵ فقط توسط نقش‌های ۱ تا ۳ انجام می‌شود.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-02">
+          <svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs>
+              <marker id="rl2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#565C6B"/></marker>
+            </defs>
+            <style>
+              .rbox{stroke-width:2;}
+              .rt1{fill:#152238; stroke:#152238;}
+              .rt2{fill:#1E3454; stroke:#1E3454;}
+              .rt3{fill:#AD6B3A; stroke:#AD6B3A;}
+              .rt4{fill:#F7F5EC; stroke:#2A4568;}
+              .rtxt-l{fill:#fff; font-size:14px; font-weight:700;}
+              .rtxt-d{fill:#152238; font-size:13.5px; font-weight:700;}
+              .rl{stroke:#565C6B; stroke-width:1.6; fill:none;}
+              .tier-lbl{font-family:'JetBrains Mono',monospace; font-size:11.5px; fill:#565C6B;}
+            </style>
+
+            <rect class="rbox rt1" x="150" y="20" width="240" height="60" rx="3"/>
+            <text class="rtxt-l" x="270" y="46" text-anchor="middle">۱ · مدیر پژوهشکده</text>
+            <text class="rtxt-l" x="270" y="64" text-anchor="middle" font-size="11" font-weight="400">دسترسی کامل سامانه</text>
+
+            <rect class="rbox rt1" x="610" y="20" width="240" height="60" rx="3"/>
+            <text class="rtxt-l" x="730" y="46" text-anchor="middle">۲ · معاون پژوهشکده</text>
+            <text class="rtxt-l" x="730" y="64" text-anchor="middle" font-size="11" font-weight="400">دسترسی کامل سامانه</text>
+            <text class="tier-lbl" x="500" y="16" text-anchor="middle">SHEET 02 / TIER 1 — FULL SYSTEM ACCESS</text>
+
+            <path class="rl" d="M270,80 L270,110 L500,110" />
+            <path class="rl" d="M730,80 L730,110 L500,110" />
+            <path class="rl" d="M500,110 L500,150" marker-end="url(#rl2)"/>
+
+            <rect class="rbox rt2" x="380" y="150" width="240" height="60" rx="3"/>
+            <text class="rtxt-l" x="500" y="176" text-anchor="middle">۳ · قائم‌مقام پژوهشکده</text>
+            <text class="rtxt-l" x="500" y="194" text-anchor="middle" font-size="11" font-weight="400">دسترسی مدیریتی گسترده</text>
+
+            <path class="rl" d="M500,210 L500,240" marker-end="url(#rl2)"/>
+            <path class="rl" d="M500,240 L270,240 L270,270" marker-end="url(#rl2)"/>
+            <path class="rl" d="M500,240 L730,240 L730,270" marker-end="url(#rl2)"/>
+
+            <rect class="rbox rt3" x="150" y="270" width="240" height="60" rx="3"/>
+            <text class="rtxt-l" x="270" y="296" text-anchor="middle">۴ · کنترل پروژه</text>
+            <text class="rtxt-l" x="270" y="314" text-anchor="middle" font-size="11" font-weight="400">دسترسی در محدودهٔ پروژه</text>
+
+            <rect class="rbox rt3" x="610" y="270" width="240" height="60" rx="3"/>
+            <text class="rtxt-l" x="730" y="296" text-anchor="middle">۵ · پژوهشگر / مجری پروژه</text>
+            <text class="rtxt-l" x="730" y="314" text-anchor="middle" font-size="11" font-weight="400">دسترسی در محدودهٔ پروژه</text>
+            <text class="tier-lbl" x="500" y="266" text-anchor="middle">TIER 3 — PROJECT-SCOPED (نقش پویا، به‌ازای هر پروژه)</text>
+
+            <path class="rl" d="M270,330 L270,360 L500,360" />
+            <path class="rl" d="M730,330 L730,360 L500,360" />
+            <path class="rl" d="M500,360 L500,400" marker-end="url(#rl2)"/>
+
+            <rect class="rbox rt4" x="90" y="420" width="230" height="60" rx="3"/>
+            <text class="rtxt-d" x="205" y="446" text-anchor="middle">۶ · همکار پروژه</text>
+            <text class="rtxt-d" x="205" y="464" text-anchor="middle" font-size="11" font-weight="400" fill="#565C6B">درونی / خارجی / شرکتی</text>
+
+            <rect class="rbox rt4" x="385" y="420" width="230" height="60" rx="3"/>
+            <text class="rtxt-d" x="500" y="446" text-anchor="middle">۷ · سرباز</text>
+            <text class="rtxt-d" x="500" y="464" text-anchor="middle" font-size="11" font-weight="400" fill="#565C6B">دورهٔ خدمت مشخص</text>
+
+            <rect class="rbox rt4" x="680" y="420" width="230" height="60" rx="3"/>
+            <text class="rtxt-d" x="795" y="446" text-anchor="middle">۸ · کارآموز</text>
+            <text class="rtxt-d" x="795" y="464" text-anchor="middle" font-size="11" font-weight="400" fill="#565C6B">دورهٔ کارآموزی مشخص</text>
+            <text class="tier-lbl" x="500" y="416" text-anchor="middle">TIER 4 — پنل شخصی و گزارش‌دهی محدود</text>
+
+            <g transform="translate(90,520)">
+              <rect width="18" height="18" fill="#152238"/><text x="26" y="14" font-size="12.5" fill="#20242E">سطح ۱ — دسترسی کامل به کل سامانه</text>
+              <rect x="330" width="18" height="18" fill="#1E3454"/><text x="356" y="14" font-size="12.5" fill="#20242E">سطح ۲ — دسترسی مدیریتی گسترده</text>
+              <rect x="640" width="18" height="18" fill="#AD6B3A"/><text x="666" y="14" font-size="12.5" fill="#20242E">سطح ۳ — دسترسی محدود به پروژه</text>
+              <rect y="40" width="18" height="18" fill="#F7F5EC" stroke="#2A4568" stroke-width="2"/><text x="26" y="54" font-size="12.5" fill="#20242E">سطح ۴ — پنل شخصی و گزارش‌دهی</text>
+            </g>
+            <text x="500" y="600" text-anchor="middle" font-size="12.5" fill="#943F35">نقش‌های ۱ تا ۵ روی یک کاربر قابل ترکیب هستند؛ فقط نقش‌های ۱ تا ۳ می‌توانند این نقش‌ها را تخصیص دهند.</text>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;02</div>
+        <div class="tb-title">نقش‌ها و سطوح دسترسی</div>
+        <div class="tb-meta">REV 1.0 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-02','SHEET 02 · نقش‌ها و سطوح دسترسی')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-02','02-نقش-ها-و-سطوح-دسترسی')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-02" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <section class="sheet" id="sheet-03">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">ماتریس دسترسی</div>
+        <h2>دسترسی هر نقش به هر ماژول</h2>
+        <p>ماتریس زیر سطح دسترسی هرکدام از نقش‌های ۳ تا ۸ را به شش ماژول اصلی نشان می‌دهد (نقش‌های ۱ و ۲ در همهٔ ماژول‌ها دسترسی کامل دارند و برای اختصار در ماتریس تکرار نشده‌اند).</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-03">
+          <table class="matrix">
+            <caption>Access Matrix — Roles (rows) × Modules (columns)</caption>
+            <thead>
+              <tr>
+                <th>نقش</th>
+                <th>۱ مدیریت کاربران</th>
+                <th>۲ مدیریت پروژه‌ها</th>
+                <th>۳ مدیریت همکار پروژه</th>
+                <th>۴ مدیریت سرباز</th>
+                <th>۵ مدیریت کارآموز</th>
+                <th>۶ مدیریت شرکت‌ها و قراردادها</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th>۳ قائم‌مقام</th><td class="full">کامل</td><td class="full">کامل</td><td class="full">کامل</td><td class="full">کامل</td><td class="full">کامل</td><td class="full">کامل</td></tr>
+              <tr><th>۴ کنترل پروژه</th><td class="none">—</td><td class="proj">کامل در پروژهٔ خود</td><td class="proj">افزودن/مدیریت</td><td class="proj">افزودن/مدیریت</td><td class="proj">افزودن/مدیریت</td><td class="proj">افزودن/مدیریت</td></tr>
+              <tr><th>۵ پژوهشگر / مجری</th><td class="none">—</td><td class="proj">ثبت پروپوزال؛ کامل پس از تایید</td><td class="proj">افزودن/مدیریت</td><td class="proj">افزودن/مدیریت</td><td class="proj">افزودن/مدیریت</td><td class="proj">افزودن/مدیریت</td></tr>
+              <tr><th>۶ همکار پروژه</th><td class="self">پنل شخصی</td><td class="self">مشاهدهٔ پروژهٔ خود</td><td class="self">اطلاعات و گزارش خود</td><td class="none">—</td><td class="none">—</td><td class="self">مشاهدهٔ قراردادهای مرتبط</td></tr>
+              <tr><th>۷ سرباز</th><td class="self">پنل شخصی</td><td class="self">مشاهدهٔ پروژهٔ خود</td><td class="none">—</td><td class="self">اطلاعات و گزارش خود</td><td class="none">—</td><td class="none">—</td></tr>
+              <tr><th>۸ کارآموز</th><td class="self">پنل شخصی</td><td class="self">مشاهدهٔ پروژهٔ خود</td><td class="none">—</td><td class="none">—</td><td class="self">اطلاعات و گزارش خود</td><td class="none">—</td></tr>
+            </tbody>
+          </table>
+          <div class="legend-row">
+            <span><i style="background:#5B7A5D"></i>کامل — مدیریت تمام رکوردها</span>
+            <span><i style="background:#AD6B3A"></i>محدود به پروژه — فقط پروژه‌های مرتبط با کاربر</span>
+            <span><i style="background:#2A4568"></i>پنل شخصی — فقط اطلاعات و گزارش‌های خود کاربر</span>
+            <span><i style="background:#EDEAE0;border:1px solid #B7B2A2"></i>بدون دسترسی</span>
+          </div>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;03</div>
+        <div class="tb-title">ماتریس دسترسی نقش × ماژول</div>
+        <div class="tb-meta">REV 1.0 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-03','SHEET 03 · ماتریس دسترسی نقش × ماژول')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-03','03-ماتریس-دسترسی')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-03" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 04 — MODULE ARCHITECTURE ================= -->
+    <section class="sheet" id="sheet-04">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">معماری سامانه</div>
+        <h2>معماری و ارتباط شش ماژول اصلی</h2>
+        <p>هر ماژول پایگاه‌داده و منطق مستقل دارد. ماژول ۶ (شرکت‌ها و قراردادها) هم به پروژه‌ها و هم به همکاران پروژه (به‌عنوان همکار خارجی/شرکتی) متصل می‌شود.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-04">
+          <svg viewBox="0 0 1100 900" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs>
+              <marker id="a4s" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#152238"/></marker>
+              <marker id="a4g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5B7A5D"/></marker>
+              <marker id="a4d" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#AD6B3A"/></marker>
+            </defs>
+
+            <!-- outer boundary -->
+            <rect x="30" y="30" width="1040" height="820" fill="none" stroke="#6FA6B6" stroke-width="2" stroke-dasharray="8 6" rx="6"/>
+            <text x="550" y="875" text-anchor="middle" font-size="13" fill="#2A4568">لایهٔ یکپارچه‌سازی مشترک — شناسهٔ کاربری، وضعیت، تاریخچه (بدون بن‌بست) و قابلیت ارتقای مستقل هر ماژول</text>
+
+            <!-- ROW 1: USERS (top center) -->
+            <rect x="400" y="70" width="300" height="80" rx="5" fill="#152238"/>
+            <text x="550" y="103" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">۱ · مدیریت کاربران</text>
+            <text x="550" y="127" text-anchor="middle" fill="#BFD8DD" font-size="11">شناسهٔ کاربر، نقش‌های سازمانی (M:N)</text>
+
+            <!-- ROW 2: PROJECTS (center) -->
+            <rect x="400" y="280" width="300" height="90" rx="5" fill="#AD6B3A"/>
+            <text x="550" y="315" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">۲ · مدیریت پروژه‌ها</text>
+            <text x="550" y="337" text-anchor="middle" fill="#F7E6D8" font-size="11">پروپوزال، فازها، تحویل نهایی</text>
+            <text x="550" y="355" text-anchor="middle" fill="#F7E6D8" font-size="11">هستهٔ ارتباطی همهٔ ماژول‌ها</text>
+
+            <!-- ROW 3: three sub-modules -->
+            <rect x="80" y="500" width="270" height="90" rx="5" fill="#F7F5EC" stroke="#2A4568" stroke-width="2.5"/>
+            <text x="215" y="532" text-anchor="middle" font-size="15" font-weight="700" fill="#152238">۳ · همکار پروژه</text>
+            <text x="215" y="554" text-anchor="middle" font-size="11" fill="#565C6B">درونی / خارجی / شرکتی</text>
+            <text x="215" y="572" text-anchor="middle" font-size="11" fill="#5B7A5D" font-weight="700">(شامل شرکت‌ها)</text>
+
+            <rect x="415" y="500" width="270" height="90" rx="5" fill="#F7F5EC" stroke="#2A4568" stroke-width="2.5"/>
+            <text x="550" y="532" text-anchor="middle" font-size="15" font-weight="700" fill="#152238">۴ · سرباز</text>
+            <text x="550" y="554" text-anchor="middle" font-size="11" fill="#565C6B">دورهٔ خدمت</text>
+            <text x="550" y="572" text-anchor="middle" font-size="11" fill="#565C6B">گزارش‌های ۳۰/۶۰/۹۰ روزه</text>
+
+            <rect x="750" y="500" width="270" height="90" rx="5" fill="#F7F5EC" stroke="#2A4568" stroke-width="2.5"/>
+            <text x="885" y="532" text-anchor="middle" font-size="15" font-weight="700" fill="#152238">۵ · کارآموز</text>
+            <text x="885" y="554" text-anchor="middle" font-size="11" fill="#565C6B">دورهٔ کارآموزی</text>
+            <text x="885" y="572" text-anchor="middle" font-size="11" fill="#565C6B">تحصیلی، رزومه، مهارت‌ها</text>
+
+            <!-- ROW 4: COMPANIES (bottom) -->
+            <rect x="340" y="700" width="420" height="100" rx="5" fill="#F7F5EC" stroke="#5B7A5D" stroke-width="2.5"/>
+            <text x="550" y="735" text-anchor="middle" font-size="16" font-weight="700" fill="#152238">۶ · شرکت‌ها و قراردادها</text>
+            <text x="550" y="757" text-anchor="middle" font-size="11" fill="#565C6B">نام شرکت، نام محصول، شماره قرارداد</text>
+            <text x="550" y="775" text-anchor="middle" font-size="11" fill="#565C6B">تاریخ عقد قرارداد، اطلاعات تماس</text>
+
+            <!-- === CONNECTIONS === -->
+            <path d="M550,150 L550,280" fill="none" stroke="#152238" stroke-width="2.5" marker-end="url(#a4s)"/>
+            <text x="565" y="220" font-size="11" fill="#565C6B" font-weight="600">نقش پروژه‌ای (کنترل‌پروژه/مجری)</text>
+
+            <path d="M500,370 L215,500" fill="none" stroke="#152238" stroke-width="2.5" marker-end="url(#a4s)"/>
+            <text x="330" y="440" font-size="11" fill="#565C6B" font-weight="600">همکاران پروژه</text>
+
+            <path d="M550,370 L550,500" fill="none" stroke="#152238" stroke-width="2.5" marker-end="url(#a4s)"/>
+            <text x="565" y="440" font-size="11" fill="#565C6B" font-weight="600">سربازان پروژه</text>
+
+            <path d="M600,370 L885,500" fill="none" stroke="#152238" stroke-width="2.5" marker-end="url(#a4s)"/>
+            <text x="760" y="440" font-size="11" fill="#565C6B" font-weight="600">کارآموزان پروژه</text>
+
+            <path d="M550,370 L550,700" fill="none" stroke="#5B7A5D" stroke-width="2.5" stroke-dasharray="8 4" marker-end="url(#a4g)"/>
+            <text x="565" y="640" font-size="11" fill="#5B7A5D" font-weight="700">قراردادها به پروژه متصل هستند</text>
+
+            <path d="M340,750 L215,590" fill="none" stroke="#5B7A5D" stroke-width="2.5" stroke-dasharray="8 4" marker-end="url(#a4g)"/>
+            <text x="230" y="670" font-size="11" fill="#5B7A5D" font-weight="700" text-anchor="start">شرکت به‌عنوان همکار خارجی</text>
+
+            <path d="M415,545 Q360,600 350,545" fill="none" stroke="#AD6B3A" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a4d)"/>
+            <text x="380" y="620" font-size="10" fill="#AD6B3A" text-anchor="middle">تبدیل</text>
+
+            <path d="M750,545 C 550,660 400,660 350,590" fill="none" stroke="#AD6B3A" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a4d)"/>
+            <text x="550" y="655" font-size="10.5" fill="#AD6B3A" text-anchor="middle">تبدیل پس از پایان دورهٔ خدمت/کارآموزی → همکار پروژه (رکورد اصلی حذف نمی‌شود)</text>
+
+            <path d="M400,110 C 200,200 100,350 90,500" fill="none" stroke="#6FA6B6" stroke-width="1.5" stroke-dasharray="5 5"/>
+            <path d="M700,110 C 900,200 1000,350 1010,500" fill="none" stroke="#6FA6B6" stroke-width="1.5" stroke-dasharray="5 5"/>
+            <text x="90" y="410" font-size="10.5" fill="#2A4568">حساب کاربری اختیاری</text>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;04</div>
+        <div class="tb-title">معماری و ارتباط ماژول‌ها</div>
+        <div class="tb-meta">REV 1.4 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-04','SHEET 04 · معماری و ارتباط ماژول‌ها')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-04','04-معماری-ماژول-ها')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-04" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 05 — USERS WORKFLOW ================= -->
+    <section class="sheet" id="sheet-05">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">نمودار فعالیت</div>
+        <h2>گردش‌کار ماژول مدیریت کاربران</h2>
+        <p>از ایجاد کاربر تا تکمیل مشخصات شخصی، تخصیص نقش سازمانی و در صورت نیاز نقش پروژه‌ای.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-05">
+          <svg viewBox="0 0 900 820" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs><marker id="a5" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#152238"/></marker></defs>
+            <style>
+              .fl-p{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .fl-d{fill:#F3E6DA; stroke:#AD6B3A; stroke-width:1.8;}
+              .fl-se{fill:#152238;}
+              .fl-t{font-size:12.5px; fill:#20242E;}
+              .fl-tw{font-size:12px; fill:#fff;}
+              .fl-line{stroke:#565C6B; stroke-width:1.6; fill:none;}
+              .fl-lbl{font-size:11px; fill:#943F35;}
+            </style>
+
+            <rect class="fl-se" x="380" y="15" width="140" height="38" rx="19"/>
+            <text class="fl-tw" x="450" y="39" text-anchor="middle">شروع</text>
+            <path class="fl-line" d="M450,53 L450,85" marker-end="url(#a5)"/>
+
+            <rect class="fl-p" x="230" y="85" width="440" height="60" rx="4"/>
+            <text class="fl-t" x="450" y="110" text-anchor="middle">نقش‌های ۱ تا ۳ کاربر جدید در ماژول مدیریت کاربران ایجاد می‌کنند</text>
+            <text class="fl-t" x="450" y="130" text-anchor="middle" font-size="11" fill="#565C6B">(اطلاعات هویتی پایه، تحصیلی و تماس کاربر ثبت می‌شود)</text>
+            <path class="fl-line" d="M450,145 L450,177" marker-end="url(#a5)"/>
+
+            <rect class="fl-p" x="230" y="177" width="440" height="68" rx="4"/>
+            <text class="fl-t" x="450" y="202" text-anchor="middle">کاربر (یا نقش‌های ۱ تا ۳) مشخصات شخصی تکمیلی را ثبت می‌کند</text>
+            <text class="fl-t" x="450" y="222" text-anchor="middle" font-size="11" fill="#565C6B">نام پدر، شمارهٔ ملی، تاریخ تولد، نشانی، تماس اضطراری و تصویر پرسنلی</text>
+            <path class="fl-line" d="M450,245 L450,277" marker-end="url(#a5)"/>
+
+            <rect class="fl-p" x="230" y="277" width="440" height="60" rx="4"/>
+            <text class="fl-t" x="450" y="302" text-anchor="middle">یک یا چند نقش سازمانی از میان نقش‌های ۱ تا ۵</text>
+            <text class="fl-t" x="450" y="322" text-anchor="middle">به کاربر تخصیص داده می‌شود</text>
+            <path class="fl-line" d="M450,337 L450,369" marker-end="url(#a5)"/>
+
+            <polygon class="fl-d" points="450,369 620,425 450,481 280,425"/>
+            <text class="fl-t" x="450" y="420" text-anchor="middle">نیاز به نقش پروژه‌ای</text>
+            <text class="fl-t" x="450" y="438" text-anchor="middle">(کنترل‌پروژه/مجری) دارد؟</text>
+
+            <path class="fl-line" d="M620,425 L740,425 L740,545" marker-end="url(#a5)"/>
+            <text class="fl-lbl" x="670" y="417">بله</text>
+            <rect class="fl-p" x="580" y="545" width="300" height="68" rx="4"/>
+            <text class="fl-t" x="730" y="570" text-anchor="middle">نقش به‌صورت مجزا در ماژول</text>
+            <text class="fl-t" x="730" y="588" text-anchor="middle">مدیریت پروژه‌ها برای همان پروژه ثبت می‌شود</text>
+            <path class="fl-line" d="M730,613 L730,660 L450,660" marker-end="url(#a5)"/>
+
+            <path class="fl-line" d="M450,481 L450,660" marker-end="url(#a5)"/>
+            <text class="fl-lbl" x="462" y="510">خیر</text>
+
+            <rect class="fl-p" x="230" y="660" width="440" height="60" rx="4"/>
+            <text class="fl-t" x="450" y="685" text-anchor="middle">کاربر بر اساس نقش(های) خود وارد سامانه شده،</text>
+            <text class="fl-t" x="450" y="705" text-anchor="middle">به پنل و ماژول‌های مجاز دسترسی می‌یابد</text>
+            <path class="fl-line" d="M450,720 L450,760" marker-end="url(#a5)"/>
+
+            <rect class="fl-se" x="380" y="760" width="140" height="34" rx="17"/>
+            <text class="fl-tw" x="450" y="782" text-anchor="middle">پایان</text>
+          </svg>
+        </div>
+        <div class="note">کاربران با نقش ۶ تا ۸ در همین ماژول فقط پنل شخصی خود را می‌بینند و توسط نقش‌های ۱ تا ۵ در ماژول‌های تخصصی (همکار/سرباز/کارآموز/شرکت) ایجاد می‌شوند. جزئیات کامل جدول مشخصات شخصی در شیت ۱۱ (ERD ماژول کاربران) آمده است.</div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;05</div>
+        <div class="tb-title">گردش‌کار مدیریت کاربران</div>
+        <div class="tb-meta">REV 1.3 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-05','SHEET 05 · گردش‌کار مدیریت کاربران')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-05','05-گردش-کار-کاربران')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-05" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 06 — PROJECTS WORKFLOW ================= -->
+    <section class="sheet" id="sheet-06">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">نمودار فعالیت</div>
+        <h2>گردش‌کار ماژول مدیریت پروژه‌ها</h2>
+        <p>از ثبت پروپوزال توسط پژوهشگر تا تایید، اجرای فاز‌به‌فاز و تحویل نهایی پروژه.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-06">
+          <svg viewBox="0 0 1000 1300" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs><marker id="a6" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#152238"/></marker></defs>
+            <style>
+              .fp{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .fd{fill:#F3E6DA; stroke:#AD6B3A; stroke-width:1.8;}
+              .fse{fill:#152238;}
+              .fre{fill:#943F35;}
+              .ft{font-size:12.5px; fill:#20242E;}
+              .ftw{font-size:12.5px; fill:#fff; font-weight:600;}
+              .fline{stroke:#565C6B; stroke-width:1.8; fill:none;}
+              .flbl{font-size:11.5px; fill:#943F35; font-weight:600;}
+            </style>
+
+            <rect class="fse" x="430" y="20" width="140" height="40" rx="20"/>
+            <text class="ftw" x="500" y="45" text-anchor="middle">شروع</text>
+            <path class="fline" d="M500,60 L500,100" marker-end="url(#a6)"/>
+
+            <rect class="fp" x="230" y="100" width="540" height="70" rx="5"/>
+            <text class="ft" x="500" y="128" text-anchor="middle">پژوهشگر (نقش ۵) عنوان و پروپوزال کامل پروژه را</text>
+            <text class="ft" x="500" y="150" text-anchor="middle">در ماژول مدیریت پروژه‌ها ثبت می‌کند</text>
+            <path class="fline" d="M500,170 L500,210" marker-end="url(#a6)"/>
+
+            <rect class="fp" x="230" y="210" width="540" height="55" rx="5"/>
+            <text class="ft" x="500" y="243" text-anchor="middle">نقش‌های ۱ تا ۳ پروپوزال را بررسی می‌کنند</text>
+            <path class="fline" d="M500,265 L500,305" marker-end="url(#a6)"/>
+
+            <polygon class="fd" points="500,305 690,375 500,445 310,375"/>
+            <text class="ft" x="500" y="370" text-anchor="middle">تایید شد؟</text>
+
+            <path class="fline" d="M310,375 L130,375 L130,780" marker-end="url(#a6)"/>
+            <text class="flbl" x="200" y="367">خیر</text>
+            <rect class="fp" x="30" y="780" width="200" height="70" rx="5"/>
+            <text class="ft" x="130" y="808" text-anchor="middle" font-size="12">رد / بازگشت جهت</text>
+            <text class="ft" x="130" y="828" text-anchor="middle" font-size="12">اصلاح به پژوهشگر</text>
+            <path class="fline" d="M130,850 L130,905" marker-end="url(#a6)"/>
+            <rect class="fre" x="60" y="905" width="140" height="40" rx="20"/>
+            <text class="ftw" x="130" y="930" text-anchor="middle">پایان</text>
+
+            <path class="fline" d="M500,445 L500,490" marker-end="url(#a6)"/>
+            <text class="flbl" x="515" y="472">بله</text>
+
+            <rect class="fp" x="230" y="490" width="540" height="75" rx="5"/>
+            <text class="ft" x="500" y="518" text-anchor="middle">وضعیت پژوهشگر برای این پروژه به «مجری پروژه» تغییر می‌کند</text>
+            <text class="ft" x="500" y="540" text-anchor="middle" font-size="11" fill="#565C6B">و نقش پروژه‌ای در ماژول کاربران ثبت می‌شود</text>
+            <path class="fline" d="M500,565 L500,610" marker-end="url(#a6)"/>
+
+            <rect class="fp" x="180" y="610" width="640" height="90" rx="5"/>
+            <text class="ft" x="500" y="638" text-anchor="middle">مجری، همکاران پروژه و/یا سرباز را برای پروژه ثبت می‌کند</text>
+            <text class="ft" x="500" y="660" text-anchor="middle" font-size="11" fill="#565C6B">(از افراد موجود در سامانه به‌صورت خودکار، یا ثبت مشخصات فرد جدید)</text>
+            <text class="ft" x="500" y="680" text-anchor="middle" font-size="11" fill="#565C6B">هر پروژه یا سرباز دارد، یا همکار پروژه، یا هر دو</text>
+            <path class="fline" d="M500,700 L500,740" marker-end="url(#a6)"/>
+
+            <rect class="fp" x="230" y="740" width="540" height="75" rx="5"/>
+            <text class="ft" x="500" y="768" text-anchor="middle">برای فاز جاری پروژه، گزارش کامل فاز نوشته و ارائه می‌شود</text>
+            <text class="ft" x="500" y="790" text-anchor="middle" font-size="11" fill="#565C6B">(تعداد فازها طبق پروپوزال از پیش تعیین شده است)</text>
+            <path class="fline" d="M500,815 L500,860" marker-end="url(#a6)"/>
+
+            <polygon class="fd" points="500,860 700,930 500,1000 300,930"/>
+            <text class="ft" x="500" y="920" text-anchor="middle">همهٔ فازها</text>
+            <text class="ft" x="500" y="940" text-anchor="middle">تکمیل شده؟</text>
+
+            <path class="fline" d="M700,930 L830,930 L830,777 L770,777" marker-end="url(#a6)"/>
+            <text class="flbl" x="755" y="920">خیر — فاز بعدی</text>
+
+            <path class="fline" d="M500,1000 L500,1045" marker-end="url(#a6)"/>
+            <text class="flbl" x="515" y="1030">بله</text>
+
+            <rect class="fp" x="180" y="1045" width="640" height="75" rx="5"/>
+            <text class="ft" x="500" y="1073" text-anchor="middle">سورس/اطلاعات پروژه، گزارش نهایی و فایل ارائه بارگذاری می‌شود</text>
+            <text class="ft" x="500" y="1095" text-anchor="middle" font-size="11" fill="#565C6B">در بخش تحویل نهایی پروژه</text>
+            <path class="fline" d="M500,1120 L500,1160" marker-end="url(#a6)"/>
+
+            <rect class="fp" x="350" y="1160" width="300" height="55" rx="5"/>
+            <text class="ft" x="500" y="1193" text-anchor="middle">پروژه بسته / تکمیل می‌شود</text>
+            <path class="fline" d="M500,1215 L500,1255" marker-end="url(#a6)"/>
+
+            <rect class="fre" x="430" y="1255" width="140" height="40" rx="20"/>
+            <text class="ftw" x="500" y="1280" text-anchor="middle">پایان</text>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;06</div>
+        <div class="tb-title">گردش‌کار مدیریت پروژه‌ها</div>
+        <div class="tb-meta">REV 1.4 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-06','SHEET 06 · گردش‌کار مدیریت پروژه‌ها')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-06','06-گردش-کار-پروژه-ها')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-06" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 07 — COLLABORATORS WORKFLOW (REDESIGNED 4 COLUMNS) ================= -->
+    <section class="sheet" id="sheet-07">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">نمودار فعالیت</div>
+        <h2>گردش‌کار ماژول مدیریت همکار پروژه</h2>
+        <p>چهار مسیر ورود همکار به پروژه: <strong>داخلی</strong>، <strong>خارجی</strong>، <strong>شرکتی</strong> (از ماژول ۶)، و <strong>تبدیل</strong> از سرباز/کارآموز. هر مسیر در یک ستون عمودی مستقل با فاصلهٔ کافی ترسیم شده است.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-07">
+          <svg viewBox="0 0 1500 1500" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs>
+              <marker id="a7" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#152238"/></marker>
+              <marker id="a7g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5B7A5D"/></marker>
+              <marker id="a7o" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#AD6B3A"/></marker>
+            </defs>
+            <style>
+              .fp{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .fpg{fill:#F7F5EC; stroke:#5B7A5D; stroke-width:2.2;}
+              .fd{fill:#F3E6DA; stroke:#AD6B3A; stroke-width:1.8;}
+              .fse{fill:#152238;} .fre{fill:#943F35;}
+              .ft{font-size:12.5px; fill:#20242E;}
+              .ftw{font-size:12.5px; fill:#fff; font-weight:600;}
+              .fline{stroke:#565C6B; stroke-width:1.8; fill:none;}
+              .fline-g{stroke:#5B7A5D; stroke-width:1.8; fill:none; stroke-dasharray:6 4;}
+              .fline-o{stroke:#AD6B3A; stroke-width:1.8; fill:none; stroke-dasharray:6 4;}
+              .flbl{font-size:11.5px; fill:#943F35; font-weight:600;}
+            </style>
+
+            <!-- START (top center) -->
+            <rect class="fse" x="650" y="20" width="200" height="50" rx="25"/>
+            <text class="ftw" x="750" y="51" text-anchor="middle">شروع</text>
+            <path class="fline" d="M750,70 L750,130" marker-end="url(#a7)"/>
+
+            <!-- MASTER DECISION -->
+            <polygon class="fd" points="750,130 1050,220 750,310 450,220"/>
+            <text class="ft" x="750" y="215" text-anchor="middle" font-weight="700" font-size="14">نوع همکار پروژه کدام است؟</text>
+            <text class="ft" x="750" y="238" text-anchor="middle" font-size="11" fill="#565C6B">(نقش‌های ۱ تا ۵ تصمیم می‌گیرند)</text>
+
+            <!-- 4 BRANCH LABELS -->
+            <text x="200" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#152238">مسیر ۱ — داخلی</text>
+            <text x="550" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#5B7A5D">مسیر ۲ — شرکتی</text>
+            <text x="950" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#152238">مسیر ۳ — خارجی</text>
+            <text x="1300" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#AD6B3A">مسیر ۴ — تبدیل</text>
+
+            <!-- COLUMN 1: INTERNAL -->
+            <path class="fline" d="M450,220 L200,220 L200,290" marker-end="url(#a7)"/>
+            <text x="215" y="245" font-size="11" fill="#943F35" font-weight="700">داخلی</text>
+
+            <rect class="fp" x="50" y="290" width="300" height="90" rx="5"/>
+            <text class="ft" x="200" y="318" text-anchor="middle">مجری یا کنترل‌پروژه فرد را از</text>
+            <text class="ft" x="200" y="340" text-anchor="middle">میان کاربران موجود سامانه</text>
+            <text class="ft" x="200" y="362" text-anchor="middle">انتخاب می‌کند</text>
+            <path class="fline" d="M200,380 L200,440" marker-end="url(#a7)"/>
+
+            <rect class="fp" x="50" y="440" width="300" height="120" rx="5"/>
+            <text class="ft" x="200" y="468" text-anchor="middle">مشخصات هویتی، شخصی،</text>
+            <text class="ft" x="200" y="490" text-anchor="middle">تحصیلی و تماس به‌صورت</text>
+            <text class="ft" x="200" y="512" text-anchor="middle">خودکار و فقط‌خواندنی از</text>
+            <text class="ft" x="200" y="534" text-anchor="middle">ماژول کاربران خوانده می‌شود</text>
+            <path class="fline" d="M200,560 L200,1230" marker-end="url(#a7)"/>
+
+            <!-- COLUMN 2: COMPANY -->
+            <path class="fline" d="M650,310 L550,310 L550,350" marker-end="url(#a7)"/>
+            <text x="565" y="335" font-size="11" fill="#5B7A5D" font-weight="700">شرکتی (از ماژول ۶)</text>
+
+            <rect class="fpg" x="400" y="350" width="300" height="90" rx="5"/>
+            <text class="ft" x="550" y="378" text-anchor="middle">شرکت از لیست شرکت‌های</text>
+            <text class="ft" x="550" y="400" text-anchor="middle">موجود در ماژول ۶ انتخاب</text>
+            <text class="ft" x="550" y="422" text-anchor="middle">می‌شود</text>
+            <path class="fline-g" d="M550,440 L550,500" marker-end="url(#a7g)"/>
+
+            <rect class="fpg" x="400" y="500" width="300" height="140" rx="5"/>
+            <text class="ft" x="550" y="528" text-anchor="middle">اطلاعات شرکت (نام شرکت،</text>
+            <text class="ft" x="550" y="550" text-anchor="middle">نام محصول، شماره قرارداد،</text>
+            <text class="ft" x="550" y="572" text-anchor="middle">تاریخ عقد قرارداد و اطلاعات</text>
+            <text class="ft" x="550" y="594" text-anchor="middle">تماس) به‌صورت خودکار و</text>
+            <text class="ft" x="550" y="616" text-anchor="middle">فقط‌خواندنی خوانده می‌شود</text>
+            <path class="fline-g" d="M550,640 L550,1230" marker-end="url(#a7g)"/>
+
+            <!-- COLUMN 3: EXTERNAL -->
+            <path class="fline" d="M1050,220 L950,220 L950,290" marker-end="url(#a7)"/>
+            <text x="965" y="245" font-size="11" fill="#943F35" font-weight="700">خارجی (دستی)</text>
+
+            <rect class="fp" x="800" y="290" width="300" height="90" rx="5"/>
+            <text class="ft" x="950" y="318" text-anchor="middle">مشخصات فردی و سازمانی</text>
+            <text class="ft" x="950" y="340" text-anchor="middle">(نام، سازمان، سمت، تماس)</text>
+            <text class="ft" x="950" y="362" text-anchor="middle">به‌صورت دستی ثبت می‌شود</text>
+            <path class="fline" d="M950,380 L950,440" marker-end="url(#a7)"/>
+
+            <rect class="fp" x="800" y="440" width="300" height="120" rx="5"/>
+            <text class="ft" x="950" y="468" text-anchor="middle">فایل رزومه (PDF/Word)</text>
+            <text class="ft" x="950" y="490" text-anchor="middle">توسط مجری یا کنترل‌پروژه</text>
+            <text class="ft" x="950" y="512" text-anchor="middle">بارگذاری می‌شود و مشخصات</text>
+            <text class="ft" x="950" y="534" text-anchor="middle">تحصیلی تکمیل می‌گردد</text>
+            <path class="fline" d="M950,560 L950,1230" marker-end="url(#a7)"/>
+
+            <!-- COLUMN 4: CONVERSION -->
+            <path class="fline-o" d="M1050,220 L1300,220 L1300,290" marker-end="url(#a7o)"/>
+            <text x="1310" y="245" font-size="11" fill="#AD6B3A" font-weight="700">تبدیل از سرباز/کارآموز</text>
+
+            <polygon class="fd" points="1300,290 1430,345 1300,400 1170,345"/>
+            <text class="ft" x="1300" y="340" text-anchor="middle" font-size="11">خدمت یا دورهٔ</text>
+            <text class="ft" x="1300" y="358" text-anchor="middle" font-size="11">سرباز/کارآموز پایان یافته؟</text>
+
+            <path class="fline-o" d="M1170,345 L1100,345 L1100,440" marker-end="url(#a7o)"/>
+            <text x="1115" y="338" font-size="11" fill="#943F35" font-weight="700">خیر</text>
+            <rect class="fre" x="990" y="440" width="220" height="80" rx="5"/>
+            <text class="ftw" x="1100" y="468" text-anchor="middle" font-size="11">انتقال مسدود می‌شود؛</text>
+            <text class="ftw" x="1100" y="490" text-anchor="middle" font-size="11">فرد در وضعیت فعلی</text>
+            <text class="ftw" x="1100" y="510" text-anchor="middle" font-size="11">خود باقی می‌ماند</text>
+            <path class="fline" d="M1100,520 L1100,570" marker-end="url(#a7)"/>
+            <rect class="fre" x="1030" y="570" width="140" height="40" rx="20"/>
+            <text class="ftw" x="1100" y="595" text-anchor="middle">پایان</text>
+
+            <path class="fline-o" d="M1300,400 L1300,470" marker-end="url(#a7o)"/>
+            <text x="1315" y="440" font-size="11" fill="#943F35" font-weight="700">بله</text>
+            <polygon class="fd" points="1300,470 1430,525 1300,580 1170,525"/>
+            <text class="ft" x="1300" y="518" text-anchor="middle" font-size="11">حساب کاربری</text>
+            <text class="ft" x="1300" y="536" text-anchor="middle" font-size="11">(user_id) دارد؟</text>
+
+            <path class="fline-o" d="M1170,525 L1150,525 L1150,640" marker-end="url(#a7o)"/>
+            <text x="1165" y="618" font-size="11" fill="#943F35" font-weight="700">بله</text>
+            <rect class="fp" x="1000" y="640" width="300" height="130" rx="5"/>
+            <text class="ft" x="1150" y="668" text-anchor="middle">رکورد «داخلی» ایجاد</text>
+            <text class="ft" x="1150" y="690" text-anchor="middle">و به user_id متصل می‌شود؛</text>
+            <text class="ft" x="1150" y="712" text-anchor="middle">مشخصات فقط‌خواندنی از</text>
+            <text class="ft" x="1150" y="734" text-anchor="middle">ماژول کاربران نمایش</text>
+            <text class="ft" x="1150" y="756" text-anchor="middle">داده می‌شود</text>
+            <path class="fline" d="M1150,770 L1150,1230" marker-end="url(#a7)"/>
+
+            <path class="fline-o" d="M1430,525 L1460,525 L1460,640" marker-end="url(#a7o)"/>
+            <text x="1418" y="618" font-size="11" fill="#943F35" font-weight="700" text-anchor="end">خیر</text>
+            <rect class="fp" x="1310" y="640" width="180" height="130" rx="5"/>
+            <text class="ft" x="1400" y="668" text-anchor="middle" font-size="11">رکورد «خارجی»</text>
+            <text class="ft" x="1400" y="690" text-anchor="middle" font-size="11">ایجاد می‌شود؛ رزومه</text>
+            <text class="ft" x="1400" y="712" text-anchor="middle" font-size="11">و مشخصات تحصیلی</text>
+            <text class="ft" x="1400" y="734" text-anchor="middle" font-size="11">به‌صورت خودکار</text>
+            <text class="ft" x="1400" y="756" text-anchor="middle" font-size="11">منتقل می‌شود</text>
+            <path class="fline" d="M1400,770 L1400,1230 L1250,1230" marker-end="url(#a7)"/>
+
+            <!-- MERGE BOX -->
+            <rect class="fp" x="100" y="1230" width="1300" height="130" rx="6" fill="#F3E6DA" stroke="#AD6B3A" stroke-width="2.5"/>
+            <text class="ft" x="750" y="1265" text-anchor="middle" font-size="14" font-weight="700">رکورد پایهٔ همکار پروژه (tbl_collaborators) ایجاد می‌شود</text>
+            <text class="ft" x="750" y="1292" text-anchor="middle" font-size="12">بر اساس نوع انتخاب‌شده، زیرجدول متناظر (internal / external / company) پر می‌شود</text>
+            <text class="ft" x="750" y="1314" text-anchor="middle" font-size="12">و اتصال به پروژه(های) موردنظر از طریق tbl_project_collaborators برقرار می‌گردد</text>
+            <text class="ft" x="750" y="1338" text-anchor="middle" font-size="11" fill="#565C6B">بخش «داخلی» فقط قابل مشاهده است؛ بخش «خارجی» و «شرکتی» توسط نقش‌های ۱ تا ۵ قابل ویرایش می‌ماند</text>
+
+            <path class="fline" d="M750,1360 L750,1400" marker-end="url(#a7)"/>
+
+            <rect class="fse" x="650" y="1400" width="200" height="50" rx="25"/>
+            <text class="ftw" x="750" y="1431" text-anchor="middle">پایان</text>
+
+            <!-- Column separators -->
+            <line x1="380" y1="260" x2="380" y2="1200" stroke="#D6D0BE" stroke-width="1" stroke-dasharray="3 5"/>
+            <line x1="750" y1="330" x2="750" y2="1200" stroke="#D6D0BE" stroke-width="1" stroke-dasharray="3 5"/>
+            <line x1="1120" y1="260" x2="1120" y2="1200" stroke="#D6D0BE" stroke-width="1" stroke-dasharray="3 5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;07</div>
+        <div class="tb-title">گردش‌کار مدیریت همکار پروژه</div>
+        <div class="tb-meta">REV 1.5 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-07','SHEET 07 · گردش‌کار مدیریت همکار پروژه')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-07','07-گردش-کار-همکار-پروژه')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-07" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 08 — SARBAZ WORKFLOW ================= -->
+    <section class="sheet" id="sheet-08">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">نمودار فعالیت</div>
+        <h2>گردش‌کار ماژول مدیریت سرباز</h2>
+        <p>از شروع خدمت تا گزارش‌های دوره‌ای، دفاع و در پایان، تبدیل اختیاری به همکار پروژه.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-08">
+          <svg viewBox="0 0 900 1100" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs><marker id="a8" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#152238"/></marker></defs>
+            <style>
+              .fp{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .fd{fill:#F3E6DA; stroke:#AD6B3A; stroke-width:1.8;}
+              .fse{fill:#152238;} .fre{fill:#943F35;}
+              .ft{font-size:12.5px; fill:#20242E;}
+              .ftw{font-size:12.5px; fill:#fff; font-weight:600;}
+              .fline{stroke:#565C6B; stroke-width:1.8; fill:none;}
+              .flbl{font-size:11.5px; fill:#943F35; font-weight:600;}
+            </style>
+            <rect class="fse" x="380" y="15" width="140" height="40" rx="20"/>
+            <text class="ftw" x="450" y="40" text-anchor="middle">شروع</text>
+            <path class="fline" d="M450,55 L450,90" marker-end="url(#a8)"/>
+
+            <rect class="fp" x="210" y="90" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="123" text-anchor="middle">نقش‌های ۱ تا ۵ سرباز را به پروژه اضافه می‌کنند</text>
+            <path class="fline" d="M450,145 L450,180" marker-end="url(#a8)"/>
+
+            <rect class="fp" x="210" y="180" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="213" text-anchor="middle">تاریخ شروع خدمت ثبت می‌شود</text>
+            <path class="fline" d="M450,235 L450,270" marker-end="url(#a8)"/>
+
+            <rect class="fp" x="210" y="270" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="303" text-anchor="middle">گزارش شروع کار ثبت می‌شود</text>
+            <path class="fline" d="M450,325 L450,360" marker-end="url(#a8)"/>
+
+            <rect class="fp" x="210" y="360" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="393" text-anchor="middle">گزارش‌های دوره‌ای ۳۰ / ۶۰ / ۹۰ روزه ثبت می‌شود</text>
+            <path class="fline" d="M450,415 L450,450" marker-end="url(#a8)"/>
+
+            <rect class="fp" x="210" y="450" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="483" text-anchor="middle">گزارش آمادگی دفاع ثبت می‌شود</text>
+            <path class="fline" d="M450,505 L450,540" marker-end="url(#a8)"/>
+
+            <rect class="fp" x="210" y="540" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="573" text-anchor="middle">درخواست دفاع ثبت و بررسی می‌شود</text>
+            <path class="fline" d="M450,595 L450,630" marker-end="url(#a8)"/>
+
+            <rect class="fp" x="210" y="630" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="663" text-anchor="middle">تاریخ پایان خدمت ثبت می‌شود</text>
+            <path class="fline" d="M450,685 L450,720" marker-end="url(#a8)"/>
+
+            <polygon class="fd" points="450,720 660,790 450,860 240,790"/>
+            <text class="ft" x="450" y="783" text-anchor="middle">تبدیل به همکار</text>
+            <text class="ft" x="450" y="803" text-anchor="middle">پروژه شود؟</text>
+
+            <path class="fline" d="M660,790 L800,790 L800,905" marker-end="url(#a8)"/>
+            <text class="flbl" x="720" y="782">بله</text>
+            <rect class="fp" x="620" y="905" width="300" height="80" rx="5"/>
+            <text class="ft" x="770" y="933" text-anchor="middle" font-size="12">بررسی خودکار پایان خدمت و ایجاد</text>
+            <text class="ft" x="770" y="955" text-anchor="middle" font-size="12">رکورد در ماژول همکار پروژه</text>
+            <text class="ft" x="770" y="975" text-anchor="middle" font-size="10.5" fill="#565C6B">(رکورد سرباز حذف نمی‌شود)</text>
+            <path class="fline" d="M770,985 L770,1020" marker-end="url(#a8)"/>
+            <rect class="fre" x="700" y="1020" width="140" height="40" rx="20"/>
+            <text class="ftw" x="770" y="1045" text-anchor="middle">پایان</text>
+
+            <path class="fline" d="M240,790 L100,790 L100,905" marker-end="url(#a8)"/>
+            <text class="flbl" x="160" y="782">خیر</text>
+            <rect class="fp" x="20" y="905" width="200" height="60" rx="5"/>
+            <text class="ft" x="120" y="933" text-anchor="middle" font-size="12">پروندهٔ سرباز</text>
+            <text class="ft" x="120" y="953" text-anchor="middle" font-size="12">بایگانی می‌شود</text>
+            <path class="fline" d="M120,965 L120,1020" marker-end="url(#a8)"/>
+            <rect class="fre" x="50" y="1020" width="140" height="40" rx="20"/>
+            <text class="ftw" x="120" y="1045" text-anchor="middle">پایان</text>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;08</div>
+        <div class="tb-title">گردش‌کار مدیریت سرباز</div>
+        <div class="tb-meta">REV 1.3 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-08','SHEET 08 · گردش‌کار مدیریت سرباز')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-08','08-گردش-کار-سرباز')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-08" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 09 — KARAMOOZ WORKFLOW ================= -->
+    <section class="sheet" id="sheet-09">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">نمودار فعالیت</div>
+        <h2>گردش‌کار ماژول مدیریت کارآموز</h2>
+        <p>از شروع دوره، تکمیل مشخصات تحصیلی و بارگذاری رزومه تا گزارش‌های پروژه و در پایان، تبدیل اختیاری به همکار پروژه.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-09">
+          <svg viewBox="0 0 900 1000" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs><marker id="a9" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#152238"/></marker></defs>
+            <style>
+              .fp{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .fd{fill:#F3E6DA; stroke:#AD6B3A; stroke-width:1.8;}
+              .fse{fill:#152238;} .fre{fill:#943F35;}
+              .ft{font-size:12.5px; fill:#20242E;}
+              .ftw{font-size:12.5px; fill:#fff; font-weight:600;}
+              .fline{stroke:#565C6B; stroke-width:1.8; fill:none;}
+              .flbl{font-size:11.5px; fill:#943F35; font-weight:600;}
+            </style>
+            <rect class="fse" x="380" y="15" width="140" height="40" rx="20"/>
+            <text class="ftw" x="450" y="40" text-anchor="middle">شروع</text>
+            <path class="fline" d="M450,55 L450,90" marker-end="url(#a9)"/>
+
+            <rect class="fp" x="210" y="90" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="123" text-anchor="middle">نقش‌های ۱ تا ۵ کارآموز را به پروژه اضافه می‌کنند</text>
+            <path class="fline" d="M450,145 L450,180" marker-end="url(#a9)"/>
+
+            <rect class="fp" x="190" y="180" width="520" height="80" rx="5"/>
+            <text class="ft" x="450" y="210" text-anchor="middle" font-size="12">کارآموز مشخصات تحصیلی (مقطع، رشته و گرایش، دانشگاه، معدل)</text>
+            <text class="ft" x="450" y="233" text-anchor="middle" font-size="12">را تکمیل و فایل رزومهٔ خود را بارگذاری می‌کند</text>
+            <path class="fline" d="M450,260 L450,295" marker-end="url(#a9)"/>
+
+            <rect class="fp" x="210" y="295" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="328" text-anchor="middle">تاریخ شروع دورهٔ کارآموزی ثبت می‌شود</text>
+            <path class="fline" d="M450,350 L450,385" marker-end="url(#a9)"/>
+
+            <rect class="fp" x="210" y="385" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="418" text-anchor="middle">گزارش‌های دورهٔ کارآموزی مرتبط با پروژه ثبت می‌شود</text>
+            <path class="fline" d="M450,440 L450,475" marker-end="url(#a9)"/>
+
+            <rect class="fp" x="210" y="475" width="480" height="55" rx="5"/>
+            <text class="ft" x="450" y="508" text-anchor="middle">تاریخ پایان دورهٔ کارآموزی ثبت می‌شود</text>
+            <path class="fline" d="M450,530 L450,565" marker-end="url(#a9)"/>
+
+            <polygon class="fd" points="450,565 660,635 450,705 240,635"/>
+            <text class="ft" x="450" y="628" text-anchor="middle">تبدیل به همکار</text>
+            <text class="ft" x="450" y="648" text-anchor="middle">پروژه شود؟</text>
+
+            <path class="fline" d="M660,635 L800,635 L800,750" marker-end="url(#a9)"/>
+            <text class="flbl" x="720" y="627">بله</text>
+            <rect class="fp" x="620" y="750" width="300" height="80" rx="5"/>
+            <text class="ft" x="770" y="778" text-anchor="middle" font-size="12">بررسی پایان دوره و ایجاد رکورد</text>
+            <text class="ft" x="770" y="800" text-anchor="middle" font-size="12">در ماژول همکار پروژه</text>
+            <text class="ft" x="770" y="820" text-anchor="middle" font-size="10.5" fill="#565C6B">(نوع داخلی/خارجی بر اساس user_id)</text>
+            <path class="fline" d="M770,830 L770,865" marker-end="url(#a9)"/>
+            <rect class="fre" x="700" y="865" width="140" height="40" rx="20"/>
+            <text class="ftw" x="770" y="890" text-anchor="middle">پایان</text>
+
+            <path class="fline" d="M240,635 L100,635 L100,750" marker-end="url(#a9)"/>
+            <text class="flbl" x="160" y="627">خیر</text>
+            <rect class="fp" x="20" y="750" width="200" height="60" rx="5"/>
+            <text class="ft" x="120" y="778" text-anchor="middle" font-size="12">پروندهٔ کارآموز</text>
+            <text class="ft" x="120" y="798" text-anchor="middle" font-size="12">بایگانی می‌شود</text>
+            <path class="fline" d="M120,810 L120,865" marker-end="url(#a9)"/>
+            <rect class="fre" x="50" y="865" width="140" height="40" rx="20"/>
+            <text class="ftw" x="120" y="890" text-anchor="middle">پایان</text>
+          </svg>
+        </div>
+        <div class="note info">جزئیات کامل جداول تحصیلی، رزومه، سوابق کاری و مهارت‌ها در شیت ۱۵ (ERD ماژول کارآموز) آمده است.</div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;09</div>
+        <div class="tb-title">گردش‌کار مدیریت کارآموز</div>
+        <div class="tb-meta">REV 1.3 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-09','SHEET 09 · گردش‌کار مدیریت کارآموز')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-09','09-گردش-کار-کارآموز')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-09" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 10 — FULL ERD ================= -->
+    <section class="sheet" id="sheet-10">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">مدل داده</div>
+        <h2>ERD کامل سامانه — نمای کلی شش ماژول</h2>
+        <p>نمای یکپارچهٔ کل مدل داده. برای جزئیات کامل هر خوشه به شیت‌های ۱۱ تا ۱۵ و ۱۸ تا ۲۱ مراجعه کنید.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-10">
+          <svg viewBox="0 0 1600 1400" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs>
+              <marker id="m-s" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#565C6B"/></marker>
+              <marker id="m-d" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#AD6B3A"/></marker>
+              <marker id="m-g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5B7A5D"/></marker>
+            </defs>
+            <style>
+              .e-hd{fill:#152238;}
+              .e-bd{fill:#F7F5EC; stroke:#152238; stroke-width:1.6;}
+              .e-ht{fill:#fff; font-size:13px; font-weight:700;}
+              .e-hn{fill:#BFD8DD; font-family:'JetBrains Mono',monospace; font-size:9.5px;}
+              .e-f{fill:#20242E; font-size:10.5px; font-family:'JetBrains Mono',monospace;}
+              .e-pk{fill:#AD6B3A; font-weight:700;}
+              .e-fk{fill:#2A4568; font-style:italic;}
+              .rel{stroke:#565C6B; stroke-width:1.6; fill:none;}
+              .rel-d{stroke:#AD6B3A; stroke-width:1.6; fill:none; stroke-dasharray:6 4;}
+              .rel-g{stroke:#5B7A5D; stroke-width:2; fill:none;}
+              .rl{font-size:11px; fill:#565C6B; font-weight:600;}
+              .rlg{font-size:11px; fill:#5B7A5D; font-weight:700;}
+              .rld{font-size:11px; fill:#AD6B3A; font-weight:700;}
+              .clu{fill:none; stroke:#D6D0BE; stroke-width:1.2; stroke-dasharray:4 4;}
+              .clut{font-family:'JetBrains Mono',monospace; font-size:11px; fill:#8a8368; font-weight:700;}
+              .clu-g{fill:none; stroke:#5B7A5D; stroke-width:1.6; stroke-dasharray:5 4;}
+              .clut-g{font-family:'JetBrains Mono',monospace; font-size:11px; fill:#5B7A5D; font-weight:700;}
+            </style>
+
+            <rect class="clu" x="30" y="20" width="400" height="300"/>
+            <text class="clut" x="45" y="42">MODULE 1 — USERS</text>
+
+            <rect class="clu" x="470" y="20" width="640" height="540"/>
+            <text class="clut" x="485" y="42">MODULE 2 — PROJECTS</text>
+
+            <rect class="clu" x="30" y="820" width="380" height="280"/>
+            <text class="clut" x="45" y="842">MODULE 3 — COLLABORATORS</text>
+
+            <rect class="clu" x="450" y="820" width="380" height="340"/>
+            <text class="clut" x="465" y="842">MODULE 4 — SARBAZ</text>
+
+            <rect class="clu" x="870" y="820" width="380" height="340"/>
+            <text class="clut" x="885" y="842">MODULE 5 — KARAMOOZ</text>
+
+            <rect class="clu-g" x="30" y="1180" width="1540" height="200"/>
+            <text class="clut-g" x="45" y="1202">MODULE 6 — COMPANIES &amp; CONTRACTS (NEW)</text>
+
+            <g transform="translate(50,60)">
+              <rect class="e-bd" width="360" height="240"/>
+              <rect class="e-hd" width="360" height="34"/>
+              <text class="e-ht" x="180" y="23" text-anchor="middle">کاربران</text>
+              <text class="e-hn" x="180" y="48" text-anchor="middle">tbl_users</text>
+              <text class="e-f e-pk" x="340" y="72" text-anchor="end">PK  user_id</text>
+              <text class="e-f" x="340" y="94" text-anchor="end">full_name</text>
+              <text class="e-f" x="340" y="116" text-anchor="end">national_code, email, phone</text>
+              <text class="e-f" x="340" y="138" text-anchor="end">employment_type</text>
+              <text class="e-f" x="340" y="160" text-anchor="end">degree, university</text>
+              <text class="e-f" x="340" y="182" text-anchor="end">status, created_at</text>
+            </g>
+
+            <g transform="translate(520,60)">
+              <rect class="e-bd" width="380" height="280"/>
+              <rect class="e-hd" width="380" height="34"/>
+              <text class="e-ht" x="190" y="23" text-anchor="middle">پروژه‌ها</text>
+              <text class="e-hn" x="190" y="48" text-anchor="middle">tbl_projects</text>
+              <text class="e-f e-pk" x="360" y="72" text-anchor="end">PK  project_id</text>
+              <text class="e-f e-fk" x="360" y="94" text-anchor="end">FK  parent_project_id (self)</text>
+              <text class="e-f" x="360" y="116" text-anchor="end">title, proposal_text</text>
+              <text class="e-f" x="360" y="138" text-anchor="end">institute, specialty_group</text>
+              <text class="e-f" x="360" y="160" text-anchor="end">duration_months, budget</text>
+              <text class="e-f" x="360" y="182" text-anchor="end">project_type, nature, client</text>
+              <text class="e-f e-fk" x="360" y="204" text-anchor="end">FK  proposed_by → user_id</text>
+              <text class="e-f e-fk" x="360" y="226" text-anchor="end">FK  approved_by → user_id</text>
+              <text class="e-f" x="360" y="248" text-anchor="end">status, version_no, created_at</text>
+            </g>
+
+            <g transform="translate(1000,100)">
+              <rect class="e-bd" width="90" height="120"/>
+              <rect class="e-hd" width="90" height="26"/>
+              <text class="e-ht" x="45" y="18" text-anchor="middle" font-size="11">نقش‌ها</text>
+              <text class="e-f e-pk" x="80" y="46" text-anchor="end" font-size="9">PK role_id</text>
+              <text class="e-f" x="80" y="64" text-anchor="end" font-size="9">role_name</text>
+              <text class="e-f" x="80" y="82" text-anchor="end" font-size="9">(۱ تا ۸)</text>
+            </g>
+            <g transform="translate(1110,100)">
+              <rect class="e-bd" width="90" height="120"/>
+              <rect class="e-hd" width="90" height="26"/>
+              <text class="e-ht" x="45" y="18" text-anchor="middle" font-size="11">نقش کاربر</text>
+              <text class="e-f" x="80" y="46" text-anchor="end" font-size="9">FK user_id</text>
+              <text class="e-f" x="80" y="64" text-anchor="end" font-size="9">FK role_id</text>
+              <text class="e-f" x="80" y="82" text-anchor="end" font-size="9">assigned_at</text>
+            </g>
+
+            <g transform="translate(1010,270)">
+              <rect class="e-bd" width="230" height="120"/>
+              <rect class="e-hd" width="230" height="26"/>
+              <text class="e-ht" x="115" y="18" text-anchor="middle" font-size="11.5">فازهای پروژه</text>
+              <text class="e-hn" x="115" y="42" text-anchor="middle">tbl_project_phases</text>
+              <text class="e-f e-pk" x="215" y="62" text-anchor="end" font-size="9.5">PK phase_id</text>
+              <text class="e-f e-fk" x="215" y="78" text-anchor="end" font-size="9.5">FK project_id</text>
+              <text class="e-f" x="215" y="94" text-anchor="end" font-size="9.5">phase_number, status</text>
+              <text class="e-f" x="215" y="110" text-anchor="end" font-size="9.5">report_file_url</text>
+            </g>
+
+            <g transform="translate(530,420)">
+              <rect class="e-bd" width="360" height="120"/>
+              <rect class="e-hd" width="360" height="26"/>
+              <text class="e-ht" x="180" y="18" text-anchor="middle" font-size="11.5">نقش‌های پروژه‌ای / تیم داخلی / تحویل نهایی</text>
+              <text class="e-hn" x="180" y="42" text-anchor="middle">tbl_project_roles · tbl_project_team_members · tbl_project_deliverables</text>
+              <text class="e-f e-fk" x="340" y="64" text-anchor="end" font-size="9.5">project_id → user_id → role_id</text>
+              <text class="e-f" x="340" y="82" text-anchor="end" font-size="9.5">(کنترل‌پروژه/مجری، تیم، فایل‌های نهایی)</text>
+              <text class="e-f" x="340" y="100" text-anchor="end" font-size="9.5">effort_person_months, final_report_url</text>
+            </g>
+
+            <g transform="translate(50,860)">
+              <rect class="e-bd" width="340" height="220"/>
+              <rect class="e-hd" width="340" height="34"/>
+              <text class="e-ht" x="170" y="23" text-anchor="middle">همکاران پروژه</text>
+              <text class="e-hn" x="170" y="48" text-anchor="middle">tbl_collaborators</text>
+              <text class="e-f e-pk" x="320" y="72" text-anchor="end">PK  collaborator_id</text>
+              <text class="e-f" x="320" y="94" text-anchor="end">type: internal/external/company</text>
+              <text class="e-f e-fk" x="320" y="116" text-anchor="end">FK  user_id (nullable)</text>
+              <text class="e-f e-fk" x="320" y="138" text-anchor="end">FK  company_id (nullable, NEW)</text>
+              <text class="e-f" x="320" y="160" text-anchor="end">source_type, source_ref_id</text>
+              <text class="e-f" x="320" y="182" text-anchor="end">status, created_at</text>
+            </g>
+
+            <g transform="translate(470,860)">
+              <rect class="e-bd" width="340" height="280"/>
+              <rect class="e-hd" width="340" height="34"/>
+              <text class="e-ht" x="170" y="23" text-anchor="middle">سربازان</text>
+              <text class="e-hn" x="170" y="48" text-anchor="middle">tbl_sarbaz</text>
+              <text class="e-f e-pk" x="320" y="72" text-anchor="end">PK  sarbaz_id</text>
+              <text class="e-f e-fk" x="320" y="94" text-anchor="end">FK  user_id (nullable)</text>
+              <text class="e-f" x="320" y="116" text-anchor="end">full_name, national_code</text>
+              <text class="e-f" x="320" y="138" text-anchor="end">service_start_date, service_end_date</text>
+              <text class="e-f" x="320" y="160" text-anchor="end">service_status</text>
+            </g>
+            <g transform="translate(470,1160)">
+              <rect class="e-bd" width="340" height="60"/>
+              <rect class="e-hd" width="340" height="24"/>
+              <text class="e-ht" x="170" y="17" text-anchor="middle" font-size="11">گزارش‌های سرباز</text>
+              <text class="e-f e-fk" x="320" y="42" text-anchor="end" font-size="9.5">FK sarbaz_id / project_id · report_type · file_url</text>
+            </g>
+
+            <g transform="translate(890,860)">
+              <rect class="e-bd" width="340" height="280"/>
+              <rect class="e-hd" width="340" height="34"/>
+              <text class="e-ht" x="170" y="23" text-anchor="middle">کارآموزان</text>
+              <text class="e-hn" x="170" y="48" text-anchor="middle">tbl_karamooz</text>
+              <text class="e-f e-pk" x="320" y="72" text-anchor="end">PK  karamooz_id</text>
+              <text class="e-f e-fk" x="320" y="94" text-anchor="end">FK  user_id (nullable)</text>
+              <text class="e-f" x="320" y="116" text-anchor="end">full_name, national_code</text>
+              <text class="e-f" x="320" y="138" text-anchor="end">start_date, end_date, status</text>
+              <text class="e-f" x="320" y="160" text-anchor="end">+ تحصیلی، رزومه، سوابق، مهارت‌ها</text>
+            </g>
+            <g transform="translate(890,1160)">
+              <rect class="e-bd" width="340" height="60"/>
+              <rect class="e-hd" width="340" height="24"/>
+              <text class="e-ht" x="170" y="17" text-anchor="middle" font-size="11">گزارش‌های کارآموز</text>
+              <text class="e-f e-fk" x="320" y="42" text-anchor="end" font-size="9.5">FK karamooz_id / project_id · report_type · file_url</text>
+            </g>
+
+            <g transform="translate(50,1230)">
+              <rect class="e-bd" width="500" height="130" stroke="#5B7A5D" stroke-width="2"/>
+              <rect class="e-hd" width="500" height="34" fill="#5B7A5D"/>
+              <text class="e-ht" x="250" y="23" text-anchor="middle">شرکت‌ها و قراردادها</text>
+              <text class="e-hn" x="250" y="48" text-anchor="middle">tbl_companies</text>
+              <text class="e-f e-pk" x="480" y="72" text-anchor="end">PK  company_id</text>
+              <text class="e-f" x="480" y="94" text-anchor="end">company_name, product_name, contract_number, contract_date</text>
+              <text class="e-f e-fk" x="480" y="116" text-anchor="end">FK  project_id (nullable)</text>
+            </g>
+
+            <g transform="translate(600,1230)">
+              <rect class="e-bd" width="500" height="130" stroke="#5B7A5D" stroke-width="2"/>
+              <rect class="e-hd" width="500" height="34" fill="#5B7A5D"/>
+              <text class="e-ht" x="250" y="23" text-anchor="middle">همکار شرکتی</text>
+              <text class="e-hn" x="250" y="48" text-anchor="middle">tbl_collaborators_company</text>
+              <text class="e-f e-pk" x="480" y="72" text-anchor="end">PK,FK  collaborator_id</text>
+              <text class="e-f e-fk" x="480" y="94" text-anchor="end">FK  company_id (NOT NULL)</text>
+              <text class="e-f" x="480" y="116" text-anchor="end">role_note</text>
+            </g>
+
+            <path class="rel" d="M410,180 L520,180" marker-end="url(#m-s)"/>
+            <text class="rl" x="425" y="173">proposed_by (N:1)</text>
+
+            <path class="rel" d="M400,160 C 950,50 1050,100 1045,160" marker-end="url(#m-s)"/>
+            <text class="rl" x="750" y="100">نقش‌ها (M:N)</text>
+
+            <path class="rel" d="M900,200 L1010,270" marker-end="url(#m-s)"/>
+            <text class="rl" x="920" y="240">1:N</text>
+
+            <path class="rel" d="M700,340 L710,420" marker-end="url(#m-s)"/>
+            <text class="rl" x="720" y="390">1:N</text>
+
+            <path class="rel-d" d="M220,300 C 220,600 220,750 220,860" marker-end="url(#m-d)"/>
+            <text class="rld" x="230" y="600">user_id (0..1)</text>
+
+            <path class="rel-d" d="M180,300 C 180,700 470,750 640,860" marker-end="url(#m-d)"/>
+            <text class="rld" x="380" y="700">user_id (0..1)</text>
+
+            <path class="rel-d" d="M240,300 C 240,700 900,780 1060,860" marker-end="url(#m-d)"/>
+            <text class="rld" x="700" y="740">user_id (0..1)</text>
+
+            <path class="rel" d="M560,340 L380,860" marker-end="url(#m-s)"/>
+            <text class="rl" x="400" y="650">همکاران پروژه</text>
+
+            <path class="rel" d="M700,340 L640,860" marker-end="url(#m-s)"/>
+            <text class="rl" x="650" y="650">سربازان پروژه</text>
+
+            <path class="rel" d="M850,340 L1050,860" marker-end="url(#m-s)"/>
+            <text class="rl" x="920" y="650">کارآموزان پروژه</text>
+
+            <path class="rel-d" d="M470,1000 C 420,1000 400,1000 390,980" marker-end="url(#m-d)"/>
+            <text class="rld" x="405" y="1000">تبدیل</text>
+
+            <path class="rel-d" d="M890,1000 C 500,1080 400,1040 390,1000" marker-end="url(#m-d)"/>
+            <text class="rld" x="600" y="1075">تبدیل پس از پایان دوره</text>
+
+            <path class="rel-g" d="M300,1230 L300,340 L700,340" marker-end="url(#m-g)"/>
+            <text class="rlg" x="310" y="700">project_id (N:1)</text>
+
+            <path class="rel-g" d="M850,1230 L850,1090 L380,1090" marker-end="url(#m-g)"/>
+            <text class="rlg" x="600" y="1085" fill="#5B7A5D">company_id (N:1) — همکار شرکتی</text>
+          </svg>
+        </div>
+        <div class="note good">در سراسر مدل، اتصال به «کاربران» همیشه اختیاری (nullable) است. شرکت‌ها از دو طریق به سامانه متصل می‌شوند: <span class="mono">project_id</span> (اتصال مستقیم به پروژه) و <span class="mono">company_id</span> در جدول <span class="mono">tbl_collaborators</span> (حضور به‌عنوان همکار شرکتی).</div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;10</div>
+        <div class="tb-title">ERD کامل سامانه</div>
+        <div class="tb-meta">REV 1.4 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-10','SHEET 10 · ERD کامل سامانه')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-10','10-ERD-کامل-سامانه')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-10" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 11 — USERS ERD ================= -->
+    <section class="sheet" id="sheet-11">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">مدل داده — جزئیات</div>
+        <h2>ERD ماژول ۱ · مدیریت کاربران</h2>
+        <p>جدول <span class="mono">tbl_users</span> فقط هویت و حساب کاربری را نگه می‌دارد؛ مشخصات شخصی کامل در جدول جداگانهٔ یک‌به‌یک <span class="mono">tbl_user_personal_info</span> ذخیره می‌شود.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-11">
+          <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <style>
+              .e-hd{fill:#152238;} .e-bd{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .e-ht{fill:#fff; font-size:13.5px; font-weight:700;} .e-hn{fill:#BFD8DD; font-family:'JetBrains Mono',monospace; font-size:10px;}
+              .e-f{fill:#20242E; font-size:11px; font-family:'JetBrains Mono',monospace;}
+              .e-pk{fill:#AD6B3A; font-weight:700;} .e-fk{fill:#2A4568; font-style:italic;}
+              .rel{stroke:#565C6B; stroke-width:1.6; fill:none;} .rl{font-size:11px; fill:#565C6B;}
+            </style>
+
+            <g transform="translate(40,40)">
+              <rect class="e-bd" width="280" height="220"/>
+              <rect class="e-hd" width="280" height="34"/>
+              <text class="e-ht" x="140" y="23" text-anchor="middle">کاربران</text>
+              <text class="e-hn" x="140" y="48" text-anchor="middle">tbl_users</text>
+              <text class="e-f e-pk" x="260" y="72" text-anchor="end">PK  user_id</text>
+              <text class="e-f" x="260" y="92" text-anchor="end">full_name</text>
+              <text class="e-f" x="260" y="112" text-anchor="end">national_code</text>
+              <text class="e-f" x="260" y="132" text-anchor="end">employment_type</text>
+              <text class="e-f" x="260" y="152" text-anchor="end">degree</text>
+              <text class="e-f" x="260" y="172" text-anchor="end">university</text>
+              <text class="e-f" x="260" y="192" text-anchor="end">email, phone, status</text>
+            </g>
+
+            <g transform="translate(40,300)">
+              <rect class="e-bd" width="340" height="270"/>
+              <rect class="e-hd" width="340" height="34"/>
+              <text class="e-ht" x="170" y="23" text-anchor="middle">مشخصات شخصی</text>
+              <text class="e-hn" x="170" y="48" text-anchor="middle">tbl_user_personal_info</text>
+              <text class="e-f e-pk" x="320" y="70" text-anchor="end">PK  id</text>
+              <text class="e-f e-fk" x="320" y="86" text-anchor="end">FK  user_id (UNIQUE, 1:1)</text>
+              <text class="e-f" x="320" y="102" text-anchor="end">father_name</text>
+              <text class="e-f" x="320" y="118" text-anchor="end">id_card_number</text>
+              <text class="e-f" x="320" y="134" text-anchor="end">birth_date, birth_place</text>
+              <text class="e-f" x="320" y="150" text-anchor="end">gender, marital_status</text>
+              <text class="e-f" x="320" y="166" text-anchor="end">military_service_status</text>
+              <text class="e-f" x="320" y="182" text-anchor="end">province, city, address</text>
+              <text class="e-f" x="320" y="198" text-anchor="end">postal_code</text>
+              <text class="e-f" x="320" y="214" text-anchor="end">emergency_contact (name/phone)</text>
+              <text class="e-f" x="320" y="230" text-anchor="end">photo_url</text>
+              <text class="e-f" x="320" y="246" text-anchor="end">national_card_scan_url</text>
+              <text class="e-f" x="320" y="262" text-anchor="end">updated_at</text>
+            </g>
+
+            <path class="rel" d="M180,260 L180,300"/><text class="rl" x="190" y="283">۱ : ۱</text>
+
+            <g transform="translate(390,110)">
+              <rect class="e-bd" width="220" height="110"/>
+              <rect class="e-hd" width="220" height="34"/>
+              <text class="e-ht" x="110" y="23" text-anchor="middle" font-size="12.5">نقش‌های کاربر</text>
+              <text class="e-hn" x="110" y="48" text-anchor="middle">tbl_user_roles</text>
+              <text class="e-f e-fk" x="200" y="70" text-anchor="end">FK  user_id</text>
+              <text class="e-f e-fk" x="200" y="88" text-anchor="end">FK  role_id</text>
+              <text class="e-f" x="200" y="106" text-anchor="end">assigned_by, assigned_at</text>
+            </g>
+            <g transform="translate(660,80)">
+              <rect class="e-bd" width="220" height="170"/>
+              <rect class="e-hd" width="220" height="34"/>
+              <text class="e-ht" x="110" y="23" text-anchor="middle" font-size="12.5">نقش‌ها</text>
+              <text class="e-hn" x="110" y="48" text-anchor="middle">tbl_roles</text>
+              <text class="e-f e-pk" x="200" y="70" text-anchor="end">PK  role_id</text>
+              <text class="e-f" x="200" y="88" text-anchor="end">role_name</text>
+              <text class="e-f" x="200" y="106" text-anchor="end">1 مدیر</text>
+              <text class="e-f" x="200" y="122" text-anchor="end">2 معاون</text>
+              <text class="e-f" x="200" y="138" text-anchor="end">3 قائم‌مقام</text>
+              <text class="e-f" x="200" y="154" text-anchor="end">4 کنترل پروژه</text>
+              <text class="e-f" x="200" y="170" text-anchor="end">... تا ۸ کارآموز</text>
+            </g>
+            <path class="rel" d="M320,165 L390,165"/><text class="rl" x="330" y="158">1 : N</text>
+            <path class="rel" d="M610,165 L660,165"/><text class="rl" x="615" y="158">N : 1</text>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;11</div>
+        <div class="tb-title">ERD · مدیریت کاربران</div>
+        <div class="tb-meta">REV 1.3 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-11','SHEET 11 · ERD مدیریت کاربران')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-11','11-ERD-کاربران')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-11" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 12 — PROJECTS ERD ================= -->
+    <section class="sheet" id="sheet-12">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">مدل داده — جزئیات</div>
+        <h2>ERD ماژول ۲ · مدیریت پروژه‌ها</h2>
+        <p>شامل خودارجاعی «طرح مادر»، نقش‌های پروژه‌ای، تیم پژوهشگران داخلی (طبق قالب پروپوزال)، فازها و تحویل نهایی.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-12">
+          <svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <style>
+              .e-hd{fill:#AD6B3A;} .e-bd{fill:#F7F5EC; stroke:#AD6B3A; stroke-width:1.8;}
+              .e-ht{fill:#fff; font-size:13px; font-weight:700;} .e-hn{fill:#F7E6D8; font-family:'JetBrains Mono',monospace; font-size:10px;}
+              .e-f{fill:#20242E; font-size:11.5px; font-family:'JetBrains Mono',monospace;}
+              .e-pk{fill:#152238; font-weight:700;} .e-fk{fill:#2A4568; font-style:italic;}
+              .rel{stroke:#565C6B; stroke-width:1.6; fill:none;} .rl{font-size:11px; fill:#565C6B;}
+            </style>
+            <g transform="translate(430,20)">
+              <rect class="e-bd" width="320" height="270"/>
+              <rect class="e-hd" width="320" height="34"/>
+              <text class="e-ht" x="160" y="23" text-anchor="middle">پروژه‌ها</text>
+              <text class="e-hn" x="160" y="48" text-anchor="middle">tbl_projects</text>
+              <text class="e-f e-pk" x="300" y="70" text-anchor="end">PK  project_id</text>
+              <text class="e-f e-fk" x="300" y="88" text-anchor="end">FK  parent_project_id (self)</text>
+              <text class="e-f" x="300" y="106" text-anchor="end">title, proposal_text</text>
+              <text class="e-f" x="300" y="124" text-anchor="end">institute, specialty_group</text>
+              <text class="e-f" x="300" y="142" text-anchor="end">duration_months, budget</text>
+              <text class="e-f" x="300" y="160" text-anchor="end">project_type, nature, client</text>
+              <text class="e-f e-fk" x="300" y="178" text-anchor="end">FK  proposed_by → user_id</text>
+              <text class="e-f e-fk" x="300" y="196" text-anchor="end">FK  approved_by → user_id</text>
+              <text class="e-f" x="300" y="214" text-anchor="end">status, version_no, version_date</text>
+              <text class="e-f" x="300" y="232" text-anchor="end">has_sarbaz, has_collaborator (bool)</text>
+              <text class="e-f" x="300" y="250" text-anchor="end">created_at</text>
+            </g>
+            <g transform="translate(60,60)">
+              <rect class="e-bd" width="260" height="90"/>
+              <rect class="e-hd" width="260" height="30"/>
+              <text class="e-ht" x="130" y="20" text-anchor="middle" font-size="12">نقش‌های پروژه‌ای</text>
+              <text class="e-hn" x="130" y="43" text-anchor="middle">tbl_project_roles</text>
+              <text class="e-f e-fk" x="240" y="63" text-anchor="end">FK project_id/user_id/role_id</text>
+              <text class="e-f" x="240" y="79" text-anchor="end">(نقش ۴ کنترل یا ۵ مجری)</text>
+            </g>
+            <g transform="translate(60,190)">
+              <rect class="e-bd" width="260" height="110"/>
+              <rect class="e-hd" width="260" height="30"/>
+              <text class="e-ht" x="130" y="20" text-anchor="middle" font-size="12">تیم پژوهشگران داخلی</text>
+              <text class="e-hn" x="130" y="43" text-anchor="middle">tbl_project_team_members</text>
+              <text class="e-f e-fk" x="240" y="63" text-anchor="end">FK project_id / user_id</text>
+              <text class="e-f" x="240" y="79" text-anchor="end">degree, field_of_study</text>
+              <text class="e-f" x="240" y="95" text-anchor="end">activity_ref, effort_person_months</text>
+            </g>
+            <g transform="translate(430,330)">
+              <rect class="e-bd" width="320" height="110"/>
+              <rect class="e-hd" width="320" height="30"/>
+              <text class="e-ht" x="160" y="20" text-anchor="middle" font-size="12">فازهای پروژه</text>
+              <text class="e-hn" x="160" y="43" text-anchor="middle">tbl_project_phases</text>
+              <text class="e-f e-pk" x="300" y="63" text-anchor="end">PK  phase_id</text>
+              <text class="e-f e-fk" x="300" y="79" text-anchor="end">FK  project_id</text>
+              <text class="e-f" x="300" y="95" text-anchor="end">phase_number, description</text>
+              <text class="e-f" x="300" y="111" text-anchor="end">report_file_url, status, date</text>
+            </g>
+            <g transform="translate(830,60)">
+              <rect class="e-bd" width="290" height="110"/>
+              <rect class="e-hd" width="290" height="30"/>
+              <text class="e-ht" x="145" y="20" text-anchor="middle" font-size="12">تحویل نهایی پروژه</text>
+              <text class="e-hn" x="145" y="43" text-anchor="middle">tbl_project_deliverables</text>
+              <text class="e-f e-fk" x="270" y="63" text-anchor="end">FK  project_id (۱:۱)</text>
+              <text class="e-f" x="270" y="79" text-anchor="end">source_files_url</text>
+              <text class="e-f" x="270" y="95" text-anchor="end">final_report_url, presentation_url</text>
+            </g>
+            <path class="rel" d="M320,110 L430,120"/><text class="rl" x="345" y="105">N : 1</text>
+            <path class="rel" d="M320,245 L430,260"/><text class="rl" x="345" y="240">N : 1</text>
+            <path class="rel" d="M590,290 L590,330"/><text class="rl" x="596" y="315">1 : N</text>
+            <path class="rel" d="M750,110 L830,110"/><text class="rl" x="758" y="103">1 : 1</text>
+          </svg>
+        </div>
+        <div class="note info">جدول <span class="mono">tbl_project_team_members</span> دقیقاً معادل بخش «۱-۱ مشخصات پژوهشگران داخلی عضو تیم پروژه» در قالب پروپوزال ارسالی است (ردیف، مدرک، رشته و گرایش، ردیف فعالیت، میزان همکاری نفر-ماه).</div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;12</div>
+        <div class="tb-title">ERD · مدیریت پروژه‌ها</div>
+        <div class="tb-meta">REV 1.0 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-12','SHEET 12 · ERD مدیریت پروژه‌ها')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-12','12-ERD-پروژه-ها')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-12" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 13 — COLLABORATORS ERD ================= -->
+    <section class="sheet" id="sheet-13">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">مدل داده — جزئیات</div>
+        <h2>ERD ماژول ۳ · مدیریت همکار پروژه (داخلی / خارجی / شرکتی)</h2>
+        <p>جدول پایهٔ <span class="mono">tbl_collaborators</span> سه نوع همکار را پشتیبانی می‌کند: <strong>internal</strong>، <strong>external</strong>، و <strong>company</strong>.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-13">
+          <svg viewBox="0 0 1400 860" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <style>
+              .e-hd{fill:#152238;} .e-bd{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .e-hd2{fill:#AD6B3A;} .e-bd2{fill:#F7F5EC; stroke:#AD6B3A; stroke-width:1.8;}
+              .e-hd3{fill:#5B7A5D;} .e-bd3{fill:#F7F5EC; stroke:#5B7A5D; stroke-width:2;}
+              .e-ht{fill:#fff; font-size:13px; font-weight:700;} .e-hn{fill:#BFD8DD; font-family:'JetBrains Mono',monospace; font-size:10px;}
+              .e-hn2{fill:#F7E6D8; font-family:'JetBrains Mono',monospace; font-size:10px;}
+              .e-hn3{fill:#D4E8D4; font-family:'JetBrains Mono',monospace; font-size:10px;}
+              .e-f{fill:#20242E; font-size:11px; font-family:'JetBrains Mono',monospace;}
+              .e-pk{fill:#AD6B3A; font-weight:700;} .e-pk2{fill:#152238; font-weight:700;} .e-pk3{fill:#5B7A5D; font-weight:700;}
+              .e-fk{fill:#2A4568; font-style:italic;} .e-fk3{fill:#5B7A5D; font-style:italic;}
+              .e-note{fill:#943F35; font-size:10px; font-style:italic;}
+              .rel{stroke:#565C6B; stroke-width:1.6; fill:none;} .reld{stroke:#AD6B3A; stroke-width:1.6; fill:none; stroke-dasharray:5 4;}
+              .relg{stroke:#5B7A5D; stroke-width:1.8; fill:none;}
+              .rl{font-size:11px; fill:#565C6B;} .rlg{font-size:11px; fill:#5B7A5D; font-weight:700;}
+              .refbox{fill:#EDEAE0; stroke:#8a8368; stroke-width:1.3;}
+              .refbox-g{fill:#E5EFE5; stroke:#5B7A5D; stroke-width:1.5;}
+              .refl{font-size:12px; fill:#20242E; font-weight:600;} .refs{font-size:9.5px; fill:#565C6B; font-family:'JetBrains Mono',monospace;}
+            </style>
+
+            <rect class="refbox" x="30" y="30" width="220" height="55"/>
+            <text class="refl" x="140" y="52" text-anchor="middle">کاربران</text>
+            <text class="refs" x="140" y="70" text-anchor="middle">PK user_id (ماژول ۱)</text>
+
+            <rect class="refbox" x="1150" y="30" width="220" height="55"/>
+            <text class="refl" x="1260" y="52" text-anchor="middle">پروژه‌ها</text>
+            <text class="refs" x="1260" y="70" text-anchor="middle">PK project_id (ماژول ۲)</text>
+
+            <rect class="refbox-g" x="30" y="740" width="220" height="60"/>
+            <text class="refl" x="140" y="762" text-anchor="middle">شرکت‌ها و قراردادها</text>
+            <text class="refs" x="140" y="782" text-anchor="middle">PK company_id (ماژول ۶)</text>
+
+            <g transform="translate(540,30)">
+              <rect class="e-bd" width="280" height="190"/>
+              <rect class="e-hd" width="280" height="34"/>
+              <text class="e-ht" x="140" y="23" text-anchor="middle">همکاران پروژه (پایه)</text>
+              <text class="e-hn" x="140" y="48" text-anchor="middle">tbl_collaborators</text>
+              <text class="e-f e-pk" x="260" y="70" text-anchor="end">PK  collaborator_id</text>
+              <text class="e-f" x="260" y="86" text-anchor="end">type: internal/external/company</text>
+              <text class="e-f" x="260" y="102" text-anchor="end">status</text>
+              <text class="e-f e-fk" x="260" y="118" text-anchor="end">FK  user_id (nullable)</text>
+              <text class="e-f e-fk3" x="260" y="134" text-anchor="end">FK  company_id (nullable, NEW)</text>
+              <text class="e-f" x="260" y="150" text-anchor="end">source_type, source_ref_id</text>
+              <text class="e-f" x="260" y="166" text-anchor="end">full_name</text>
+              <text class="e-f" x="260" y="182" text-anchor="end">created_at</text>
+            </g>
+
+            <g transform="translate(30,300)">
+              <rect class="e-bd" width="300" height="150"/>
+              <rect class="e-hd" width="300" height="34"/>
+              <text class="e-ht" x="150" y="23" text-anchor="middle">همکار داخلی</text>
+              <text class="e-hn" x="150" y="48" text-anchor="middle">tbl_collaborators_internal</text>
+              <text class="e-f e-pk" x="280" y="68" text-anchor="end">PK,FK  collaborator_id</text>
+              <text class="e-f e-fk" x="280" y="86" text-anchor="end">FK  user_id (NOT NULL)</text>
+              <text class="e-f" x="280" y="104" text-anchor="end">department_note</text>
+              <text class="e-f" x="280" y="122" text-anchor="end">project_role_note</text>
+              <text class="e-note" x="280" y="140" text-anchor="end">* از users + personal_info خوانده می‌شود</text>
+            </g>
+
+            <g transform="translate(380,300)">
+              <rect class="e-bd" width="340" height="244"/>
+              <rect class="e-hd" width="340" height="34"/>
+              <text class="e-ht" x="170" y="23" text-anchor="middle">همکار خارجی</text>
+              <text class="e-hn" x="170" y="48" text-anchor="middle">tbl_collaborators_external</text>
+              <text class="e-f e-pk" x="320" y="68" text-anchor="end">PK,FK  collaborator_id</text>
+              <text class="e-f" x="320" y="84" text-anchor="end">full_name</text>
+              <text class="e-f" x="320" y="100" text-anchor="end">national_code / passport_no</text>
+              <text class="e-f" x="320" y="116" text-anchor="end">organization_name, position</text>
+              <text class="e-f" x="320" y="132" text-anchor="end">email, phone</text>
+              <text class="e-f" x="320" y="148" text-anchor="end">address</text>
+              <text class="e-f" x="320" y="164" text-anchor="end">degree, field_of_study</text>
+              <text class="e-f" x="320" y="180" text-anchor="end">resume_file_url</text>
+              <text class="e-f" x="320" y="196" text-anchor="end">notes</text>
+            </g>
+
+            <g transform="translate(770,300)">
+              <rect class="e-bd3" width="340" height="150"/>
+              <rect class="e-hd3" width="340" height="34"/>
+              <text class="e-ht" x="170" y="23" text-anchor="middle">همکار شرکتی (NEW)</text>
+              <text class="e-hn3" x="170" y="48" text-anchor="middle">tbl_collaborators_company</text>
+              <text class="e-f e-pk3" x="320" y="68" text-anchor="end">PK,FK  collaborator_id</text>
+              <text class="e-f e-fk3" x="320" y="86" text-anchor="end">FK  company_id (NOT NULL)</text>
+              <text class="e-f" x="320" y="104" text-anchor="end">contact_person (از tbl_companies)</text>
+              <text class="e-f" x="320" y="122" text-anchor="end">role_note</text>
+              <text class="e-note" x="320" y="140" text-anchor="end">* مشخصات از ماژول ۶ خوانده می‌شود</text>
+            </g>
+
+            <g transform="translate(500,700)">
+              <rect class="e-bd2" width="360" height="110"/>
+              <rect class="e-hd2" width="360" height="34"/>
+              <text class="e-ht" x="180" y="23" text-anchor="middle">پروژه × همکار</text>
+              <text class="e-hn2" x="180" y="48" text-anchor="middle">tbl_project_collaborators</text>
+              <text class="e-f e-pk2" x="340" y="68" text-anchor="end">PK  id</text>
+              <text class="e-f e-fk" x="340" y="86" text-anchor="end">FK  project_id, collaborator_id</text>
+              <text class="e-f" x="340" y="104" text-anchor="end">role_in_project, start/end_date</text>
+            </g>
+
+            <path class="rel" d="M620,220 L400,300"/><text class="rl" x="480" y="260">نوع=داخلی (1:1)</text>
+            <path class="rel" d="M730,220 L700,300"/><text class="rl" x="740" y="260">نوع=خارجی (1:1)</text>
+            <path class="relg" d="M820,220 L880,300"/><text class="rlg" x="870" y="260">نوع=شرکتی (1:1)</text>
+
+            <path class="reld" d="M280,300 L280,240 L140,240 L140,85"/><text class="rl" x="150" y="220">FK user_id (N:1)</text>
+            <path class="relg" d="M940,300 L940,240 L140,240 L140,740"/><text class="rlg" x="450" y="232">FK company_id (N:1)</text>
+
+            <path class="rel" d="M680,220 L680,700"/><text class="rl" x="690" y="460">1 : N</text>
+            <path class="rel" d="M860,755 L1260,755 L1260,85"/><text class="rl" x="1060" y="747">N : 1</text>
+          </svg>
+        </div>
+        <div class="note good">این طراحی «الگوی زیرنوع» (Table-per-Subtype) است و اکنون سه نوع همکار را پشتیبانی می‌کند: <strong>داخلی</strong>، <strong>خارجی</strong>، <strong>شرکتی</strong>.</div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;13</div>
+        <div class="tb-title">ERD · همکار پروژه داخلی/خارجی/شرکتی</div>
+        <div class="tb-meta">REV 1.4 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-13','SHEET 13 · ERD همکار پروژه')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-13','13-ERD-همکار-پروژه')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-13" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 14 — SARBAZ ERD ================= -->
+    <section class="sheet" id="sheet-14">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">مدل داده — جزئیات</div>
+        <h2>ERD ماژول ۴ · مدیریت سرباز</h2>
+        <p>جدول گزارش‌ها انواع گزارش دورهٔ خدمت را پوشش می‌دهد.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-14">
+          <svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <style>
+              .e-hd{fill:#152238;} .e-bd{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .e-ht{fill:#fff; font-size:13px; font-weight:700;} .e-hn{fill:#BFD8DD; font-family:'JetBrains Mono',monospace; font-size:10px;}
+              .e-f{fill:#20242E; font-size:11.5px; font-family:'JetBrains Mono',monospace;}
+              .e-pk{fill:#AD6B3A; font-weight:700;} .e-fk{fill:#2A4568; font-style:italic;}
+              .rel{stroke:#565C6B; stroke-width:1.6; fill:none;} .rl{font-size:11px; fill:#565C6B;}
+            </style>
+            <g transform="translate(60,60)">
+              <rect class="e-bd" width="220" height="60"/>
+              <rect class="e-hd" width="220" height="28"/>
+              <text class="e-ht" x="110" y="19" text-anchor="middle" font-size="12">کاربران</text>
+              <text class="e-f e-pk" x="200" y="48" text-anchor="end" font-size="10.5">PK user_id</text>
+            </g>
+            <g transform="translate(370,40)">
+              <rect class="e-bd" width="280" height="150"/>
+              <rect class="e-hd" width="280" height="34"/>
+              <text class="e-ht" x="140" y="23" text-anchor="middle">سربازان</text>
+              <text class="e-hn" x="140" y="48" text-anchor="middle">tbl_sarbaz</text>
+              <text class="e-f e-pk" x="260" y="70" text-anchor="end">PK  sarbaz_id</text>
+              <text class="e-f e-fk" x="260" y="88" text-anchor="end">FK  user_id (nullable)</text>
+              <text class="e-f" x="260" y="106" text-anchor="end">full_name, national_code</text>
+              <text class="e-f" x="260" y="124" text-anchor="end">service_start_date</text>
+              <text class="e-f" x="260" y="142" text-anchor="end">service_end_date, service_status</text>
+            </g>
+            <g transform="translate(730,60)">
+              <rect class="e-bd" width="220" height="60"/>
+              <rect class="e-hd" width="220" height="28"/>
+              <text class="e-ht" x="110" y="19" text-anchor="middle" font-size="12">پروژه‌ها</text>
+              <text class="e-f e-pk" x="200" y="48" text-anchor="end" font-size="10.5">PK project_id</text>
+            </g>
+            <g transform="translate(150,230)">
+              <rect class="e-bd" width="260" height="90"/>
+              <rect class="e-hd" width="260" height="30"/>
+              <text class="e-ht" x="130" y="20" text-anchor="middle" font-size="12">پروژه × سرباز</text>
+              <text class="e-hn" x="130" y="43" text-anchor="middle">tbl_project_sarbaz</text>
+              <text class="e-f e-fk" x="240" y="63" text-anchor="end">FK project_id / sarbaz_id</text>
+              <text class="e-f" x="240" y="79" text-anchor="end">assigned_at</text>
+            </g>
+            <g transform="translate(500,230)">
+              <rect class="e-bd" width="300" height="130"/>
+              <rect class="e-hd" width="300" height="30"/>
+              <text class="e-ht" x="150" y="20" text-anchor="middle" font-size="12">گزارش‌های سرباز</text>
+              <text class="e-hn" x="150" y="43" text-anchor="middle">tbl_sarbaz_reports</text>
+              <text class="e-f e-pk" x="280" y="63" text-anchor="end">PK  report_id</text>
+              <text class="e-f e-fk" x="280" y="79" text-anchor="end">FK  sarbaz_id, project_id</text>
+              <text class="e-f" x="280" y="95" text-anchor="end">report_type (Lookup)</text>
+              <text class="e-f" x="280" y="111" text-anchor="end">content, file_url, submitted_at</text>
+            </g>
+            <path class="rel" d="M280,120 L400,115"/><text class="rl" x="300" y="112">0..1 : N</text>
+            <path class="rel" d="M650,115 L730,100"/><text class="rl" x="655" y="100">N : 1</text>
+            <path class="rel" d="M500,190 L400,230"/><text class="rl" x="440" y="215">N : 1</text>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;14</div>
+        <div class="tb-title">ERD · مدیریت سرباز</div>
+        <div class="tb-meta">REV 1.0 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-14','SHEET 14 · ERD مدیریت سرباز')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-14','14-ERD-سرباز')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-14" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 15 — KARAMOOZ ERD ================= -->
+    <section class="sheet" id="sheet-15">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">مدل داده — جزئیات</div>
+        <h2>ERD ماژول ۵ · مدیریت کارآموز</h2>
+        <p>چهار جدول تخصصی: تحصیلی، رزومه، سوابق، مهارت‌ها.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-15">
+          <svg viewBox="0 0 1300 700" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <style>
+              .e-hd{fill:#152238;} .e-bd{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .e-ht{fill:#fff; font-size:13px; font-weight:700;} .e-hn{fill:#BFD8DD; font-family:'JetBrains Mono',monospace; font-size:10px;}
+              .e-f{fill:#20242E; font-size:11px; font-family:'JetBrains Mono',monospace;}
+              .e-pk{fill:#AD6B3A; font-weight:700;} .e-fk{fill:#2A4568; font-style:italic;}
+              .rel{stroke:#565C6B; stroke-width:1.6; fill:none;} .reld{stroke:#6FA6B6; stroke-width:1.4; fill:none; stroke-dasharray:5 4;}
+              .rl{font-size:10.5px; fill:#565C6B;}
+              .refbox{fill:#EDEAE0; stroke:#8a8368; stroke-width:1.3;}
+              .refl{font-size:12px; fill:#20242E; font-weight:600;} .refs{font-size:9.5px; fill:#565C6B; font-family:'JetBrains Mono',monospace;}
+            </style>
+
+            <rect class="refbox" x="40" y="30" width="200" height="55"/>
+            <text class="refl" x="140" y="52" text-anchor="middle">کاربران</text>
+            <text class="refs" x="140" y="70" text-anchor="middle">PK user_id</text>
+
+            <rect class="refbox" x="1080" y="30" width="200" height="55"/>
+            <text class="refl" x="1180" y="52" text-anchor="middle">پروژه‌ها</text>
+            <text class="refs" x="1180" y="70" text-anchor="middle">PK project_id</text>
+
+            <g transform="translate(520,30)">
+              <rect class="e-bd" width="280" height="180"/>
+              <rect class="e-hd" width="280" height="34"/>
+              <text class="e-ht" x="140" y="23" text-anchor="middle">کارآموزان</text>
+              <text class="e-hn" x="140" y="48" text-anchor="middle">tbl_karamooz</text>
+              <text class="e-f e-pk" x="260" y="68" text-anchor="end">PK  karamooz_id</text>
+              <text class="e-f e-fk" x="260" y="86" text-anchor="end">FK  user_id (nullable)</text>
+              <text class="e-f" x="260" y="104" text-anchor="end">full_name, national_code</text>
+              <text class="e-f" x="260" y="122" text-anchor="end">start_date, end_date</text>
+              <text class="e-f" x="260" y="140" text-anchor="end">status</text>
+              <text class="e-f" x="260" y="158" text-anchor="end">created_at</text>
+            </g>
+
+            <g transform="translate(40,230)">
+              <rect class="e-bd" width="320" height="220"/>
+              <rect class="e-hd" width="320" height="34"/>
+              <text class="e-ht" x="160" y="23" text-anchor="middle">مشخصات تحصیلی</text>
+              <text class="e-hn" x="160" y="48" text-anchor="middle">tbl_karamooz_education</text>
+              <text class="e-f e-pk" x="300" y="68" text-anchor="end">PK  id</text>
+              <text class="e-f e-fk" x="300" y="86" text-anchor="end">FK  karamooz_id (UNIQUE, 1:1)</text>
+              <text class="e-f" x="300" y="104" text-anchor="end">degree_level</text>
+              <text class="e-f" x="300" y="122" text-anchor="end">field_of_study, orientation</text>
+              <text class="e-f" x="300" y="140" text-anchor="end">university_name</text>
+              <text class="e-f" x="300" y="158" text-anchor="end">entry_year, expected_grad_year</text>
+              <text class="e-f" x="300" y="176" text-anchor="end">gpa</text>
+              <text class="e-f" x="300" y="194" text-anchor="end">academic_advisor</text>
+            </g>
+
+            <g transform="translate(420,230)">
+              <rect class="e-bd" width="260" height="110"/>
+              <rect class="e-hd" width="260" height="34"/>
+              <text class="e-ht" x="130" y="23" text-anchor="middle" font-size="12">پروژه × کارآموز</text>
+              <text class="e-hn" x="130" y="48" text-anchor="middle">tbl_project_karamooz</text>
+              <text class="e-f e-fk" x="240" y="68" text-anchor="end">FK  project_id, karamooz_id</text>
+              <text class="e-f" x="240" y="86" text-anchor="end">assigned_at</text>
+            </g>
+
+            <g transform="translate(740,230)">
+              <rect class="e-bd" width="320" height="160"/>
+              <rect class="e-hd" width="320" height="34"/>
+              <text class="e-ht" x="160" y="23" text-anchor="middle">گزارش‌های کارآموز</text>
+              <text class="e-hn" x="160" y="48" text-anchor="middle">tbl_karamooz_reports</text>
+              <text class="e-f e-pk" x="300" y="68" text-anchor="end">PK  report_id</text>
+              <text class="e-f e-fk" x="300" y="86" text-anchor="end">FK  karamooz_id, project_id</text>
+              <text class="e-f" x="300" y="104" text-anchor="end">report_type</text>
+              <text class="e-f" x="300" y="122" text-anchor="end">content, file_url</text>
+              <text class="e-f" x="300" y="140" text-anchor="end">submitted_at</text>
+            </g>
+
+            <g transform="translate(40,480)">
+              <rect class="e-bd" width="300" height="140"/>
+              <rect class="e-hd" width="300" height="34"/>
+              <text class="e-ht" x="150" y="23" text-anchor="middle">رزومه</text>
+              <text class="e-hn" x="150" y="48" text-anchor="middle">tbl_karamooz_resume</text>
+              <text class="e-f e-pk" x="280" y="68" text-anchor="end">PK  id</text>
+              <text class="e-f e-fk" x="280" y="86" text-anchor="end">FK  karamooz_id (UNIQUE, 1:1)</text>
+              <text class="e-f" x="280" y="104" text-anchor="end">resume_file_url</text>
+              <text class="e-f" x="280" y="122" text-anchor="end">objective_summary, uploaded_at</text>
+            </g>
+
+            <g transform="translate(420,480)">
+              <rect class="e-bd" width="320" height="140"/>
+              <rect class="e-hd" width="320" height="34"/>
+              <text class="e-ht" x="160" y="23" text-anchor="middle">سوابق کاری / پروژه‌ای</text>
+              <text class="e-hn" x="160" y="48" text-anchor="middle">tbl_karamooz_experience</text>
+              <text class="e-f e-pk" x="300" y="68" text-anchor="end">PK  id</text>
+              <text class="e-f e-fk" x="300" y="86" text-anchor="end">FK  karamooz_id (1:N)</text>
+              <text class="e-f" x="300" y="104" text-anchor="end">title, organization</text>
+              <text class="e-f" x="300" y="122" text-anchor="end">start/end_date, description</text>
+            </g>
+
+            <g transform="translate(820,480)">
+              <rect class="e-bd" width="260" height="130"/>
+              <rect class="e-hd" width="260" height="34"/>
+              <text class="e-ht" x="130" y="23" text-anchor="middle">مهارت‌ها</text>
+              <text class="e-hn" x="130" y="48" text-anchor="middle">tbl_karamooz_skill</text>
+              <text class="e-f e-pk" x="240" y="68" text-anchor="end">PK  id</text>
+              <text class="e-f e-fk" x="240" y="86" text-anchor="end">FK  karamooz_id (1:N)</text>
+              <text class="e-f" x="240" y="104" text-anchor="end">skill_name, level</text>
+            </g>
+
+            <path class="reld" d="M240,60 L520,90"/><text class="rl" x="270" y="52">user_id (0..1)</text>
+            <path class="rel" d="M560,210 L200,230"/><text class="rl" x="330" y="215">1 : 1</text>
+            <path class="rel" d="M660,210 L550,230"/><text class="rl" x="600" y="215">1 : N</text>
+            <path class="rel" d="M680,285 L1180,285 L1180,85"/><text class="rl" x="1000" y="277">N : 1</text>
+            <path class="rel" d="M760,210 L900,230"/><text class="rl" x="800" y="215">1 : N</text>
+            <path class="rel" d="M200,450 L190,480"/><text class="rl" x="205" y="468">1 : 1</text>
+            <path class="rel" d="M620,210 C 620,350 580,350 580,480"/><text class="rl" x="590" y="350">1 : N</text>
+            <path class="rel" d="M700,210 C 950,300 950,350 950,480"/><text class="rl" x="900" y="330">1 : N</text>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;15</div>
+        <div class="tb-title">ERD · مدیریت کارآموز</div>
+        <div class="tb-meta">REV 1.1 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-15','SHEET 15 · ERD مدیریت کارآموز')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-15','15-ERD-کارآموز')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-15" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 16 — DB DICTIONARY ================= -->
+    <section class="sheet" id="sheet-16">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">پیوست فنی</div>
+        <h2>دیکشنری کامل دیتابیس — ۲۵ جدول، شش ماژول</h2>
+        <p>فهرست کامل تمام جداول و فیلدهای سامانه.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-16">
+<h3 style="font-family:var(--font-display);font-size:16px;margin:26px 0 10px;color:var(--navy-3);">ماژول ۱ — مدیریت کاربران</h3>
+<table class="matrix" style="margin-bottom:18px;">
+<caption>کاربران — <span class="mono">tbl_users</span></caption>
+<thead><tr><th style="width:26%">فیلد</th><th style="width:18%">نوع داده</th><th style="width:16%">کلید</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">user_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">PK</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">شناسهٔ کاربر</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">full_name</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نام و نام خانوادگی</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">national_code</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(10)</td><td style="text-align:start;font-weight:600;color:var(--copper)">UNIQUE</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">کد ملی</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">email</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td style="text-align:start;font-weight:600;color:var(--copper)">UNIQUE</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">پست الکترونیکی</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">phone</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(20)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">شمارهٔ تماس</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">employment_type</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(50)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نوع استخدام</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">degree</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(50)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">آخرین مدرک تحصیلی</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">university</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">دانشگاه محل تحصیل</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">status</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">ENUM</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">active / inactive</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">created_at</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">DATETIME</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">تاریخ ایجاد</td></tr>
+</tbody></table>
+<table class="matrix" style="margin-bottom:18px;">
+<caption>مشخصات شخصی — <span class="mono">tbl_user_personal_info</span></caption>
+<thead><tr><th style="width:26%">فیلد</th><th style="width:18%">نوع داده</th><th style="width:16%">کلید</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">PK</td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">user_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">FK, UNIQUE</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">۱:۱</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">father_name</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(100)</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">id_card_number</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(20)</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">birth_date / birth_place</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">DATE / VARCHAR</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">gender / marital_status</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">ENUM</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">military_service_status</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(50)</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">province / city / address</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR / TEXT</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">postal_code</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(10)</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">emergency_contact_name/phone</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">photo_url</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">FILE_URL</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">national_card_scan_url</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">FILE_URL</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">updated_at</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">DATETIME</td><td></td><td></td></tr>
+</tbody></table>
+<table class="matrix" style="margin-bottom:18px;">
+<caption>نقش‌ها و نقش‌های کاربر — <span class="mono">tbl_roles</span> · <span class="mono">tbl_user_roles</span></caption>
+<thead><tr><th style="width:26%">فیلد</th><th style="width:18%">نوع داده</th><th style="width:16%">کلید</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">role_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">TINYINT</td><td style="text-align:start;font-weight:600;color:var(--copper)">PK</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">۱ تا ۸</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">role_name</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(60)</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">access_level</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">TINYINT</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">۱ تا ۴</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">user_id / role_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT / TINYINT</td><td style="text-align:start;font-weight:600;color:var(--copper)">FK</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">در tbl_user_roles</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">assigned_by / assigned_at</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT / DATETIME</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">UNIQUE(user_id, role_id)</td></tr>
+</tbody></table>
+<h3 style="font-family:var(--font-display);font-size:16px;margin:26px 0 10px;color:var(--navy-3);">ماژول ۲ — مدیریت پروژه‌ها</h3>
+<table class="matrix" style="margin-bottom:18px;">
+<caption>پروژه‌ها و جداول وابسته</caption>
+<thead><tr><th style="width:26%">جدول</th><th style="width:18%">کلید اصلی</th><th style="width:16%">کلید خارجی</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_projects</td><td style="text-align:start;font-size:12.5px">project_id</td><td style="text-align:start;font-size:12.5px">parent_project_id, proposed_by, approved_by</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">عنوان، پروپوزال، مدت، بودجه، نوع، ماهیت، مشتری</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_project_roles</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">project_id, user_id, role_id</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نقش ۴ یا ۵</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_project_team_members</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">project_id, user_id</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">طبق قالب پروپوزال ۱-۱</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_project_phases</td><td style="text-align:start;font-size:12.5px">phase_id</td><td style="text-align:start;font-size:12.5px">project_id</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">phase_number, description, report_file_url</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_project_deliverables</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">project_id (UNIQUE)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">۱:۱ — source_files_url, final_report_url, presentation_url</td></tr>
+</tbody></table>
+<h3 style="font-family:var(--font-display);font-size:16px;margin:26px 0 10px;color:var(--navy-3);">ماژول ۳ — مدیریت همکار پروژه</h3>
+<table class="matrix" style="margin-bottom:18px;">
+<caption>همکاران و زیرنوع‌ها</caption>
+<thead><tr><th style="width:26%">جدول</th><th style="width:18%">کلید اصلی</th><th style="width:16%">کلید خارجی</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_collaborators</td><td style="text-align:start;font-size:12.5px">collaborator_id</td><td style="text-align:start;font-size:12.5px">user_id (nullable), company_id (nullable)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">type: internal/external/company</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_collaborators_internal</td><td style="text-align:start;font-size:12.5px">collaborator_id</td><td style="text-align:start;font-size:12.5px">user_id (NOT NULL)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">فقط‌خواندنی از ماژول کاربران</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_collaborators_external</td><td style="text-align:start;font-size:12.5px">collaborator_id</td><td style="text-align:start;font-size:12.5px">—</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">فرد حقیقی + رزومه</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_collaborators_company</td><td style="text-align:start;font-size:12.5px">collaborator_id</td><td style="text-align:start;font-size:12.5px">company_id (NOT NULL)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">فقط‌خواندنی از ماژول ۶</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_project_collaborators</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">project_id, collaborator_id</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">role_in_project, start/end_date</td></tr>
+</tbody></table>
+<h3 style="font-family:var(--font-display);font-size:16px;margin:26px 0 10px;color:var(--navy-3);">ماژول ۴ — مدیریت سرباز</h3>
+<table class="matrix" style="margin-bottom:18px;">
+<caption>سربازان و گزارش‌ها</caption>
+<thead><tr><th style="width:26%">جدول</th><th style="width:18%">کلید اصلی</th><th style="width:16%">کلید خارجی</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_sarbaz</td><td style="text-align:start;font-size:12.5px">sarbaz_id</td><td style="text-align:start;font-size:12.5px">user_id (nullable)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">service_start/end_date, service_status</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_project_sarbaz</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">project_id, sarbaz_id</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">assigned_at</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_sarbaz_reports</td><td style="text-align:start;font-size:12.5px">report_id</td><td style="text-align:start;font-size:12.5px">sarbaz_id, project_id</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">report_type: start/30/60/90/defense_readiness/defense_request/final</td></tr>
+</tbody></table>
+<h3 style="font-family:var(--font-display);font-size:16px;margin:26px 0 10px;color:var(--navy-3);">ماژول ۵ — مدیریت کارآموز</h3>
+<table class="matrix" style="margin-bottom:18px;">
+<caption>کارآموز و جداول تخصصی</caption>
+<thead><tr><th style="width:26%">جدول</th><th style="width:18%">کلید اصلی</th><th style="width:16%">کلید خارجی</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_karamooz</td><td style="text-align:start;font-size:12.5px">karamooz_id</td><td style="text-align:start;font-size:12.5px">user_id (nullable)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">start/end_date, status</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_karamooz_education</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">karamooz_id (UNIQUE, 1:1)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">مقطع، رشته، دانشگاه، معدل</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_karamooz_resume</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">karamooz_id (UNIQUE, 1:1)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">resume_file_url, objective_summary</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_karamooz_experience</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">karamooz_id (1:N)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">title, organization, start/end_date</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_karamooz_skill</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">karamooz_id (1:N)</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">skill_name, level</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_project_karamooz</td><td style="text-align:start;font-size:12.5px">id</td><td style="text-align:start;font-size:12.5px">project_id, karamooz_id</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">assigned_at</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">tbl_karamooz_reports</td><td style="text-align:start;font-size:12.5px">report_id</td><td style="text-align:start;font-size:12.5px">karamooz_id, project_id</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">report_type, content, file_url</td></tr>
+</tbody></table>
+<h3 style="font-family:var(--font-display);font-size:16px;margin:26px 0 10px;color:#5B7A5D;">ماژول ۶ — مدیریت شرکت‌ها و قراردادها (NEW)</h3>
+<table class="matrix" style="margin-bottom:18px;">
+<caption>شرکت‌ها و قراردادها — <span class="mono">tbl_companies</span></caption>
+<thead><tr><th style="width:26%">فیلد</th><th style="width:18%">نوع داده</th><th style="width:16%">کلید</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">company_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">PK</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">شناسهٔ شرکت/قرارداد</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">company_name</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نام شرکت</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">product_name</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(200)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نام محصول</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">contract_number</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(50)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">شماره قرارداد</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">contract_date</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">DATE</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">تاریخ عقد قرارداد</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">project_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">FK, nullable</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">اتصال به پروژه</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">contact_person</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">شخص رابط</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">phone / email</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR</td><td></td><td></td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">status</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">ENUM</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">active / expired / terminated</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">created_at</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">DATETIME</td><td></td><td></td></tr>
+</tbody></table>
+<table class="matrix" style="margin-bottom:18px;">
+<caption>همکار شرکتی — <span class="mono">tbl_collaborators_company</span></caption>
+<thead><tr><th style="width:26%">فیلد</th><th style="width:18%">نوع داده</th><th style="width:16%">کلید</th><th>توضیح</th></tr></thead>
+<tbody>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">collaborator_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">PK, FK</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">اتصال به tbl_collaborators</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">company_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">FK, NOT NULL</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">اتصال به tbl_companies</td></tr>
+<tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">role_note</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نقش شرکت در پروژه</td></tr>
+</tbody></table>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;16</div>
+        <div class="tb-title">دیکشنری کامل دیتابیس</div>
+        <div class="tb-meta">REV 1.4 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-16','SHEET 16 · دیکشنری کامل دیتابیس')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-16','16-دیکشنری-دیتابیس')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-16" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 17 — NOTES ================= -->
+    <section class="sheet" id="sheet-17">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">جمع‌بندی</div>
+        <h2>یادداشت‌های مهندسی و نکات ارتقا</h2>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-17">
+          <table class="matrix">
+            <caption>Engineering notes for implementation</caption>
+            <thead><tr><th style="width:22%">حوزه</th><th>نکتهٔ طراحی</th></tr></thead>
+            <tbody>
+              <tr><th>چندنقشی</th><td style="text-align:start">جدول واسط <span class="mono">tbl_user_roles</span> اجازه می‌دهد یک کاربر هم‌زمان چند نقش داشته باشد؛ نقش‌های پروژه‌ای (۴ و ۵) در <span class="mono">tbl_project_roles</span> به‌ازای هر پروژه ثبت می‌شوند.</td></tr>
+              <tr><th>عدم حذف فیزیکی</th><td style="text-align:start">تبدیل سرباز/کارآموز به همکار پروژه، رکورد اصلی را حذف نمی‌کند؛ فقط رکورد جدید در <span class="mono">tbl_collaborators</span> با ارجاع <span class="mono">source_ref_id</span> ایجاد می‌شود.</td></tr>
+              <tr><th>ارتقاپذیری</th><td style="text-align:start">افزودن نقش نهم یا ماژول هفتم فقط به معنی افزودن یک ردیف Lookup و یک ماژول مستقل جدید است.</td></tr>
+              <tr><th>الگوی زیرنوع</th><td style="text-align:start">همکار پروژه با Table-per-Subtype مدل شده و سه زیرنوع دارد: internal، external، company. افزودن نوع چهارم فقط یک زیرجدول جدید است.</td></tr>
+              <tr><th>اتصال دوگانه شرکت‌ها</th><td style="text-align:start">یک شرکت هم‌زمان می‌تواند: (۱) به یک یا چند پروژه متصل باشد (از طریق <span class="mono">project_id</span> در <span class="mono">tbl_companies</span>)، و (۲) به‌عنوان همکار خارجی/شرکتی در یک یا چند پروژه حضور یابد (از طریق <span class="mono">company_id</span> در <span class="mono">tbl_collaborators</span>).</td></tr>
+              <tr><th>مشخصات شخصی</th><td style="text-align:start">هستهٔ <span class="mono">tbl_users</span> فقط هویت/حساب کاربری را نگه می‌دارد؛ فیلدهای شخصی حساس در <span class="mono">tbl_user_personal_info</span> جدا شده‌اند.</td></tr>
+              <tr><th>رزومهٔ کارآموز</th><td style="text-align:start">چهار جدول <span class="mono">tbl_karamooz_education</span>، <span class="mono">tbl_karamooz_resume</span>، <span class="mono">tbl_karamooz_experience</span> و <span class="mono">tbl_karamooz_skill</span> یک رزومهٔ ساخت‌یافته تشکیل می‌دهند.</td></tr>
+              <tr><th>ماژول شرکت‌ها</th><td style="text-align:start">ماژول ۶ با <span class="mono">tbl_companies</span> به‌عنوان جدول پایه، از طریق <span class="mono">project_id</span> به پروژه‌ها متصل می‌شود. این ماژول همچنین می‌تواند به‌عنوان همکار شرکتی از طریق جدول واسط <span class="mono">tbl_collaborators_company</span> در پروژه‌ها حضور یابد.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;17</div>
+        <div class="tb-title">یادداشت‌های مهندسی</div>
+        <div class="tb-meta">REV 1.4 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-17','SHEET 17 · یادداشت‌های مهندسی')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-17','17-یادداشت-های-مهندسی')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-17" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 18 — MODULE 6 ARCHITECTURE ================= -->
+    <section class="sheet" id="sheet-18">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">معماری ماژول جدید</div>
+        <h2>معماری و ارتباط ماژول ۶ · مدیریت شرکت‌ها و قراردادها</h2>
+        <p>این ماژول کاملاً مستقل طراحی شده و از دو طریق به سامانه متصل می‌شود: <span class="mono">project_id</span> به پروژه‌ها و <span class="mono">company_id</span> به همکاران.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-18">
+          <svg viewBox="0 0 1100 600" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs>
+              <marker id="a18" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5B7A5D"/></marker>
+              <marker id="a18b" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2A4568"/></marker>
+            </defs>
+            <rect x="30" y="20" width="1040" height="540" fill="none" stroke="#5B7A5D" stroke-width="2" stroke-dasharray="8 6" rx="6"/>
+            <text x="550" y="580" text-anchor="middle" font-size="13" fill="#5B7A5D">ماژول ۶ — کاملاً مستقل، با دو اتصال: project_id (به پروژه‌ها) و company_id (به همکاران)</text>
+
+            <rect x="150" y="70" width="300" height="80" rx="5" fill="#AD6B3A"/>
+            <text x="300" y="103" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">ماژول ۲ · مدیریت پروژه‌ها</text>
+            <text x="300" y="127" text-anchor="middle" fill="#F7E6D8" font-size="11">tbl_projects — project_id</text>
+
+            <rect x="650" y="70" width="300" height="80" rx="5" fill="#2A4568"/>
+            <text x="800" y="103" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">ماژول ۳ · همکاران پروژه</text>
+            <text x="800" y="127" text-anchor="middle" fill="#BFD8DD" font-size="11">tbl_collaborators — collaborator_id</text>
+
+            <rect x="250" y="260" width="600" height="200" rx="5" fill="#F7F5EC" stroke="#5B7A5D" stroke-width="2.5"/>
+            <text x="550" y="295" text-anchor="middle" font-size="17" font-weight="700" fill="#152238">ماژول ۶ · مدیریت شرکت‌ها و قراردادها</text>
+            <text x="550" y="322" text-anchor="middle" font-size="12" fill="#565C6B">tbl_companies — company_id, company_name</text>
+            <text x="550" y="344" text-anchor="middle" font-size="12" fill="#565C6B">product_name, contract_number, contract_date</text>
+            <text x="550" y="366" text-anchor="middle" font-size="12" fill="#565C6B">contact_person, phone, email, status</text>
+            <text x="550" y="394" text-anchor="middle" font-size="11.5" fill="#5B7A5D" font-weight="700">project_id (nullable) — اتصال به پروژه</text>
+            <text x="550" y="418" text-anchor="middle" font-size="11.5" fill="#5B7A5D" font-weight="700">company_id → tbl_collaborators_company (همکار شرکتی)</text>
+            <text x="550" y="442" text-anchor="middle" font-size="11.5" fill="#5B7A5D" font-weight="700">tbl_collaborators_company — collaborator_id, company_id, role_note</text>
+
+            <path d="M300,150 L400,260" fill="none" stroke="#5B7A5D" stroke-width="2.5" marker-end="url(#a18)"/>
+            <text x="330" y="210" font-size="12" fill="#5B7A5D" font-weight="700">project_id (N:1)</text>
+
+            <path d="M800,150 L700,260" fill="none" stroke="#5B7A5D" stroke-width="2.5" marker-end="url(#a18)"/>
+            <text x="740" y="210" font-size="12" fill="#5B7A5D" font-weight="700">company_id (N:1)</text>
+
+            <g transform="translate(50,490)">
+              <rect width="230" height="60" rx="3" fill="#EDEAE0" stroke="#8a8368" stroke-width="1.2"/>
+              <text x="115" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#20242E">تاریخ عقد قرارداد</text>
+              <text x="115" y="46" text-anchor="middle" font-size="10" fill="#565C6B" font-family="'JetBrains Mono',monospace">contract_date</text>
+            </g>
+            <g transform="translate(300,490)">
+              <rect width="230" height="60" rx="3" fill="#EDEAE0" stroke="#8a8368" stroke-width="1.2"/>
+              <text x="115" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#20242E">شماره قرارداد</text>
+              <text x="115" y="46" text-anchor="middle" font-size="10" fill="#565C6B" font-family="'JetBrains Mono',monospace">contract_number</text>
+            </g>
+            <g transform="translate(550,490)">
+              <rect width="230" height="60" rx="3" fill="#EDEAE0" stroke="#8a8368" stroke-width="1.2"/>
+              <text x="115" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#20242E">نام محصول</text>
+              <text x="115" y="46" text-anchor="middle" font-size="10" fill="#565C6B" font-family="'JetBrains Mono',monospace">product_name</text>
+            </g>
+            <g transform="translate(800,490)">
+              <rect width="230" height="60" rx="3" fill="#EDEAE0" stroke="#8a8368" stroke-width="1.2"/>
+              <text x="115" y="26" text-anchor="middle" font-size="12" font-weight="600" fill="#20242E">نام شرکت</text>
+              <text x="115" y="46" text-anchor="middle" font-size="10" fill="#565C6B" font-family="'JetBrains Mono',monospace">company_name</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;18</div>
+        <div class="tb-title">معماری ماژول شرکت‌ها و قراردادها</div>
+        <div class="tb-meta">REV 1.2 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-18','SHEET 18 · معماری ماژول شرکت‌ها')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-18','18-معماری-شرکت-ها-و-قراردادها')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-18" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 19 — MODULE 6 WORKFLOW ================= -->
+    <section class="sheet" id="sheet-19">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">نمودار فعالیت</div>
+        <h2>گردش‌کار ماژول ۶ · مدیریت شرکت‌ها و قراردادها</h2>
+        <p>از ثبت شرکت و اطلاعات قرارداد تا اتصال به پروژه (و اختیاراً به‌عنوان همکار خارجی/شرکتی) و مدیریت وضعیت قرارداد.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-19">
+          <svg viewBox="0 0 1000 1100" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs><marker id="a19" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#152238"/></marker></defs>
+            <style>
+              .fp{fill:#F7F5EC; stroke:#152238; stroke-width:1.8;}
+              .fd{fill:#F3E6DA; stroke:#AD6B3A; stroke-width:1.8;}
+              .fse{fill:#152238;} .fre{fill:#943F35;}
+              .ft{font-size:12.5px; fill:#20242E;}
+              .ftw{font-size:12.5px; fill:#fff; font-weight:600;}
+              .fline{stroke:#565C6B; stroke-width:1.8; fill:none;}
+              .flbl{font-size:11.5px; fill:#943F35; font-weight:600;}
+            </style>
+
+            <rect class="fse" x="430" y="20" width="140" height="40" rx="20"/>
+            <text class="ftw" x="500" y="45" text-anchor="middle">شروع</text>
+            <path class="fline" d="M500,60 L500,100" marker-end="url(#a19)"/>
+
+            <rect class="fp" x="230" y="100" width="540" height="70" rx="5"/>
+            <text class="ft" x="500" y="128" text-anchor="middle">نقش‌های ۱ تا ۵ یک شرکت/قرارداد جدید</text>
+            <text class="ft" x="500" y="150" text-anchor="middle">در ماژول مدیریت شرکت‌ها ثبت می‌کنند</text>
+            <path class="fline" d="M500,170 L500,210" marker-end="url(#a19)"/>
+
+            <rect class="fp" x="230" y="210" width="540" height="90" rx="5"/>
+            <text class="ft" x="500" y="238" text-anchor="middle">اطلاعات اصلی ثبت می‌شود:</text>
+            <text class="ft" x="500" y="260" text-anchor="middle" font-size="11" fill="#565C6B">نام شرکت، نام محصول، شماره قرارداد،</text>
+            <text class="ft" x="500" y="280" text-anchor="middle" font-size="11" fill="#565C6B">تاریخ عقد قرارداد و اطلاعات تماس</text>
+            <path class="fline" d="M500,300 L500,340" marker-end="url(#a19)"/>
+
+            <polygon class="fd" points="500,340 700,410 500,480 300,410"/>
+            <text class="ft" x="500" y="405" text-anchor="middle">قرارداد به پروژه</text>
+            <text class="ft" x="500" y="425" text-anchor="middle">متصل شود؟</text>
+
+            <path class="fline" d="M700,410 L850,410 L850,540" marker-end="url(#a19)"/>
+            <text class="flbl" x="770" y="402">بله</text>
+            <rect class="fp" x="720" y="540" width="250" height="70" rx="5"/>
+            <text class="ft" x="845" y="568" text-anchor="middle" font-size="11.5">project_id از لیست</text>
+            <text class="ft" x="845" y="590" text-anchor="middle" font-size="11.5">پروژه‌ها انتخاب و ذخیره می‌شود</text>
+            <path class="fline" d="M845,610 L845,680" marker-end="url(#a19)"/>
+
+            <path class="fline" d="M300,410 L150,410 L150,540" marker-end="url(#a19)"/>
+            <text class="flbl" x="200" y="402">خیر</text>
+            <rect class="fp" x="30" y="540" width="240" height="70" rx="5"/>
+            <text class="ft" x="150" y="568" text-anchor="middle" font-size="11.5">قرارداد بدون اتصال</text>
+            <text class="ft" x="150" y="590" text-anchor="middle" font-size="11.5">به پروژه ثبت می‌شود</text>
+            <path class="fline" d="M150,610 L150,680" marker-end="url(#a19)"/>
+
+            <polygon class="fd" points="500,680 700,750 500,820 300,750"/>
+            <text class="ft" x="500" y="745" text-anchor="middle">شرکت به‌عنوان همکار</text>
+            <text class="ft" x="500" y="765" text-anchor="middle">خارجی نیز حضور یابد؟</text>
+
+            <path class="fline" d="M700,750 L850,750 L850,880" marker-end="url(#a19)"/>
+            <text class="flbl" x="770" y="742">بله</text>
+            <rect class="fp" x="700" y="880" width="280" height="90" rx="5" stroke="#5B7A5D" stroke-width="2.2"/>
+            <text class="ft" x="840" y="908" text-anchor="middle" font-size="11.5">رکورد در tbl_collaborators</text>
+            <text class="ft" x="840" y="930" text-anchor="middle" font-size="11.5">با type=company و company_id</text>
+            <text class="ft" x="840" y="952" text-anchor="middle" font-size="11.5">ایجاد و به پروژه متصل می‌شود</text>
+            <path class="fline" d="M840,970 L840,1020" marker-end="url(#a19)"/>
+
+            <path class="fline" d="M300,750 L150,750 L150,880" marker-end="url(#a19)"/>
+            <text class="flbl" x="200" y="742">خیر</text>
+            <rect class="fp" x="30" y="880" width="240" height="70" rx="5"/>
+            <text class="ft" x="150" y="908" text-anchor="middle" font-size="11.5">فقط به‌عنوان قرارداد</text>
+            <text class="ft" x="150" y="930" text-anchor="middle" font-size="11.5">ثبت می‌شود</text>
+            <path class="fline" d="M150,950 L150,1020" marker-end="url(#a19)"/>
+
+            <rect class="fp" x="350" y="1020" width="300" height="55" rx="5" fill="#F3E6DA" stroke="#AD6B3A" stroke-width="2"/>
+            <text class="ft" x="500" y="1053" text-anchor="middle" font-size="12" font-weight="600">قرارداد با وضعیت active ثبت می‌شود</text>
+            <path class="fline" d="M500,1075 L500,1105" marker-end="url(#a19)"/>
+
+            <rect class="fre" x="430" y="1105" width="140" height="40" rx="20"/>
+            <text class="ftw" x="500" y="1130" text-anchor="middle">پایان</text>
+          </svg>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;19</div>
+        <div class="tb-title">گردش‌کار مدیریت شرکت‌ها و قراردادها</div>
+        <div class="tb-meta">REV 1.3 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-19','SHEET 19 · گردش‌کار شرکت‌ها و قراردادها')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-19','19-گردش-کار-شرکت-ها-و-قراردادها')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-19" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 20 — MODULE 6 ERD (COMPLETE) ================= -->
+    <section class="sheet" id="sheet-20">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">مدل داده — جزئیات</div>
+        <h2>ERD کامل ماژول ۶ · مدیریت شرکت‌ها و قراردادها</h2>
+        <p>نمای کامل جدول اصلی <span class="mono">tbl_companies</span> با تمام فیلدها، جدول واسط <span class="mono">tbl_collaborators_company</span>، جدول اتصال <span class="mono">tbl_project_collaborators</span>، و ارجاعات دقیق به ماژول‌های ۲ (پروژه‌ها) و ۳ (همکاران پروژه).</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-20">
+          <svg viewBox="0 0 1500 1050" xmlns="http://www.w3.org/2000/svg" direction="ltr">
+            <defs>
+              <marker id="m20-s" markerWidth="11" markerHeight="11" refX="10" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#565C6B"/></marker>
+              <marker id="m20-g" markerWidth="11" markerHeight="11" refX="10" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#5B7A5D"/></marker>
+              <marker id="m20-p" markerWidth="11" markerHeight="11" refX="10" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#AD6B3A"/></marker>
+              <marker id="m20-c" markerWidth="11" markerHeight="11" refX="10" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#2A4568"/></marker>
+            </defs>
+            <style>
+              .e-hd{fill:#5B7A5D;} .e-bd{fill:#F7F5EC; stroke:#5B7A5D; stroke-width:2.2;}
+              .e-hd2{fill:#152238;} .e-bd2{fill:#F7F5EC; stroke:#152238; stroke-width:2;}
+              .e-hd3{fill:#AD6B3A;} .e-bd3{fill:#F7F5EC; stroke:#AD6B3A; stroke-width:2;}
+              .e-hd4{fill:#2A4568;} .e-bd4{fill:#F7F5EC; stroke:#2A4568; stroke-width:2;}
+              .e-ht{fill:#fff; font-size:14px; font-weight:700;}
+              .e-hn{fill:#D4E8D4; font-family:'JetBrains Mono',monospace; font-size:10.5px;}
+              .e-hn2{fill:#BFD8DD; font-family:'JetBrains Mono',monospace; font-size:10.5px;}
+              .e-hn3{fill:#F7E6D8; font-family:'JetBrains Mono',monospace; font-size:10.5px;}
+              .e-f{fill:#20242E; font-size:11.5px; font-family:'JetBrains Mono',monospace;}
+              .e-fg{fill:#5B7A5D; font-size:11.5px; font-family:'JetBrains Mono',monospace; font-weight:700;}
+              .e-pk{fill:#AD6B3A; font-weight:700;} .e-pk2{fill:#152238; font-weight:700;}
+              .e-fk{fill:#2A4568; font-style:italic;} .e-fk3{fill:#5B7A5D; font-style:italic;}
+              .relg{stroke:#5B7A5D; stroke-width:2.4; fill:none;}
+              .relp{stroke:#AD6B3A; stroke-width:2; fill:none; stroke-dasharray:7 4;}
+              .relc{stroke:#2A4568; stroke-width:2; fill:none;}
+              .rlg{font-size:12px; fill:#5B7A5D; font-weight:700;}
+              .rlp{font-size:12px; fill:#AD6B3A; font-weight:700;}
+              .rlc{font-size:12px; fill:#2A4568; font-weight:700;}
+            </style>
+
+            <!-- REF: PROJECTS -->
+            <g transform="translate(50,50)">
+              <rect class="e-bd3" width="300" height="120" rx="4"/>
+              <rect class="e-hd3" width="300" height="38" rx="4"/>
+              <text class="e-ht" x="150" y="25" text-anchor="middle">ماژول ۲ · پروژه‌ها</text>
+              <text class="e-hn3" x="150" y="55" text-anchor="middle">tbl_projects</text>
+              <text class="e-f e-pk2" x="280" y="80" text-anchor="end">PK  project_id</text>
+              <text class="e-f" x="280" y="102" text-anchor="end">title, status, proposed_by</text>
+            </g>
+
+            <!-- REF: COLLABORATORS BASE -->
+            <g transform="translate(1150,50)">
+              <rect class="e-bd4" width="300" height="120" rx="4"/>
+              <rect class="e-hd4" width="300" height="38" rx="4"/>
+              <text class="e-ht" x="150" y="25" text-anchor="middle">ماژول ۳ · همکاران پایه</text>
+              <text class="e-hn2" x="150" y="55" text-anchor="middle">tbl_collaborators</text>
+              <text class="e-f e-pk2" x="280" y="80" text-anchor="end">PK  collaborator_id</text>
+              <text class="e-f" x="280" y="102" text-anchor="end">type, user_id, company_id, status</text>
+            </g>
+
+            <!-- MAIN: tbl_companies -->
+            <g transform="translate(500,240)">
+              <rect class="e-bd" width="500" height="460" rx="4"/>
+              <rect class="e-hd" width="500" height="45" rx="4"/>
+              <text class="e-ht" x="250" y="28" text-anchor="middle" font-size="15">ماژول ۶ · شرکت‌ها و قراردادها</text>
+              <text class="e-hn" x="250" y="62" text-anchor="middle">tbl_companies</text>
+
+              <text class="e-f e-pk" x="480" y="92" text-anchor="end">PK  company_id</text>
+
+              <text class="e-f" x="480" y="118" text-anchor="end">company_name — نام شرکت</text>
+              <text class="e-f" x="480" y="142" text-anchor="end">product_name — نام محصول</text>
+              <text class="e-f" x="480" y="166" text-anchor="end">contract_number — شماره قرارداد</text>
+              <text class="e-f" x="480" y="190" text-anchor="end">contract_date — تاریخ عقد قرارداد</text>
+
+              <text class="e-f e-fk" x="480" y="218" text-anchor="end">FK  project_id (nullable → tbl_projects)</text>
+
+              <text class="e-f" x="480" y="246" text-anchor="end">contact_person — نام شخص رابط</text>
+              <text class="e-f" x="480" y="270" text-anchor="end">phone — شماره تماس</text>
+              <text class="e-f" x="480" y="294" text-anchor="end">email — پست الکترونیکی</text>
+              <text class="e-f" x="480" y="318" text-anchor="end">address — نشانی</text>
+
+              <text class="e-f" x="480" y="346" text-anchor="end">status — active / expired / terminated</text>
+              <text class="e-f" x="480" y="370" text-anchor="end">notes — توضیحات</text>
+              <text class="e-f" x="480" y="394" text-anchor="end">created_at — تاریخ ایجاد</text>
+
+              <line x1="20" y1="410" x2="480" y2="410" stroke="#D6D0BE" stroke-width="1" stroke-dasharray="3 4"/>
+
+              <text class="e-fg" x="480" y="436" text-anchor="end">← قابل استفاده به‌عنوان همکار شرکتی</text>
+            </g>
+
+            <!-- SUBTYPE: tbl_collaborators_company -->
+            <g transform="translate(50,760)">
+              <rect class="e-bd" width="480" height="180" rx="4"/>
+              <rect class="e-hd" width="480" height="42" rx="4"/>
+              <text class="e-ht" x="240" y="27" text-anchor="middle" font-size="14">زیرنوع همکار شرکتی</text>
+              <text class="e-hn" x="240" y="60" text-anchor="middle">tbl_collaborators_company</text>
+
+              <text class="e-f e-pk2" x="460" y="90" text-anchor="end">PK,FK  collaborator_id → tbl_collaborators</text>
+              <text class="e-f e-fk3" x="460" y="118" text-anchor="end">FK  company_id (NOT NULL) → tbl_companies</text>
+              <text class="e-f" x="460" y="146" text-anchor="end">role_note — نقش شرکت در پروژه</text>
+              <text class="e-f" x="460" y="170" text-anchor="end">created_at — تاریخ ایجاد رکورد</text>
+            </g>
+
+            <!-- LINK: tbl_project_collaborators -->
+            <g transform="translate(980,760)">
+              <rect class="e-bd3" width="470" height="180" rx="4"/>
+              <rect class="e-hd3" width="470" height="42" rx="4"/>
+              <text class="e-ht" x="235" y="27" text-anchor="middle" font-size="14">اتصال همکار به پروژه</text>
+              <text class="e-hn3" x="235" y="60" text-anchor="middle">tbl_project_collaborators</text>
+
+              <text class="e-f e-pk2" x="450" y="90" text-anchor="end">PK  id</text>
+              <text class="e-f e-fk" x="450" y="118" text-anchor="end">FK  project_id → tbl_projects</text>
+              <text class="e-f e-fk" x="450" y="146" text-anchor="end">FK  collaborator_id → tbl_collaborators</text>
+              <text class="e-f" x="450" y="170" text-anchor="end">role_in_project, start_date, end_date</text>
+            </g>
+
+            <!-- ============ RELATIONS ============ -->
+
+            <!-- (1) tbl_companies.project_id → tbl_projects.project_id -->
+            <path class="relp" d="M500,320 L350,320 L350,170" marker-end="url(#m20-p)"/>
+            <text class="rlp" x="360" y="250">project_id (N:1)</text>
+
+            <!-- (2) tbl_companies.company_id → tbl_collaborators_company.company_id -->
+            <path class="relg" d="M650,700 L650,720 L290,720 L290,760" marker-end="url(#m20-g)"/>
+            <text class="rlg" x="360" y="715">company_id (1:N)</text>
+
+            <!-- (3) tbl_collaborators_company.collaborator_id → tbl_collaborators.collaborator_id -->
+            <path class="relc" d="M530,850 L900,850 L900,780 L1150,780 L1150,170" marker-end="url(#m20-c)"/>
+            <text class="rlc" x="905" y="820">collaborator_id (N:1)</text>
+
+            <!-- (4) tbl_project_collaborators.project_id → tbl_projects.project_id -->
+            <path class="relp" d="M980,850 L200,850 L200,170" marker-end="url(#m20-p)"/>
+            <text class="rlp" x="205" y="450">project_id (N:1)</text>
+
+            <!-- (5) tbl_project_collaborators.collaborator_id → tbl_collaborators.collaborator_id -->
+            <path class="relc" d="M1450,880 L1470,880 L1470,170" marker-end="url(#m20-c)"/>
+            <text class="rlc" x="1400" y="530">collaborator_id (N:1)</text>
+
+            <!-- Legend -->
+            <g transform="translate(50,975)">
+              <line x1="0" y1="0" x2="40" y2="0" stroke="#5B7A5D" stroke-width="2.4"/>
+              <text x="50" y="4" font-size="11.5" fill="#20242E">اتصال مستقیم (company_id به زیرنوع)</text>
+
+              <line x1="380" y1="0" x2="420" y2="0" stroke="#2A4568" stroke-width="2"/>
+              <text x="430" y="4" font-size="11.5" fill="#20242E">اتصال به همکاران پایه (collaborator_id)</text>
+
+              <line x1="760" y1="0" x2="800" y2="0" stroke="#AD6B3A" stroke-width="2" stroke-dasharray="7 4"/>
+              <text x="810" y="4" font-size="11.5" fill="#20242E">اتصال به پروژه (project_id)</text>
+            </g>
+          </svg>
+        </div>
+        <div class="note good">ERD کامل ماژول ۶ با ۵ جدول: <span class="mono">tbl_companies</span> (جدول اصلی)، <span class="mono">tbl_collaborators_company</span> (زیرنوع همکار شرکتی)، <span class="mono">tbl_project_collaborators</span> (اتصال N:N به پروژه)، و ارجاعات به <span class="mono">tbl_projects</span> و <span class="mono">tbl_collaborators</span>. شرکت‌ها از دو مسیر به سامانه متصل می‌شوند: <span class="mono">project_id</span> (اتصال مستقیم قرارداد به پروژه) و <span class="mono">company_id</span> (حضور به‌عنوان همکار شرکتی).</div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;20</div>
+        <div class="tb-title">ERD · شرکت‌ها و قراردادها</div>
+        <div class="tb-meta">REV 1.5 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-20','SHEET 20 · ERD شرکت‌ها و قراردادها')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-20','20-ERD-شرکت-ها-و-قراردادها')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-20" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+    <!-- ================= SHEET 21 — MODULE 6 DB DICTIONARY ================= -->
+    <section class="sheet" id="sheet-21">
+      <div class="sheet-head">
+        <div class="sheet-eyebrow">پیوست فنی — ماژول جدید</div>
+        <h2>دیکشنری دیتابیس ماژول ۶ · شرکت‌ها و قراردادها</h2>
+        <p>فهرست کامل فیلدهای جدول <span class="mono">tbl_companies</span> و جدول واسط <span class="mono">tbl_collaborators_company</span>.</p>
+      </div>
+      <div class="sheet-body">
+        <div class="capture" id="cap-21">
+          <table class="matrix" style="margin-bottom:18px;">
+            <caption>شرکت‌ها و قراردادها — <span class="mono">tbl_companies</span></caption>
+            <thead><tr><th style="width:26%">فیلد</th><th style="width:18%">نوع داده</th><th style="width:16%">کلید</th><th>توضیح</th></tr></thead>
+            <tbody>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">company_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">PK</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">شناسهٔ شرکت/قرارداد</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">company_name</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نام شرکت</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">product_name</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(200)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نام محصول</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">contract_number</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(50)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">شماره قرارداد</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">contract_date</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">DATE</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">تاریخ عقد قرارداد</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">project_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">FK, nullable</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">اتصال به پروژه (اختیاری)</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">contact_person</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نام شخص رابط</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">phone</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(20)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">شماره تماس</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">email</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">پست الکترونیکی</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">status</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">ENUM</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">active / expired / terminated</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">created_at</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">DATETIME</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">تاریخ ایجاد</td></tr>
+            </tbody>
+          </table>
+          <table class="matrix">
+            <caption>همکار شرکتی — <span class="mono">tbl_collaborators_company</span></caption>
+            <thead><tr><th style="width:26%">فیلد</th><th style="width:18%">نوع داده</th><th style="width:16%">کلید</th><th>توضیح</th></tr></thead>
+            <tbody>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">collaborator_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">PK, FK</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">اتصال به tbl_collaborators</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">company_id</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">INT</td><td style="text-align:start;font-weight:600;color:var(--copper)">FK, NOT NULL</td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">اتصال به tbl_companies</td></tr>
+              <tr><td style="text-align:start;font-family:var(--font-mono);font-size:12.5px">role_note</td><td style="text-align:start;font-family:var(--font-mono);font-size:12px">VARCHAR(150)</td><td></td><td style="text-align:start;font-size:12.5px;color:var(--ink-soft)">نقش شرکت در پروژه</td></tr>
+            </tbody>
+          </table>
+          <div class="note good" style="margin-top:18px;">این دو جدول کاملاً مستقل هستند و از دو طریق به بقیهٔ سامانه متصل می‌شوند: <span class="mono">project_id</span> (اتصال به پروژه) و <span class="mono">company_id</span> (اتصال به همکاران). چهار فیلد اصلی «تاریخ عقد قرارداد»، «شماره قرارداد»، «نام محصول»، «نام شرکت» در جدول <span class="mono">tbl_companies</span> پیاده‌سازی شده‌اند.</div>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="tb-num">SHEET&nbsp;21</div>
+        <div class="tb-title">دیکشنری دیتابیس · شرکت‌ها و قراردادها</div>
+        <div class="tb-meta">REV 1.3 · 1405</div>
+        <div class="tb-actions">
+          <button class="btn-fs" onclick="openFullscreen('cap-21','SHEET 21 · دیکشنری شرکت‌ها و قراردادها')">⛶ نمایش تمام‌صفحه</button>
+          <button class="btn-dl" onclick="downloadSheet('cap-21','21-دیکشنری-شرکت-ها-و-قراردادها')">دانلود تصویر</button>
+        </div>
+      </div>
+      <div style="padding:4px 20px;"><span class="status" id="st-cap-21" style="display:block;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-height:14px;"></span></div>
+    </section>
+
+  </main>
+
+    <nav class="toc" aria-label="فهرست شیت‌ها">
+    <h2>SHEET INDEX</h2>
+    <ol>
+      <li><a href="#sheet-01"><span class="n">01</span>اصول طراحی</a></li>
+      <li><a href="#sheet-02"><span class="n">02</span>نقش‌ها و سطوح دسترسی</a></li>
+      <li><a href="#sheet-03"><span class="n">03</span>ماتریس دسترسی</a></li>
+      <li><a href="#sheet-04"><span class="n">04</span>معماری ماژول‌ها</a></li>
+      <li><a href="#sheet-05"><span class="n">05</span>گردش‌کار کاربران</a></li>
+      <li><a href="#sheet-06"><span class="n">06</span>گردش‌کار پروژه‌ها</a></li>
+      <li><a href="#sheet-07"><span class="n">07</span>گردش‌کار همکار پروژه</a></li>
+      <li><a href="#sheet-08"><span class="n">08</span>گردش‌کار سرباز</a></li>
+      <li><a href="#sheet-09"><span class="n">09</span>گردش‌کار کارآموز</a></li>
+      <li><a href="#sheet-10"><span class="n">10</span>ERD کامل سامانه</a></li>
+      <li><a href="#sheet-11"><span class="n">11</span>ERD کاربران</a></li>
+      <li><a href="#sheet-12"><span class="n">12</span>ERD پروژه‌ها</a></li>
+      <li><a href="#sheet-13"><span class="n">13</span>ERD همکاران</a></li>
+      <li><a href="#sheet-14"><span class="n">14</span>ERD سرباز</a></li>
+      <li><a href="#sheet-15"><span class="n">15</span>ERD کارآموز</a></li>
+      <li><a href="#sheet-16"><span class="n">16</span>دیکشنری دیتابیس</a></li>
+      <li><a href="#sheet-17"><span class="n">17</span>یادداشت‌های مهندسی</a></li>
+      <li><a href="#sheet-18"><span class="n">18</span>معماری شرکت‌ها</a></li>
+      <li><a href="#sheet-19"><span class="n">19</span>گردش‌کار شرکت‌ها</a></li>
+      <li><a href="#sheet-20"><span class="n">20</span>ERD شرکت‌ها</a></li>
+      <li><a href="#sheet-21"><span class="n">21</span>دیکشنری شرکت‌ها</a></li>
+    </ol>
+  </nav>
+</div>
+
+<footer>مستند مهندسی نرم‌افزار سامانه مدیریت پژوهش · نسخه ۱٫۵ · مهر ۱۴۰۵ · تمامی شیت‌ها از طریق دکمه‌های «نمایش تمام‌صفحه» و «دانلود تصویر» قابل مشاهده و دریافت هستند.</footer>
+
+<!-- ================= FULLSCREEN MODAL ================= -->
+<div class="fs-modal" id="fsModal" role="dialog" aria-modal="true" aria-labelledby="fsTitle">
+  <div class="fs-modal-header">
+    <span class="fs-eyebrow">FULLSCREEN VIEW</span>
+    <span class="fs-title" id="fsTitle">—</span>
+    <div class="fs-modal-actions">
+      <button class="btn-dl" id="fsDownloadBtn" onclick="downloadFromFullscreen()">دانلود تصویر</button>
+      <button class="close-btn" onclick="closeFullscreen()" aria-label="بستن">✕ بستن (ESC)</button>
+    </div>
+  </div>
+  <div class="fs-modal-body">
+    <div class="fs-content" id="fsContent"></div>
+  </div>
+</div>
+
+<script>
+/* ============ DOWNLOAD (PNG) ============ */
+async function downloadSheet(captureId, filename){
+  const el = document.getElementById(captureId);
+  const statusEl = document.getElementById('st-' + captureId);
+  if(!el) return;
+  if(statusEl) statusEl.textContent = 'در حال تولید تصویر…';
+  try{
+    const canvas = await html2canvas(el, {
+      scale: 3,
+      backgroundColor: '#ffffff',
+      useCORS: true,
+      logging:false
+    });
+    const link = document.createElement('a');
+    link.download = filename + '.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    if(statusEl) statusEl.textContent = 'دانلود شد ✓';
+  }catch(err){
+    console.error(err);
+    if(statusEl) statusEl.textContent = 'خطا در تولید تصویر';
+    alert('در تولید تصویر خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+  }
+  setTimeout(()=>{ if(statusEl) statusEl.textContent=''; }, 4000);
+}
+
+/* ============ FULLSCREEN MODAL ============ */
+let currentFsCapture = null;
+let currentFsTitle = '';
+const fsModal = document.getElementById('fsModal');
+const fsContent = document.getElementById('fsContent');
+const fsTitle = document.getElementById('fsTitle');
+
+function openFullscreen(captureId, title){
+  const src = document.getElementById(captureId);
+  if(!src) return;
+  currentFsCapture = captureId;
+  currentFsTitle = title || 'Fullscreen View';
+  fsTitle.textContent = currentFsTitle;
+  fsContent.innerHTML = '';
+  // Clone content to allow its own rendering inside modal
+  const clone = src.cloneNode(true);
+  // Remove any id from clone to avoid duplicate ids
+  clone.removeAttribute('id');
+  fsContent.appendChild(clone);
+  fsModal.classList.add('open');
+  document.body.classList.add('modal-open');
+  // Focus the close button
+  setTimeout(()=>{
+    const closeBtn = fsModal.querySelector('.close-btn');
+    if(closeBtn) closeBtn.focus();
+  }, 100);
+}
+
+function closeFullscreen(){
+  fsModal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+  fsContent.innerHTML = '';
+  currentFsCapture = null;
+  currentFsTitle = '';
+}
+
+async function downloadFromFullscreen(){
+  if(!currentFsCapture){
+    // fallback: download the modal content itself
+    const el = fsContent.querySelector('*');
+    if(el) await downloadElement(el, currentFsTitle || 'sheet');
+    return;
+  }
+  // Prefer downloading original capture for higher fidelity
+  const safeName = (currentFsTitle || 'sheet').replace(/[\\/:*?"<>|]/g,'-');
+  await downloadSheet(currentFsCapture, safeName);
+}
+
+async function downloadElement(el, filename){
+  try{
+    const canvas = await html2canvas(el, {
+      scale: 3,
+      backgroundColor:'#ffffff',
+      useCORS:true,
+      logging:false
+    });
+    const link = document.createElement('a');
+    link.download = filename + '.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }catch(err){
+    console.error(err);
+    alert('خطا در تولید تصویر');
+  }
+}
+
+/* Close on Escape */
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape' && fsModal.classList.contains('open')){
+    closeFullscreen();
+  }
+});
+
+/* Close when clicking outside content */
+fsModal.addEventListener('click', function(e){
+  if(e.target === fsModal){
+    closeFullscreen();
+  }
+});
+</script>
+</body>
+</html>

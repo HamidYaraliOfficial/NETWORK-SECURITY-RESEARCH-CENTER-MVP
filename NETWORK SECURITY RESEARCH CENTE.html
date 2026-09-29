@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سامانه مدیریت پژوهشکده امنیت شبکه</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f5f7;--bg-2:#eaecf0;--surface:#ffffff;--surface-2:#f8f9fb;--surface-3:#eef0f4;
+  --border:#d8dce3;--border-2:#c4cad4;--border-3:#a8b1bd;
+  --text:#101826;--text-2:#2c3a52;--text-soft:#5a6880;--text-mute:#8894a8;
+  --navy:#0f2544;--navy-2:#1a3a63;--navy-3:#2a4f7c;--navy-soft:#e8eef6;
+  --gold:#a67c3d;--gold-2:#c49a56;--gold-soft:#f5eedd;
+  --burgundy:#7a2f3a;--emerald:#1e5a3f;--slate:#4a5568;
+  --grad-navy:linear-gradient(180deg,#0f2544 0%,#1a3a63 100%);
+  --grad-navy-h:linear-gradient(90deg,#0f2544 0%,#1a3a63 100%);
+  --grad-gold:linear-gradient(135deg,#a67c3d 0%,#c49a56 100%);
+  --shadow-xs:0 1px 2px rgba(15,37,68,0.05);
+  --shadow-sm:0 1px 3px rgba(15,37,68,0.08),0 1px 2px rgba(15,37,68,0.04);
+  --shadow:0 4px 12px rgba(15,37,68,0.08),0 2px 4px rgba(15,37,68,0.04);
+  --shadow-md:0 8px 24px rgba(15,37,68,0.10),0 4px 8px rgba(15,37,68,0.05);
+  --shadow-lg:0 16px 40px rgba(15,37,68,0.14),0 8px 16px rgba(15,37,68,0.06);
+  --radius-xs:4px;--radius-sm:6px;--radius:8px;--radius-md:10px;--radius-lg:14px;
+  --font:'Vazirmatn',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sidebar-w:264px;--header-h:64px;
+  --t:.2s cubic-bezier(.4,0,.2,1);
+  --t-slow:.4s cubic-bezier(.4,0,.2,1);
+}
+body[data-theme="dark"]{
+  --bg:#0a1119;--bg-2:#0f1823;--surface:#131d2b;--surface-2:#182333;--surface-3:#1e2b3d;
+  --border:#243146;--border-2:#31415a;--border-3:#435470;
+  --text:#e6ecf3;--text-2:#c8d3e0;--text-soft:#93a2b8;--text-mute:#6a7a91;
+  --navy:#5a9bd4;--navy-2:#7ab0e0;--navy-3:#9ac4e8;--navy-soft:#1a2a3e;
+  --gold:#d4a860;--gold-2:#e0bc7a;--gold-soft:#2a2114;
+  --shadow-xs:0 1px 2px rgba(0,0,0,0.3);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.4);
+  --shadow:0 4px 12px rgba(0,0,0,0.4);
+  --shadow-md:0 8px 24px rgba(0,0,0,0.5);
+  --shadow-lg:0 16px 40px rgba(0,0,0,0.6);
+}
+body[data-theme="royal"]{
+  --bg:#f0f3f8;--bg-2:#e4e9f1;--surface:#ffffff;--surface-2:#f5f7fb;--surface-3:#e9eef6;
+  --border:#d2dae6;--border-2:#b9c5d6;--border-3:#98a8be;
+  --text:#0c1a30;--text-2:#1f3352;--text-soft:#4e6183;--text-mute:#7d8fa8;
+  --navy:#0a2149;--navy-2:#143a70;--navy-3:#245090;--navy-soft:#e4ecf8;
+  --gold:#b8893c;--gold-2:#d4a860;--gold-soft:#f7f0e0;
+  --grad-navy:linear-gradient(180deg,#0a2149 0%,#143a70 100%);
+}
+body[data-theme="burgundy"]{
+  --bg:#f6f3f4;--bg-2:#ece6e8;--surface:#ffffff;--surface-2:#faf7f8;--surface-3:#f0e9eb;
+  --border:#e0d4d8;--border-2:#cbb8bd;--border-3:#b09aa0;
+  --text:#2a0f14;--text-2:#4a1f28;--text-soft:#7a4850;--text-mute:#a8858c;
+  --navy:#5a1f2a;--navy-2:#7a2f3a;--navy-3:#9a4550;--navy-soft:#f5e6e9;
+  --gold:#a67c3d;--gold-2:#c49a56;--gold-soft:#f5eedd;
+  --grad-navy:linear-gradient(180deg,#5a1f2a 0%,#7a2f3a 100%);
+}
+body[data-theme="emerald"]{
+  --bg:#f2f6f3;--bg-2:#e6ede8;--surface:#ffffff;--surface-2:#f7faf8;--surface-3:#eaf1ec;
+  --border:#d2dfd6;--border-2:#b8cbbf;--border-3:#95af9d;
+  --text:#0a2018;--text-2:#1a3a2a;--text-soft:#4a6a58;--text-mute:#7a9482;
+  --navy:#0e3a24;--navy-2:#1a5a3a;--navy-3:#2a7a52;--navy-soft:#e4f0e8;
+  --gold:#a67c3d;--gold-2:#c49a56;
+  --grad-navy:linear-gradient(180deg,#0e3a24 0%,#1a5a3a 100%);
+}
+body[data-theme="slate"]{
+  --bg:#f3f4f6;--bg-2:#e8eaee;--surface:#ffffff;--surface-2:#f8f9fb;--surface-3:#eef0f4;
+  --border:#d6dae0;--border-2:#bfc5cf;--border-3:#9aa2af;
+  --text:#1a1f2a;--text-2:#2f3745;--text-soft:#5c6475;--text-mute:#8890a0;
+  --navy:#2a3342;--navy-2:#3f4a5c;--navy-3:#586477;--navy-soft:#eaedf2;
+  --gold:#a67c3d;--gold-2:#c49a56;
+  --grad-navy:linear-gradient(180deg,#2a3342 0%,#3f4a5c 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;transition:background var(--t),color var(--t);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:14px}
+button{font-family:var(--font);cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:var(--font)}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--navy);color:#fff}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--surface-2)}
+::-webkit-scrollbar-thumb{background:var(--border-3);border-radius:10px;border:2px solid var(--surface-2)}
+::-webkit-scrollbar-thumb:hover{background:var(--navy)}
+
+/* ============ LOGIN ============ */
+#loginPage{position:fixed;inset:0;background:var(--grad-navy);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999;transition:opacity .5s ease,visibility .5s ease;overflow:hidden}
+#loginPage::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:50px 50px;pointer-events:none}
+#loginPage::after{content:'';position:absolute;width:600px;height:600px;top:-200px;left:-200px;background:radial-gradient(circle,rgba(166,124,61,.15),transparent 60%);pointer-events:none}
+#loginPage.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.login-wrapper{display:grid;grid-template-columns:1fr 420px;max-width:1080px;width:100%;background:var(--surface);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.4);position:relative;z-index:1;animation:loginIn .6s cubic-bezier(.4,0,.2,1)}
+@keyframes loginIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.login-brand{background:var(--grad-navy);padding:56px 48px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;color:#fff}
+.login-brand::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(166,124,61,.05) 0,rgba(166,124,61,.05) 1px,transparent 1px,transparent 20px);pointer-events:none}
+.login-brand-logo{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.login-brand-logo .logo-box{width:60px;height:60px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+.login-brand-logo .logo-box img{width:42px;height:42px;object-fit:contain}
+.login-brand-logo .logo-box .fallback{font-size:28px}
+.login-brand-logo .brand-text{display:flex;flex-direction:column}
+.login-brand-logo .brand-text .b-title{font-size:15px;font-weight:800;letter-spacing:-.2px}
+.login-brand-logo .brand-text .b-sub{font-size:11px;opacity:.7;font-family:var(--mono);margin-top:2px}
+.login-brand-main{position:relative;z-index:1;margin-top:48px}
+.login-brand-main h1{font-size:28px;font-weight:800;line-height:1.4;margin-bottom:16px;letter-spacing:-.4px}
+.login-brand-main h1 .accent{color:var(--gold-2)}
+.login-brand-main p{font-size:13.5px;line-height:2;opacity:.8;max-width:420px}
+.login-brand-features{margin-top:40px;position:relative;z-index:1;display:flex;flex-direction:column;gap:12px}
+.login-feature{display:flex;align-items:center;gap:12px;font-size:12.5px;opacity:.85}
+.login-feature .check{width:22px;height:22px;border-radius:50%;background:rgba(166,124,61,.2);border:1px solid var(--gold-2);display:flex;align-items:center;justify-content:center;color:var(--gold-2);font-size:11px;font-weight:700;flex-shrink:0}
+.login-brand-footer{font-size:10.5px;opacity:.5;font-family:var(--mono);position:relative;z-index:1;margin-top:48px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+.login-form-side{padding:52px 44px;display:flex;flex-direction:column;justify-content:center;background:var(--surface)}
+.login-form-header{margin-bottom:32px}
+.login-form-header h2{font-size:20px;font-weight:800;color:var(--text);margin-bottom:6px;letter-spacing:-.3px}
+.login-form-header p{font-size:12.5px;color:var(--text-soft)}
+.login-form-field{margin-bottom:18px}
+.login-form-field label{display:block;font-size:11.5px;font-weight:700;color:var(--text-2);margin-bottom:7px;letter-spacing:.2px}
+.login-form-field .input-wrap{position:relative}
+.login-form-field .input-wrap input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface-2);color:var(--text);font-size:13.5px;outline:none;transition:all var(--t)}
+.login-form-field .input-wrap input:focus{border-color:var(--navy);background:var(--surface);box-shadow:0 0 0 3px var(--navy-soft)}
+.login-form-field .input-wrap input::placeholder{color:var(--text-mute)}
+.login-form-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;font-size:12px}
+.login-form-row label{display:flex;align-items:center;gap:6px;color:var(--text-soft);cursor:pointer}
+.login-form-row a{color:var(--navy-3);font-weight:600;cursor:pointer}
+.login-form-row a:hover{text-decoration:underline}
+.login-submit{width:100%;padding:13px;border-radius:var(--radius-sm);background:var(--grad-navy);color:#fff;font-size:14px;font-weight:800;letter-spacing:.3px;transition:all var(--t);box-shadow:0 4px 12px rgba(15,37,68,.25);position:relative;overflow:hidden}
+.login-submit:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(15,37,68,.35)}
+.login-submit:active{transform:translateY(0)}
+.login-error{color:var(--burgundy);font-size:12px;text-align:center;margin-top:14px;min-height:18px;font-weight:600;padding:8px;border-radius:var(--radius-xs);transition:all var(--t)}
+.login-error.show{background:rgba(122,47,58,.08)}
+.login-demo{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);font-size:11px;color:var(--text-mute);text-align:center;font-family:var(--mono);line-height:1.9}
+.login-demo code{background:var(--surface-3);padding:2px 6px;border-radius:4px;color:var(--navy-3);font-weight:600}
+@media (max-width:860px){.login-wrapper{grid-template-columns:1fr;max-width:440px}.login-brand{display:none}.login-form-side{padding:40px 32px}}
+
+/* ============ DASHBOARD ============ */
+#dashboard{display:none;min-height:100vh}
+#dashboard.active{display:block}
+
+/* HEADER */
+.app-header{height:var(--header-h);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:16px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-xs);transition:background var(--t),border var(--t)}
+.app-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--navy) 0%,var(--gold) 100%);opacity:.4}
+.header-brand{display:flex;align-items:center;gap:12px;padding-left:16px;border-left:1px solid var(--border);flex-shrink:0}
+.header-brand .brand-logo{width:40px;height:40px;border-radius:9px;background:var(--grad-navy);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;box-shadow:var(--shadow-sm)}
+.header-brand .brand-logo img{width:28px;height:28px;object-fit:contain}
+.header-brand .brand-logo .fallback{color:var(--gold-2);font-size:18px}
+.header-brand .brand-text{display:flex;flex-direction:column;line-height:1.2}
+.header-brand .brand-text .b-name{font-size:13.5px;font-weight:800;color:var(--text);letter-spacing:-.2px}
+.header-brand .brand-text .b-sub{font-size:10px;color:var(--text-mute);font-family:var(--mono);margin-top:2px;letter-spacing:.3px}
+.header-search{flex:1;max-width:440px;position:relative}
+.header-search input{width:100%;padding:9px 38px 9px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface-2);color:var(--text);font-size:13px;outline:none;transition:all var(--t)}
+.header-search input:focus{border-color:var(--navy);background:var(--surface);box-shadow:0 0 0 3px var(--navy-soft)}
+.header-search .search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-mute);font-size:13px;pointer-events:none}
+.header-search .search-kbd{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:10px;color:var(--text-mute);background:var(--surface-3);border:1px solid var(--border);padding:2px 6px;border-radius:4px;pointer-events:none}
+.header-actions{display:flex;align-items:center;gap:6px;margin-right:auto}
+.h-action{width:38px;height:38px;border-radius:var(--radius-sm);background:transparent;color:var(--text-soft);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all var(--t);position:relative;flex-shrink:0;border:1px solid transparent}
+.h-action:hover{background:var(--surface-2);color:var(--navy);border-color:var(--border)}
+.h-action.active{background:var(--navy-soft);color:var(--navy);border-color:var(--border-2)}
+.h-action .notif-dot{position:absolute;top:7px;left:7px;width:7px;height:7px;border-radius:50%;background:var(--burgundy);border:1.5px solid var(--surface)}
+.header-divider{width:1px;height:28px;background:var(--border);margin:0 4px}
+.theme-picker{display:flex;gap:3px;background:var(--surface-2);padding:3px;border-radius:var(--radius-sm);border:1px solid var(--border)}
+.theme-dot{width:22px;height:22px;border-radius:5px;border:2px solid transparent;transition:all var(--t);cursor:pointer;position:relative}
+.theme-dot:hover{transform:scale(1.1)}
+.theme-dot.active{border-color:var(--navy);box-shadow:0 0 0 1px var(--surface)}
+.theme-dot[data-theme="light"]{background:#f4f5f7}
+.theme-dot[data-theme="dark"]{background:#0a1119}
+.theme-dot[data-theme="royal"]{background:#0a2149}
+.theme-dot[data-theme="burgundy"]{background:#5a1f2a}
+.theme-dot[data-theme="emerald"]{background:#0e3a24}
+.theme-dot[data-theme="slate"]{background:#2a3342}
+.user-menu{position:relative}
+.user-chip{display:flex;align-items:center;gap:9px;padding:5px 10px 5px 6px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);transition:all var(--t);cursor:pointer}
+.user-chip:hover{border-color:var(--border-2);background:var(--surface-2)}
+.user-chip .u-avatar{width:30px;height:30px;border-radius:50%;background:var(--grad-navy);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;flex-shrink:0;font-family:var(--mono)}
+.user-chip .u-info{display:flex;flex-direction:column;line-height:1.15;text-align:right}
+.user-chip .u-info .u-name{font-size:12px;font-weight:700;color:var(--text)}
+.user-chip .u-info .u-role{font-size:10px;color:var(--text-mute);font-family:var(--mono)}
+.user-chip .u-caret{color:var(--text-mute);font-size:10px}
+.user-dropdown{position:absolute;top:calc(100% + 8px);left:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);min-width:240px;box-shadow:var(--shadow-md);padding:6px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:all var(--t);z-index:200}
+.user-dropdown.show{opacity:1;visibility:visible;transform:translateY(0)}
+.user-dropdown .ud-head{padding:10px 12px;border-bottom:1px solid var(--border);margin-bottom:5px}
+.user-dropdown .ud-head .name{font-weight:700;font-size:13px;color:var(--text)}
+.user-dropdown .ud-head .role{font-size:10.5px;color:var(--text-mute);font-family:var(--mono);margin-top:2px}
+.user-dropdown button{width:100%;text-align:right;padding:8px 11px;border-radius:var(--radius-xs);font-size:12.5px;color:var(--text-2);display:flex;align-items:center;gap:9px;transition:all var(--t)}
+.user-dropdown button:hover{background:var(--surface-2);color:var(--navy)}
+.user-dropdown button.danger{color:var(--burgundy)}
+.user-dropdown button.danger:hover{background:rgba(122,47,58,.08)}
+.mobile-menu-btn{display:none}
+
+/* LAYOUT */
+.app-layout{display:flex;min-height:calc(100vh - var(--header-h));transition:all var(--t)}
+
+/* SIDEBAR VERTICAL */
+.sidebar{width:var(--sidebar-w);background:var(--surface);border-left:1px solid var(--border);padding:16px 12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;flex-shrink:0;transition:all var(--t);height:calc(100vh - var(--header-h));position:sticky;top:var(--header-h)}
+.sidebar::-webkit-scrollbar{width:5px}
+.nav-section{font-family:var(--mono);font-size:10px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.8px;padding:14px 12px 7px;font-weight:700;display:flex;align-items:center;gap:8px}
+.nav-section::after{content:'';flex:1;height:1px;background:var(--border)}
+.nav-section:first-child{padding-top:4px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:all var(--t);color:var(--text-2);font-size:13px;font-weight:600;position:relative;border:1px solid transparent;width:100%;text-align:right}
+.nav-item::before{content:'';position:absolute;right:-12px;top:50%;transform:translateY(-50%) scaleY(0);width:3px;height:60%;background:var(--gold);transition:transform var(--t);border-radius:0 3px 3px 0}
+.nav-item:hover{background:var(--surface-2);color:var(--navy)}
+.nav-item.active{background:var(--navy-soft);color:var(--navy);font-weight:700}
+.nav-item.active::before{transform:translateY(-50%) scaleY(1)}
+.nav-item .nav-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.nav-item .badge{margin-right:auto;background:var(--surface-3);color:var(--text-soft);font-size:10px;font-weight:700;padding:2px 7px;border-radius:9px;font-family:var(--mono);min-width:22px;text-align:center;border:1px solid var(--border)}
+.nav-item.active .badge{background:var(--navy);color:#fff;border-color:var(--navy)}
+.sidebar-footer{margin-top:auto;padding:14px 12px 6px;border-top:1px solid var(--border);font-size:10px;color:var(--text-mute);text-align:center;font-family:var(--mono);line-height:1.7}
+.sidebar-footer .version{display:inline-block;padding:2px 8px;background:var(--surface-3);border-radius:8px;font-weight:600;color:var(--text-soft)}
+
+/* SIDEBAR HORIZONTAL */
+.app-layout.layout-horizontal{flex-direction:column}
+.sidebar.horizontal{width:100%;height:auto;flex-direction:row;padding:8px 16px;gap:4px;border-left:none;border-bottom:1px solid var(--border);overflow-x:auto;overflow-y:hidden;position:sticky;top:var(--header-h);flex-wrap:nowrap;align-items:center;scrollbar-width:thin;background:var(--surface-2)}
+.sidebar.horizontal::-webkit-scrollbar{height:4px}
+.sidebar.horizontal::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:4px}
+.sidebar.horizontal .nav-section{display:none}
+.sidebar.horizontal .nav-item{width:auto;white-space:nowrap;padding:7px 14px;flex-shrink:0;border-radius:20px;font-size:12.5px;border:1px solid transparent}
+.sidebar.horizontal .nav-item::before{display:none}
+.sidebar.horizontal .nav-item:hover{background:var(--surface);border-color:var(--border)}
+.sidebar.horizontal .nav-item.active{background:var(--grad-navy);color:#fff;border-color:var(--navy);box-shadow:0 2px 6px rgba(15,37,68,.2)}
+.sidebar.horizontal .nav-item.active .badge{background:rgba(255,255,255,.2);color:#fff;border-color:transparent}
+.sidebar.horizontal .nav-item .badge{margin-right:6px;padding:1px 6px;font-size:9.5px}
+.sidebar.horizontal .sidebar-footer{display:none}
+
+/* MAIN */
+.main-content{flex:1;padding:28px 32px;overflow-y:auto;min-width:0;transition:all var(--t)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text-mute);margin-bottom:18px;font-family:var(--mono);padding-bottom:14px;border-bottom:1px dashed var(--border)}
+.breadcrumb .bc-item{color:var(--text-soft)}
+.breadcrumb .bc-item.active{color:var(--navy);font-weight:700}
+.breadcrumb .bc-sep{color:var(--border-3)}
+
+/* SECTION */
+.section{display:none;animation:sectionIn .35s cubic-bezier(.4,0,.2,1)}
+.section.active{display:block}
+@keyframes sectionIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.section-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+.section-title-wrap{display:flex;align-items:flex-start;gap:14px}
+.section-title-icon{width:44px;height:44px;border-radius:var(--radius-sm);background:var(--grad-navy);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--gold-2);flex-shrink:0;box-shadow:var(--shadow-sm);position:relative}
+.section-title-icon::after{content:'';position:absolute;inset:-3px;border:1px solid var(--gold);border-radius:calc(var(--radius-sm) + 3px);opacity:.25}
+.section-title-text h2{font-size:19px;font-weight:800;color:var(--text);letter-spacing:-.3px;line-height:1.3}
+.section-title-text p{font-size:12.5px;color:var(--text-soft);margin-top:3px;line-height:1.6}
+.section-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* STAT CARDS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;position:relative;overflow:hidden;box-shadow:var(--shadow-xs);transition:all var(--t);cursor:pointer}
+.stat-card::before{content:'';position:absolute;top:0;right:0;width:3px;height:100%;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform var(--t)}
+.stat-card:hover{box-shadow:var(--shadow-md);border-color:var(--border-2);transform:translateY(-2px)}
+.stat-card:hover::before{transform:scaleY(1)}
+.stat-card .stat-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.stat-card .stat-icon{width:42px;height:42px;border-radius:var(--radius-sm);background:var(--navy-soft);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--navy);border:1px solid var(--border)}
+.stat-card .stat-badge{font-family:var(--mono);font-size:10px;color:var(--text-mute);padding:2px 7px;border-radius:6px;background:var(--surface-3);border:1px solid var(--border)}
+.stat-card .stat-value{font-size:28px;font-weight:800;color:var(--text);font-family:var(--mono);line-height:1.1;letter-spacing:-1px}
+.stat-card .stat-label{font-size:12.5px;color:var(--text-soft);font-weight:600;margin-top:4px}
+.stat-card .stat-trend{font-size:11px;font-weight:700;margin-top:10px;display:flex;align-items:center;gap:5px;padding-top:10px;border-top:1px solid var(--border)}
+.stat-trend.up{color:var(--emerald)}
+.stat-trend.down{color:var(--burgundy)}
+.stat-trend .trend-arrow{font-size:10px}
+
+/* CHART */
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-xs);margin-bottom:24px}
+.chart-card .chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.chart-card .chart-head h4{font-size:14px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:9px}
+.chart-card .chart-head h4 .ch-ico{width:28px;height:28px;border-radius:6px;background:var(--navy-soft);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px}
+.chart-card .chart-head .ch-meta{font-family:var(--mono);font-size:10.5px;color:var(--text-mute)}
+.bar-chart{display:flex;align-items:flex-end;gap:14px;height:200px;padding:24px 6px 30px;position:relative}
+.bar-chart::before{content:'';position:absolute;inset:24px 6px 30px;background-image:linear-gradient(to top,var(--border) 1px,transparent 1px);background-size:100% 25%;opacity:.6;pointer-events:none}
+.bar-chart .bar{flex:1;background:var(--grad-navy);border-radius:3px 3px 0 0;position:relative;transition:all .6s cubic-bezier(.4,0,.2,1);min-height:4px;cursor:pointer;z-index:1}
+.bar-chart .bar:hover{background:var(--grad-gold)}
+.bar-chart .bar .bar-label{position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);font-size:10.5px;color:var(--text-mute);white-space:nowrap;font-family:var(--mono)}
+.bar-chart .bar .bar-value{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--text-2);font-weight:800;font-family:var(--mono)}
+
+/* MODULE CARDS */
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.module-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:all var(--t);cursor:pointer;position:relative;overflow:hidden;box-shadow:var(--shadow-xs)}
+.module-card::before{content:'';position:absolute;top:0;right:0;width:100%;height:3px;background:var(--grad-gold);transform:scaleX(0);transform-origin:right;transition:transform var(--t)}
+.module-card:hover{border-color:var(--border-2);box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.module-card:hover::before{transform:scaleX(1)}
+.module-card .module-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.module-card .module-icon{width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff;flex-shrink:0}
+.module-card h3{font-size:14.5px;font-weight:800;color:var(--text);letter-spacing:-.2px}
+.module-card p{font-size:12.5px;color:var(--text-soft);line-height:1.8;margin-bottom:14px}
+.module-card .module-footer{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:var(--text-mute);padding-top:12px;border-top:1px solid var(--border);font-family:var(--mono);flex-wrap:wrap;gap:8px}
+.module-card .module-footer .link{color:var(--navy);font-weight:700;display:flex;align-items:center;gap:4px;font-family:var(--font)}
+
+/* BUTTONS */
+.btn{padding:9px 16px;border-radius:var(--radius-sm);font-size:12.5px;font-weight:700;transition:all var(--t);display:inline-flex;align-items:center;gap:6px;border:1px solid transparent;letter-spacing:.1px;white-space:nowrap}
+.btn-primary{background:var(--grad-navy);color:#fff;box-shadow:0 2px 6px rgba(15,37,68,.2)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(15,37,68,.3)}
+.btn-gold{background:var(--grad-gold);color:#fff;box-shadow:0 2px 6px rgba(166,124,61,.25)}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(166,124,61,.35)}
+.btn-outline{background:var(--surface);border:1.5px solid var(--border-2);color:var(--text-2)}
+.btn-outline:hover{border-color:var(--navy);color:var(--navy);background:var(--navy-soft)}
+.btn-ghost{background:transparent;color:var(--text-soft)}
+.btn-ghost:hover{background:var(--surface-2);color:var(--navy)}
+.btn-danger{background:var(--burgundy);color:#fff}
+.btn-danger:hover{background:#8f3a47;transform:translateY(-1px)}
+.btn-success{background:var(--emerald);color:#fff}
+.btn-success:hover{background:#266f4e;transform:translateY(-1px)}
+.btn-sm{padding:6px 12px;font-size:11.5px;border-radius:5px}
+.btn-xs{padding:4px 9px;font-size:11px;border-radius:4px}
+
+/* TABLE */
+.table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-xs)}
+.table-card-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:var(--surface-2)}
+.table-card-head .t-title{font-size:13.5px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
+.table-card-head .t-title .t-count{font-family:var(--mono);font-size:10.5px;color:var(--text-mute);background:var(--surface-3);padding:2px 7px;border-radius:6px;border:1px solid var(--border)}
+.table-card-head .t-filters{display:flex;gap:6px}
+.table-card-head .t-filters select{padding:6px 10px;border-radius:5px;border:1px solid var(--border);background:var(--surface);font-size:11.5px;color:var(--text-soft);outline:none;cursor:pointer}
+.table-card-head .t-filters select:focus{border-color:var(--navy)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:640px}
+thead{background:var(--surface-2);border-bottom:2px solid var(--border-2)}
+thead th{padding:12px 16px;text-align:right;font-weight:800;font-size:11px;color:var(--text-2);text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;font-family:var(--mono)}
+tbody tr{border-bottom:1px solid var(--border);transition:background var(--t)}
+tbody tr:hover{background:var(--surface-2)}
+tbody tr:last-child{border-bottom:none}
+tbody td{padding:13px 16px;color:var(--text-2);text-align:right;vertical-align:middle}
+tbody td.mono{font-family:var(--mono);font-size:11.5px;color:var(--text-soft)}
+tbody td.primary{font-weight:700;color:var(--text)}
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:10.5px;font-weight:800;white-space:nowrap;letter-spacing:.2px;border:1px solid transparent}
+.status-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+.status-badge.active{background:rgba(30,90,63,.1);color:var(--emerald);border-color:rgba(30,90,63,.2)}
+.status-badge.pending{background:rgba(166,124,61,.12);color:var(--gold);border-color:rgba(166,124,61,.25)}
+.status-badge.inactive{background:rgba(122,47,58,.1);color:var(--burgundy);border-color:rgba(122,47,58,.2)}
+.status-badge.info{background:var(--navy-soft);color:var(--navy);border-color:var(--border-2)}
+.table-actions{display:flex;gap:4px;justify-content:flex-end}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,17,25,.5);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:1000;opacity:0;visibility:hidden;transition:all var(--t)}
+.modal-overlay.show{opacity:1;visibility:visible}
+.modal{background:var(--surface);border-radius:var(--radius-lg);width:100%;max-width:640px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);transform:translateY(16px) scale(.98);transition:transform var(--t);border:1px solid var(--border);overflow:hidden}
+.modal-overlay.show .modal{transform:none}
+.modal-head{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--surface-2);z-index:1}
+.modal-head .m-title{font-size:15px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:10px}
+.modal-head .m-title .m-ico{width:32px;height:32px;border-radius:7px;background:var(--grad-navy);color:var(--gold-2);display:flex;align-items:center;justify-content:center;font-size:14px}
+.modal-close{width:32px;height:32px;border-radius:6px;background:transparent;color:var(--text-soft);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all var(--t)}
+.modal-close:hover{background:var(--burgundy);color:#fff}
+.modal-body{padding:24px}
+.modal-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-start;position:sticky;bottom:0;background:var(--surface-2)}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field.full{grid-column:1/-1}
+.form-field label{font-size:11.5px;font-weight:800;color:var(--text-2);letter-spacing:.2px}
+.form-field label .req{color:var(--burgundy);margin-right:2px}
+.form-field input,.form-field select,.form-field textarea{padding:10px 13px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--surface-2);color:var(--text);font-size:13px;outline:none;transition:all var(--t);width:100%}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--navy);background:var(--surface);box-shadow:0 0 0 3px var(--navy-soft)}
+.form-field textarea{resize:vertical;min-height:80px;line-height:1.7}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--surface);color:var(--text);padding:13px 20px;border-radius:var(--radius);box-shadow:var(--shadow-lg);border:1px solid var(--border);border-right:3px solid var(--emerald);font-size:13px;font-weight:600;z-index:9999;transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:10px;max-width:90vw}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast .toast-ico{width:24px;height:24px;border-radius:50%;background:var(--emerald);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.toast.warn{border-right-color:var(--gold)}
+.toast.warn .toast-ico{background:var(--gold)}
+.toast.error{border-right-color:var(--burgundy)}
+.toast.error .toast-ico{background:var(--burgundy)}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:50px 20px;color:var(--text-mute)}
+.empty-state .empty-ico{font-size:42px;margin-bottom:14px;opacity:.4}
+.empty-state h4{font-size:14px;color:var(--text-soft);margin-bottom:6px;font-weight:700}
+.empty-state p{font-size:12.5px}
+
+/* MOBILE */
+@media (max-width:1100px){.header-search{max-width:260px}.header-search .search-kbd{display:none}}
+@media (max-width:920px){
+  .mobile-menu-btn{display:flex}
+  .header-search{display:none}
+  .sidebar:not(.horizontal){position:fixed;right:-100%;top:var(--header-h);height:calc(100vh - var(--header-h));z-index:150;transition:right .3s ease;box-shadow:var(--shadow-lg);width:280px}
+  .sidebar:not(.horizontal).open{right:0}
+  .main-content{padding:20px 18px}
+  .theme-picker{display:none}
+  .header-brand .brand-text{display:none}
+  .user-chip .u-info{display:none}
+  .user-chip{padding:5px}
+  .user-dropdown{left:auto;right:0}
+}
+@media (max-width:640px){
+  .stats-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .stat-card{padding:16px}
+  .stat-card .stat-value{font-size:22px}
+  .stat-card .stat-icon{width:36px;height:36px;font-size:15px}
+  .section-title-text h2{font-size:16px}
+  .section-title-icon{width:38px;height:38px;font-size:17px}
+  .main-content{padding:16px 14px}
+  .modules-grid{grid-template-columns:1fr}
+  .modal{max-width:100%;border-radius:var(--radius-md)}
+  .breadcrumb{font-size:10.5px}
+  .header-actions{gap:2px}
+  .h-action{width:34px;height:34px;font-size:14px}
+}
+@media (max-width:420px){
+  .stats-grid{grid-template-columns:1fr}
+  .section-header{flex-direction:column;align-items:stretch}
+  .section-actions{justify-content:stretch}
+  .section-actions .btn{flex:1;justify-content:center}
+  .table-card-head{flex-direction:column;align-items:stretch}
+}
+
+/* Detail view */
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.detail-item{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px}
+.detail-item .d-label{font-size:11px;color:var(--text-mute);font-family:var(--mono);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.detail-item .d-value{font-size:13.5px;font-weight:700;color:var(--text)}
+</style>
+</head>
+<body data-theme="light">
+
+<!-- LOGIN -->
+<div id="loginPage">
+  <div class="login-wrapper">
+    <div class="login-brand">
+      <div class="login-brand-logo">
+        <div class="logo-box">
+          <img src="logo.png" alt="لوگو" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="fallback" style="display:none">🛡️</span>
+        </div>
+        <div class="brand-text">
+          <span class="b-title">پژوهشکده امنیت شبکه</span>
+          <span class="b-sub">NETWORK SECURITY RESEARCH CENTER</span>
+        </div>
+      </div>
+      <div class="login-brand-main">
+        <h1>سامانه یکپارچه<br><span class="accent">مدیریت پژوهش</span></h1>
+        <p>بستری رسمی و امن برای مدیریت پروژه‌های پژوهشی، کاربران سازمانی، همکاران پروژه، سربازان و کارآموزان پژوهشکده.</p>
+        <div class="login-brand-features">
+          <div class="login-feature"><span class="check">✓</span><span>مدیریت پروژه‌ها با فازبندی و تحویل نهایی</span></div>
+          <div class="login-feature"><span class="check">✓</span><span>هشت نقش کاربری با سطوح دسترسی سازمانی</span></div>
+          <div class="login-feature"><span class="check">✓</span><span>گردش‌کار کامل همکار، سرباز و کارآموز</span></div>
+          <div class="login-feature"><span class="check">✓</span><span>گزارش‌گیری جامع و لاگ کامل فعالیت‌ها</span></div>
+        </div>
+      </div>
+      <div class="login-brand-footer">نسخه ۱٫۰ · MVP | © ۱۴۰۵ پژوهشکده امنیت شبکه</div>
+    </div>
+    <div class="login-form-side">
+      <div class="login-form-header">
+        <h2>ورود به سامانه</h2>
+        <p>برای دسترسی به داشبورد، اطلاعات کاربری خود را وارد کنید</p>
+      </div>
+      <div class="login-form-field">
+        <label for="username">نام کاربری</label>
+        <div class="input-wrap">
+          <input type="text" id="username" placeholder="نام کاربری" autocomplete="username" value="admin">
+        </div>
+      </div>
+      <div class="login-form-field">
+        <label for="password">رمز عبور</label>
+        <div class="input-wrap">
+          <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" value="admin">
+        </div>
+      </div>
+      <div class="login-form-row">
+        <label><input type="checkbox" style="accent-color:var(--navy)" id="rememberMe"> مرا به خاطر بسپار</label>
+        <a onclick="showToast('لینک بازیابی به ایمیل شما ارسال شد','warn')">فراموشی رمز عبور؟</a>
+      </div>
+      <button class="login-submit" id="loginBtn">ورود به سامانه</button>
+      <div class="login-error" id="loginError"></div>
+      <div class="login-demo"><code>admin / admin</code> · <code>user / user</code></div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header class="app-header">
+    <button class="h-action mobile-menu-btn" id="mobileMenuBtn" title="منو">☰</button>
+    <div class="header-brand">
+      <div class="brand-logo">
+        <img src="logo.png" alt="لوگو" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fallback" style="display:none">🛡️</span>
+      </div>
+      <div class="brand-text">
+        <span class="b-name">پژوهشکده امنیت شبکه</span>
+        <span class="b-sub">NETWORK SECURITY RESEARCH CENTER</span>
+      </div>
+    </div>
+    <div class="header-search">
+      <input type="text" id="globalSearch" placeholder="جستجو در سامانه...">
+      <span class="search-icon">🔍</span>
+      <span class="search-kbd">Ctrl + K</span>
+    </div>
+    <div class="header-actions">
+      <button class="h-action" id="layoutToggle" title="تغییر چیدمان سایدبار">⇄</button>
+      <div class="theme-picker">
+        <div class="theme-dot active" data-theme="light" title="روشن"></div>
+        <div class="theme-dot" data-theme="dark" title="شبانه"></div>
+        <div class="theme-dot" data-theme="royal" title="سرمه‌ای سلطنتی"></div>
+        <div class="theme-dot" data-theme="burgundy" title="زرشکی کلاسیک"></div>
+        <div class="theme-dot" data-theme="emerald" title="زمردی دولتی"></div>
+        <div class="theme-dot" data-theme="slate" title="خاکستری رسمی"></div>
+      </div>
+      <div class="header-divider"></div>
+      <button class="h-action" id="notifBtn" title="اعلان‌ها">🔔<span class="notif-dot"></span></button>
+      <div class="user-menu">
+        <div class="user-chip" id="userChip">
+          <div class="u-avatar" id="userAvatar">م</div>
+          <div class="u-info">
+            <span class="u-name" id="userName">مدیر پژوهشکده</span>
+            <span class="u-role" id="userRole">ADMIN</span>
+          </div>
+          <span class="u-caret">▼</span>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="ud-head">
+            <div class="name" id="ddName">مدیر پژوهشکده</div>
+            <div class="role" id="ddRole">admin@research.ir</div>
+          </div>
+          <button onclick="openModal('profileModal')">👤 پروفایل کاربری</button>
+          <button onclick="switchSection('settings')">⚙️ تنظیمات سامانه</button>
+          <button onclick="openModal('helpModal')">📖 راهنمای کاربری</button>
+          <button class="danger" onclick="logout()">🚪 خروج از سامانه</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-layout" id="appLayout">
+    <aside class="sidebar" id="sidebar">
+      <div class="nav-section">منوی اصلی</div>
+      <button class="nav-item active" data-section="dashboard"><span class="nav-icon">📊</span> داشبورد</button>
+      <button class="nav-item" data-section="projects"><span class="nav-icon">📁</span> پروژه‌ها<span class="badge" id="badgeProjects">۱۲</span></button>
+      <button class="nav-item" data-section="users"><span class="nav-icon">👥</span> کاربران<span class="badge" id="badgeUsers">۸۶</span></button>
+      <button class="nav-item" data-section="collaborators"><span class="nav-icon">🤝</span> همکاران پروژه<span class="badge" id="badgeCollab">۴۸</span></button>
+      <button class="nav-item" data-section="sarbaz"><span class="nav-icon">🎖️</span> سربازان<span class="badge" id="badgeSarbaz">۱۵</span></button>
+      <button class="nav-item" data-section="karamooz"><span class="nav-icon">🎓</span> کارآموزان<span class="badge" id="badgeKaramooz">۳۲</span></button>
+      <div class="nav-section">مدیریت و نظارت</div>
+      <button class="nav-item" data-section="reports"><span class="nav-icon">📈</span> گزارش‌ها</button>
+      <button class="nav-item" data-section="audit"><span class="nav-icon">📋</span> لاگ فعالیت‌ها</button>
+      <button class="nav-item" data-section="settings"><span class="nav-icon">⚙️</span> تنظیمات</button>
+      <div class="sidebar-footer">
+        <div class="version">نسخه ۱٫۰ · MVP</div>
+        <div style="margin-top:6px">© ۱۴۰۵ پژوهشکده</div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+
+      <!-- ═══ DASHBOARD ═══ -->
+      <section class="section active" id="section-dashboard">
+        <div class="breadcrumb">
+          <span class="bc-item">سامانه</span><span class="bc-sep">/</span>
+          <span class="bc-item active">داشبورد مدیریتی</span>
+        </div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title-icon">📊</div>
+            <div class="section-title-text">
+              <h2>داشبورد مدیریتی</h2>
+              <p>نمای کلی از وضعیت پژوهشکده امنیت شبکه</p>
+            </div>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-outline btn-sm" onclick="exportDashboard()">📥 گزارش روزانه</button>
+            <button class="btn btn-primary btn-sm" onclick="refreshDashboard()">🔄 به‌روزرسانی</button>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card" onclick="switchSection('projects')">
+            <div class="stat-head"><div class="stat-icon">📁</div><span class="stat-badge">PROJECTS</span></div>
+            <div class="stat-value" data-count="24">۰</div>
+            <div class="stat-label">پروژه‌های فعال</div>
+            <div class="stat-trend up"><span class="trend-arrow">▲</span> ۱۲٪ نسبت به ماه قبل</div>
+          </div>
+          <div class="stat-card" onclick="switchSection('users')">
+            <div class="stat-head"><div class="stat-icon">👥</div><span class="stat-badge">USERS</span></div>
+            <div class="stat-value" data-count="86">۰</div>
+            <div class="stat-label">کاربران سامانه</div>
+            <div class="stat-trend up"><span class="trend-arrow">▲</span> ۵٪ نسبت به ماه قبل</div>
+          </div>
+          <div class="stat-card" onclick="switchSection('sarbaz')">
+            <div class="stat-head"><div class="stat-icon">🎖️</div><span class="stat-badge">SARBAZ</span></div>
+            <div class="stat-value" data-count="15">۰</div>
+            <div class="stat-label">سربازان در حال خدمت</div>
+            <div class="stat-trend down"><span class="trend-arrow">▼</span> ۳٪ نسبت به ماه قبل</div>
+          </div>
+          <div class="stat-card" onclick="switchSection('karamooz')">
+            <div class="stat-head"><div class="stat-icon">🎓</div><span class="stat-badge">KARAMOOZ</span></div>
+            <div class="stat-value" data-count="32">۰</div>
+            <div class="stat-label">کارآموزان فعال</div>
+            <div class="stat-trend up"><span class="trend-arrow">▲</span> ۱۸٪ نسبت به ماه قبل</div>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-head">
+            <h4><span class="ch-ico">📈</span> روند پروژه‌های فعال</h4>
+            <span class="ch-meta">۶ ماه اخیر · ۱۴۰۵</span>
+          </div>
+          <div class="bar-chart" id="projectChart"></div>
+        </div>
+
+        <div style="margin:28px 0 16px">
+          <div class="section-title-text" style="margin-bottom:16px">
+            <h2 style="font-size:16px">ماژول‌های اصلی سامانه</h2>
+            <p>دسترسی سریع به بخش‌های کلیدی</p>
+          </div>
+          <div class="modules-grid">
+            <div class="module-card" onclick="switchSection('projects')">
+              <div class="module-head"><div class="module-icon" style="background:var(--grad-navy)">📁</div><h3>مدیریت پروژه‌ها</h3></div>
+              <p>ثبت پروپوزال، تایید، فازبندی، تحویل نهایی و پیگیری پروژه‌های پژوهشی.</p>
+              <div class="module-footer"><span>۱۲ پروژه فعال</span><span class="link">مشاهده ←</span></div>
+            </div>
+            <div class="module-card" onclick="switchSection('users')">
+              <div class="module-head"><div class="module-icon" style="background:linear-gradient(135deg,#5a1f2a,#7a2f3a)">👥</div><h3>مدیریت کاربران</h3></div>
+              <p>ایجاد کاربر، تخصیص نقش‌های سازمانی و مدیریت سطوح دسترسی.</p>
+              <div class="module-footer"><span>۸۶ کاربر</span><span class="link">مشاهده ←</span></div>
+            </div>
+            <div class="module-card" onclick="switchSection('collaborators')">
+              <div class="module-head"><div class="module-icon" style="background:linear-gradient(135deg,#0e3a24,#1a5a3a)">🤝</div><h3>همکاران پروژه</h3></div>
+              <p>مدیریت همکاران داخلی و خارجی، اتصال به پروژه‌ها و رزومه‌ها.</p>
+              <div class="module-footer"><span>۴۸ همکار</span><span class="link">مشاهده ←</span></div>
+            </div>
+            <div class="module-card" onclick="switchSection('sarbaz')">
+              <div class="module-head"><div class="module-icon" style="background:var(--grad-gold)">🎖️</div><h3>مدیریت سربازان</h3></div>
+              <p>ثبت دوره خدمت، گزارش‌های ۳۰/۶۰/۹۰ روزه و دفاع.</p>
+              <div class="module-footer"><span>۱۵ سرباز</span><span class="link">مشاهده ←</span></div>
+            </div>
+            <div class="module-card" onclick="switchSection('karamooz')">
+              <div class="module-head"><div class="module-icon" style="background:var(--grad-navy)">🎓</div><h3>مدیریت کارآموزان</h3></div>
+              <p>مشخصات تحصیلی، رزومه، سوابق کاری و مهارت‌ها.</p>
+              <div class="module-footer"><span>۳۲ کارآموز</span><span class="link">مشاهده ←</span></div>
+            </div>
+            <div class="module-card" onclick="switchSection('reports')">
+              <div class="module-head"><div class="module-icon" style="background:linear-gradient(135deg,#2a3342,#3f4a5c)">📈</div><h3>گزارش‌ها و تحلیل</h3></div>
+              <p>گزارش‌های جامع از پروژه‌ها، کاربران و عملکرد پژوهشکده.</p>
+              <div class="module-footer"><span>خروجی PDF/Excel</span><span class="link">مشاهده ←</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ PROJECTS ═══ -->
+      <section class="section" id="section-projects">
+        <div class="breadcrumb">
+          <span class="bc-item">سامانه</span><span class="bc-sep">/</span>
+          <span class="bc-item active">مدیریت پروژه‌ها</span>
+        </div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title-icon">📁</div>
+            <div class="section-title-text"><h2>مدیریت پروژه‌ها</h2><p>لیست پروژه‌های پژوهشی، وضعیت و پیشرفت</p></div>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-outline btn-sm" onclick="exportData('پروژه‌ها')">📥 خروجی Excel</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('projectModal')">+ پروژه جدید</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-card-head">
+            <div class="t-title">📋 لیست پروژه‌ها <span class="t-count" id="countProjects">۵ مورد</span></div>
+            <div class="t-filters">
+              <select id="filterProjectStatus" onchange="filterTable('projectsTable',this.value,3)">
+                <option value="">همه وضعیت‌ها</option>
+                <option value="در حال اجرا">در حال اجرا</option>
+                <option value="در انتظار تایید">در انتظار تایید</option>
+                <option value="متوقف شده">متوقف شده</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>کد پروژه</th><th>عنوان پروژه</th><th>مجری</th><th>وضعیت</th><th>پیشرفت</th><th>عملیات</th></tr>
+              </thead>
+              <tbody id="projectsTable">
+                <tr data-status="در حال اجرا">
+                  <td class="mono">P-1405-001</td><td class="primary">سامانه تشخیص نفوذ مبتنی بر یادگیری عمیق</td><td>دکتر احمدی</td>
+                  <td><span class="status-badge active">در حال اجرا</span></td><td class="mono">۶۵٪</td>
+                  <td class="table-actions">
+                    <button class="btn btn-outline btn-xs" onclick="viewItem('project','سامانه تشخیص نفوذ',{code:'P-1405-001',manager:'دکتر احمدی',status:'در حال اجرا',progress:'۶۵٪',institute:'پژوهشکده امنیت شبکه',budget:'۱۵۰۰ میلیون ریال',duration:'۱۲ ماه'})">جزئیات</button>
+                    <button class="btn btn-outline btn-xs" onclick="editItem('projectModal','پروژه')">ویرایش</button>
+                    <button class="btn btn-danger btn-xs" onclick="deleteItem('projectsTable',this,'سامانه تشخیص نفوذ')">حذف</button>
+                  </td>
+                </tr>
+                <tr data-status="در انتظار تایید">
+                  <td class="mono">P-1405-002</td><td class="primary">بلاکچین برای احراز هویت توزیع‌شده</td><td>دکتر کریمی</td>
+                  <td><span class="status-badge pending">در انتظار تایید</span></td><td class="mono">۰٪</td>
+                  <td class="table-actions">
+                    <button class="btn btn-outline btn-xs" onclick="viewItem('project','بلاکچین احراز هویت',{code:'P-1405-002',manager:'دکتر کریمی',status:'در انتظار تایید',progress:'۰٪',institute:'پژوهشکده امنیت شبکه',budget:'۹۰۰ میلیون ریال',duration:'۹ ماه'})">جزئیات</button>
+                    <button class="btn btn-outline btn-xs" onclick="editItem('projectModal','پروژه')">ویرایش</button>
+                    <button class="btn btn-danger btn-xs" onclick="deleteItem('projectsTable',this,'بلاکچین احراز هویت')">حذف</button>
+                  </td>
+                </tr>
+                <tr data-status="در حال اجرا">
+                  <td class="mono">P-1405-003</td><td class="primary">امنیت اینترنت اشیا در شبکه‌های صنعتی</td><td>مهندس رضایی</td>
+                  <td><span class="status-badge active">در حال اجرا</span></td><td class="mono">۴۲٪</td>
+                  <td class="table-actions">
+                    <button class="btn btn-outline btn-xs" onclick="viewItem('project','امنیت IoT',{code:'P-1405-003',manager:'مهندس رضایی',status:'در حال اجرا',progress:'۴۲٪',institute:'پژوهشکده امنیت شبکه',budget:'۱۲۰۰ میلیون ریال',duration:'۱۸ ماه'})">جزئیات</button>
+                    <button class="btn btn-outline btn-xs" onclick="editItem('projectModal','پروژه')">ویرایش</button>
+                    <button class="btn btn-danger btn-xs" onclick="deleteItem('projectsTable',this,'امنیت IoT')">حذف</button>
+                  </td>
+                </tr>
+                <tr data-status="در حال اجرا">
+                  <td class="mono">P-1405-004</td><td class="primary">تحلیل بدافزارهای باج‌گیر با هوش مصنوعی</td><td>دکتر موسوی</td>
+                  <td><span class="status-badge active">در حال اجرا</span></td><td class="mono">۸۸٪</td>
+                  <td class="table-actions">
+                    <button class="btn btn-outline btn-xs" onclick="viewItem('project','تحلیل بدافزار',{code:'P-1405-004',manager:'دکتر موسوی',status:'در حال اجرا',progress:'۸۸٪',institute:'پژوهشکده امنیت شبکه',budget:'۸۰۰ میلیون ریال',duration:'۱۰ ماه'})">جزئیات</button>
+                    <button class="btn btn-outline btn-xs" onclick="editItem('projectModal','پروژه')">ویرایش</button>
+                    <button class="btn btn-danger btn-xs" onclick="deleteItem('projectsTable',this,'تحلیل بدافزار')">حذف</button>
+                  </td>
+                </tr>
+                <tr data-status="متوقف شده">
+                  <td class="mono">P-1405-005</td><td class="primary">شبکه‌های ۵G و چالش‌های امنیتی</td><td>دکتر نوری</td>
+                  <td><span class="status-badge inactive">متوقف شده</span></td><td class="mono">۲۰٪</td>
+                  <td class="table-actions">
+                    <button class="btn btn-outline btn-xs" onclick="viewItem('project','شبکه ۵G',{code:'P-1405-005',manager:'دکتر نوری',status:'متوقف شده',progress:'۲۰٪',institute:'پژوهشکده امنیت شبکه',budget:'۲۰۰۰ میلیون ریال',duration:'۲۴ ماه'})">جزئیات</button>
+                    <button class="btn btn-outline btn-xs" onclick="editItem('projectModal','پروژه')">ویرایش</button>
+                    <button class="btn btn-danger btn-xs" onclick="deleteItem('projectsTable',this,'شبکه ۵G')">حذف</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ USERS ═══ -->
+      <section class="section" id="section-users">
+        <div class="breadcrumb">
+          <span class="bc-item">سامانه</span><span class="bc-sep">/</span>
+          <span class="bc-item active">مدیریت کاربران</span>
+        </div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title-icon">👥</div>
+            <div class="section-title-text"><h2>مدیریت کاربران</h2><p>لیست کاربران سامانه و نقش‌های سازمانی</p></div>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-outline btn-sm" onclick="exportData('کاربران')">📥 خروجی Excel</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('userModal')">+ کاربر جدید</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-card-head">
+            <div class="t-title">📋 لیست کاربران <span class="t-count" id="countUsers">۵ مورد</span></div>
+            <div class="t-filters">
+              <select onchange="filterTable('usersTable',this.value,3)">
+                <option value="">همه نقش‌ها</option>
+                <option value="مدیر پژوهشکده">مدیر پژوهشکده</option>
+                <option value="معاون پژوهشکده">معاون پژوهشکده</option>
+                <option value="کنترل پروژه">کنترل پروژه</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>نام</th><th>کد ملی</th><th>نقش سازمانی</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+              <tbody id="usersTable">
+                <tr data-status="مدیر پژوهشکده"><td class="primary">دکتر احمدی</td><td class="mono">1234567890</td><td>مدیر پژوهشکده</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('user','دکتر احمدی',{role:'مدیر پژوهشکده',national:'1234567890',email:'ahmadi@research.ir',phone:'0912-111-1111',degree:'دکتری',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('userModal','کاربر')">ویرایش</button></td></tr>
+                <tr data-status="معاون پژوهشکده"><td class="primary">دکتر کریمی</td><td class="mono">2345678901</td><td>معاون پژوهشکده</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('user','دکتر کریمی',{role:'معاون پژوهشکده',national:'2345678901',email:'karimi@research.ir',phone:'0912-222-2222',degree:'دکتری',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('userModal','کاربر')">ویرایش</button></td></tr>
+                <tr data-status="کنترل پروژه"><td class="primary">مهندس رضایی</td><td class="mono">3456789012</td><td>کنترل پروژه</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('user','مهندس رضایی',{role:'کنترل پروژه',national:'3456789012',email:'rezaei@research.ir',phone:'0912-333-3333',degree:'کارشناسی ارشد',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('userModal','کاربر')">ویرایش</button></td></tr>
+                <tr data-status="پژوهشگر / مجری"><td class="primary">دکتر موسوی</td><td class="mono">4567890123</td><td>پژوهشگر / مجری</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('user','دکتر موسوی',{role:'پژوهشگر / مجری',national:'4567890123',email:'mousavi@research.ir',phone:'0912-444-4444',degree:'دکتری',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('userModal','کاربر')">ویرایش</button></td></tr>
+                <tr data-status="همکار پروژه"><td class="primary">سارا محمدی</td><td class="mono">5678901234</td><td>همکار پروژه</td><td><span class="status-badge pending">غیرفعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('user','سارا محمدی',{role:'همکار پروژه',national:'5678901234',email:'mohammadi@research.ir',phone:'0912-555-5555',degree:'کارشناسی ارشد',status:'غیرفعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('userModal','کاربر')">ویرایش</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ COLLABORATORS ═══ -->
+      <section class="section" id="section-collaborators">
+        <div class="breadcrumb">
+          <span class="bc-item">سامانه</span><span class="bc-sep">/</span>
+          <span class="bc-item active">همکاران پروژه</span>
+        </div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title-icon">🤝</div>
+            <div class="section-title-text"><h2>همکاران پروژه</h2><p>همکاران داخلی و خارجی متصل به پروژه‌ها</p></div>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-primary btn-sm" onclick="openModal('collabModal')">+ همکار جدید</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-card-head">
+            <div class="t-title">📋 لیست همکاران <span class="t-count" id="countCollab">۴ مورد</span></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>نام</th><th>نوع</th><th>سازمان</th><th>پروژه</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+              <tbody id="collabTable">
+                <tr><td class="primary">علی رضایی</td><td><span class="status-badge info">داخلی</span></td><td>پژوهشکده امنیت شبکه</td><td>سامانه تشخیص نفوذ</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('collaborator','علی رضایی',{type:'داخلی',org:'پژوهشکده امنیت شبکه',project:'سامانه تشخیص نفوذ',role:'پژوهشگر ارشد',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('collabModal','همکار')">ویرایش</button></td></tr>
+                <tr><td class="primary">دکتر فاطمی</td><td><span class="status-badge pending">خارجی</span></td><td>دانشگاه صنعتی شریف</td><td>بلاکچین و احراز هویت</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('collaborator','دکتر فاطمی',{type:'خارجی',org:'دانشگاه صنعتی شریف',project:'بلاکچین و احراز هویت',role:'مشاور',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('collabModal','همکار')">ویرایش</button></td></tr>
+                <tr><td class="primary">مهندس حسینی</td><td><span class="status-badge info">داخلی</span></td><td>پژوهشکده امنیت شبکه</td><td>امنیت اینترنت اشیا</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('collaborator','مهندس حسینی',{type:'داخلی',org:'پژوهشکده امنیت شبکه',project:'امنیت اینترنت اشیا',role:'پژوهشگر',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('collabModal','همکار')">ویرایش</button></td></tr>
+                <tr><td class="primary">دکتر صادقی</td><td><span class="status-badge pending">خارجی</span></td><td>شرکت امن‌افزار پارس</td><td>تحلیل بدافزار</td><td><span class="status-badge pending">در انتظار</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('collaborator','دکتر صادقی',{type:'خارجی',org:'شرکت امن‌افزار پارس',project:'تحلیل بدافزار',role:'مشاور امنیتی',status:'در انتظار'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('collabModal','همکار')">ویرایش</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ SARBAZ ═══ -->
+      <section class="section" id="section-sarbaz">
+        <div class="breadcrumb">
+          <span class="bc-item">سامانه</span><span class="bc-sep">/</span>
+          <span class="bc-item active">مدیریت سربازان</span>
+        </div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title-icon">🎖️</div>
+            <div class="section-title-text"><h2>مدیریت سربازان</h2><p>سربازان در حال خدمت و گزارش‌های دوره‌ای</p></div>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-primary btn-sm" onclick="openModal('sarbazModal')">+ سرباز جدید</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-card-head">
+            <div class="t-title">📋 لیست سربازان <span class="t-count" id="countSarbaz">۴ مورد</span></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>نام</th><th>شروع خدمت</th><th>پروژه</th><th>گزارش‌های دوره‌ای</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+              <tbody id="sarbazTable">
+                <tr><td class="primary">محمد احمدی</td><td class="mono">1405/01/15</td><td>سامانه تشخیص نفوذ</td><td class="mono">۳۰ / ۶۰ / ۹۰ ✓</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('sarbaz','محمد احمدی',{start:'1405/01/15',end:'1405/10/15',project:'سامانه تشخیص نفوذ',reports:'۳۰ / ۶۰ / ۹۰',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('sarbazModal','سرباز')">ویرایش</button></td></tr>
+                <tr><td class="primary">رضا کریمی</td><td class="mono">1405/02/01</td><td>بلاکچین و احراز هویت</td><td class="mono">۳۰ / ۶۰ ✓</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('sarbaz','رضا کریمی',{start:'1405/02/01',end:'1405/11/01',project:'بلاکچین و احراز هویت',reports:'۳۰ / ۶۰',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('sarbazModal','سرباز')">ویرایش</button></td></tr>
+                <tr><td class="primary">حسین نوری</td><td class="mono">1404/11/10</td><td>امنیت اینترنت اشیا</td><td class="mono">تکمیل شده</td><td><span class="status-badge pending">پایان خدمت</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('sarbaz','حسین نوری',{start:'1404/11/10',end:'1405/08/10',project:'امنیت اینترنت اشیا',reports:'تکمیل شده',status:'پایان خدمت'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('sarbazModal','سرباز')">ویرایش</button></td></tr>
+                <tr><td class="primary">امیر رضایی</td><td class="mono">1405/03/20</td><td>تحلیل بدافزار</td><td class="mono">۳۰ روز ✓</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('sarbaz','امیر رضایی',{start:'1405/03/20',end:'1405/12/20',project:'تحلیل بدافزار',reports:'۳۰',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('sarbazModal','سرباز')">ویرایش</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ KARAMOOZ ═══ -->
+      <section class="section" id="section-karamooz">
+        <div class="breadcrumb">
+          <span class="bc-item">سامانه</span><span class="bc-sep">/</span>
+          <span class="bc-item active">مدیریت کارآموزان</span>
+        </div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title-icon">🎓</div>
+            <div class="section-title-text"><h2>مدیریت کارآموزان</h2><p>کارآموزان، مشخصات تحصیلی و رزومه</p></div>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-primary btn-sm" onclick="openModal('karamoozModal')">+ کارآموز جدید</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-card-head">
+            <div class="t-title">📋 لیست کارآموزان <span class="t-count" id="countKaramooz">۴ مورد</span></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>نام</th><th>دانشگاه</th><th>مقطع</th><th>پروژه</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+              <tbody id="karamoozTable">
+                <tr><td class="primary">زهرا محمدی</td><td>دانشگاه تهران</td><td>کارشناسی ارشد</td><td>سامانه تشخیص نفوذ</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('karamooz','زهرا محمدی',{university:'دانشگاه تهران',degree:'کارشناسی ارشد',field:'مهندسی کامپیوتر - امنیت',gpa:'18.5',project:'سامانه تشخیص نفوذ',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('karamoozModal','کارآموز')">ویرایش</button></td></tr>
+                <tr><td class="primary">مریم حسینی</td><td>دانشگاه صنعتی شریف</td><td>کارشناسی</td><td>بلاکچین و احراز هویت</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('karamooz','مریم حسینی',{university:'دانشگاه صنعتی شریف',degree:'کارشناسی',field:'مهندسی کامپیوتر',gpa:'17.8',project:'بلاکچین و احراز هویت',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('karamoozModal','کارآموز')">ویرایش</button></td></tr>
+                <tr><td class="primary">سارا رضایی</td><td>دانشگاه علم و صنعت</td><td>کارشناسی ارشد</td><td>امنیت اینترنت اشیا</td><td><span class="status-badge active">فعال</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('karamooz','سارا رضایی',{university:'دانشگاه علم و صنعت',degree:'کارشناسی ارشد',field:'امنیت اطلاعات',gpa:'19.2',project:'امنیت اینترنت اشیا',status:'فعال'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('karamoozModal','کارآموز')">ویرایش</button></td></tr>
+                <tr><td class="primary">نازنین کریمی</td><td>دانشگاه شهید بهشتی</td><td>کارشناسی</td><td>تحلیل بدافزار</td><td><span class="status-badge pending">در انتظار</span></td><td class="table-actions"><button class="btn btn-outline btn-xs" onclick="viewItem('karamooz','نازنین کریمی',{university:'دانشگاه شهید بهشتی',degree:'کارشناسی',field:'مهندسی کامپیوتر',gpa:'16.9',project:'تحلیل بدافزار',status:'در انتظار'})">مشاهده</button><button class="btn btn-outline btn-xs" onclick="editItem('karamoozModal','کارآموز')">ویرایش</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ REPORTS ═══ -->
+      <section class="section" id="section-reports">
+        <div class="breadcrumb">
+          <span class="bc-item">سامانه</span><span class="bc-sep">/</span>
+          <span class="bc-item active">گزارش‌ها و تحلیل</span>
+        </div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title-icon">📈</div>
+            <div class="section-title-text"><h2>گزارش‌ها و تحلیل</h2><p>گزارش‌های جامع از عملکرد پژوهشکده</p></div>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-outline btn-sm" onclick="exportData('گزارش‌ها')">📥 خروجی کلی</button>
+          </div>
+        </div>
+
+        <div class="stats-grid" style="margin-bottom:24px">
+          <div class="stat-card"><div class="stat-head"><div class="stat-icon">💰</div><span class="stat-badge">BUDGET</span></div><div class="stat-value" data-count="12500">۰</div><div class="stat-label">بودجه کل (میلیون ریال)</div></div>
+          <div class="stat-card"><div class="stat-head"><div class="stat-icon">✅</div><span class="stat-badge">DONE</span></div><div class="stat-value" data-count="18">۰</div><div class="stat-label">پروژه‌های تکمیل‌شده</div></div>
+          <div class="stat-card"><div class="stat-head"><div class="stat-icon">📄</div><span class="stat-badge">REPORTS</span></div><div class="stat-value" data-count="47">۰</div><div class="stat-label">گزارش فاز ثبت‌شده</div></div>
+          <div class="stat-card"><div class="stat-head"><div class="stat-icon">📊</div><span class="stat-badge">AVG</span></div><div class="stat-value" data-count="92">۰</div><div class="stat-label">درصد پیشرفت میانگین</div></div>
+        </div>
+
+        <div class="modules-grid">
+          <div class="module-card" onclick="downloadReport('پروژه‌ها','PDF','۲٫۴ MB')">
+            <div class="module-head"><div class="module-icon" style="background:var(--grad-navy)">📊</div><h3>گزارش پروژه‌ها</h3></div>
+            <p>گزارش کامل از وضعیت، پیشرفت و بودجه پروژه‌های پژوهشی.</p>
+            <div class="module-footer"><span>PDF · ۲٫۴ MB</span><span class="link">دانلود ←</span></div>
+          </div>
+          <div class="module-card" onclick="downloadReport('کاربران','Excel','۱٫۸ MB')">
+            <div class="module-head"><div class="module-icon" style="background:linear-gradient(135deg,#5a1f2a,#7a2f3a)">👥</div><h3>گزارش کاربران</h3></div>
+            <p>گزارش فعالیت کاربران، نقش‌ها و سطوح دسترسی.</p>
+            <div class="module-footer"><span>Excel · ۱٫۸ MB</span><span class="link">دانلود ←</span></div>
+          </div>
+          <div class="module-card" onclick="downloadReport('عملکرد ماهانه','PDF','۳٫۱ MB')">
+            <div class="module-head"><div class="module-icon" style="background:linear-gradient(135deg,#0e3a24,#1a5a3a)">📅</div><h3>گزارش عملکرد ماهانه</h3></div>
+            <p>خلاصه عملکرد پژوهشکده در ماه جاری با نمودارهای تحلیلی.</p>
+            <div class="module-footer"><span>PDF · ۳٫۱ MB</span><span class="link">مشاهده ←</span></div>
+          </div>
+          <div class="module-card" onclick="downloadReport('مالی','PDF','۲٫۰ MB')">
+            <div class="module-head"><div class="module-icon" style="background:var(--grad-gold)">💰</div><h3>گزارش مالی</h3></div>
+            <p>گزارش بودجه، هزینه‌ها و تخصیص منابع پروژه‌ها.</p>
+            <div class="module-footer"><span>PDF · ۲٫۰ MB</span><span class="link">دانلود ←</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ AUDIT ═══ -->
+      <section class="section" id="section-audit">
+        <div class="breadcrumb">
+          <span class="bc-item">سامانه</span><span class="bc-sep">/</span>
+          <span class="bc-item active">لاگ فعالیت‌ها</span>
+        </div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title-icon">📋</div>
+            <div class="section-title-text"><h2>لاگ فعالیت‌ها</h2><p>تاریخچه کامل عملیات انجام‌شده در سامانه</p></div>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-outline btn-sm" onclick="clearAuditLog()">🧹 پاک‌سازی</button>
+            <button class="btn btn-primary btn-sm" onclick="exportData('لاگ‌ها')">📥 خروجی</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-card-head">
+            <div class="t-title">📋 رخدادهای اخیر <span class="t-count" id="countAudit">۶ مورد</span></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>زمان</th><th>کاربر</th><th>عملیات</th><th>موجودیت</th><th>IP</th></tr></thead>
+              <tbody id="auditTable">
+                <tr><td class="mono">1405/07/12 09:24</td><td>دکتر احمدی</td><td><span class="status-badge active">ایجاد</span></td><td>پروژه P-1405-005</td><td class="mono">192.168.1.10</td></tr>
+                <tr><td class="mono">1405/07/12 08:55</td><td>مهندس رضایی</td><td><span class="status-badge pending">ویرایش</span></td><td>کاربر سارا محمدی</td><td class="mono">192.168.1.22</td></tr>
+                <tr><td class="mono">1405/07/11 17:30</td><td>دکتر کریمی</td><td><span class="status-badge info">مشاهده</span></td><td>گزارش فاز ۲</td><td class="mono">192.168.1.15</td></tr>
+                <tr><td class="mono">1405/07/11 14:12</td><td>دکتر موسوی</td><td><span class="status-badge active">ایجاد</span></td><td>سرباز امیر رضایی</td><td class="mono">192.168.1.18</td></tr>
+                <tr><td class="mono">1405/07/11 10:05</td><td>سیستم</td><td><span class="status-badge inactive">حذف</span></td><td>لاگ قدیمی</td><td class="mono">—</td></tr>
+                <tr><td class="mono">1405/07/10 16:48</td><td>دکتر احمدی</td><td><span class="status-badge pending">ویرایش</span></td><td>پروژه P-1405-001</td><td class="mono">192.168.1.10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ SETTINGS ═══ -->
+      <section class="section" id="section-settings">
+        <div class="breadcrumb">
+          <span class="bc-item">سامانه</span><span class="bc-sep">/</span>
+          <span class="bc-item active">تنظیمات</span>
+        </div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-title-icon">⚙️</div>
+            <div class="section-title-text"><h2>تنظیمات سامانه</h2><p>تنظیمات ظاهری، چیدمان و امنیت حساب</p></div>
+          </div>
+        </div>
+
+        <div class="modules-grid">
+          <div class="module-card">
+            <div class="module-head"><div class="module-icon" style="background:var(--grad-gold)">🎨</div><h3>انتخاب تم رنگی</h3></div>
+            <p>تم رسمی مورد نظر خود را انتخاب کنید. تغییرات بلافاصله اعمال می‌شود.</p>
+            <div class="module-footer" style="flex-direction:column;align-items:flex-start;gap:10px">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <div class="theme-dot active" data-theme="light" style="width:32px;height:32px;background:#f4f5f7;border-radius:6px" onclick="setTheme('light')" title="روشن"></div>
+                <div class="theme-dot" data-theme="dark" style="width:32px;height:32px;background:#0a1119;border-radius:6px" onclick="setTheme('dark')" title="شبانه"></div>
+                <div class="theme-dot" data-theme="royal" style="width:32px;height:32px;background:#0a2149;border-radius:6px" onclick="setTheme('royal')" title="سرمه‌ای سلطنتی"></div>
+                <div class="theme-dot" data-theme="burgundy" style="width:32px;height:32px;background:#5a1f2a;border-radius:6px" onclick="setTheme('burgundy')" title="زرشکی کلاسیک"></div>
+                <div class="theme-dot" data-theme="emerald" style="width:32px;height:32px;background:#0e3a24;border-radius:6px" onclick="setTheme('emerald')" title="زمردی دولتی"></div>
+                <div class="theme-dot" data-theme="slate" style="width:32px;height:32px;background:#2a3342;border-radius:6px" onclick="setTheme('slate')" title="خاکستری رسمی"></div>
+              </div>
+              <span style="font-family:var(--mono);font-size:10.5px">تم فعلی: <span id="currentThemeLabel">روشن</span></span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-head"><div class="module-icon" style="background:var(--grad-navy)">📐</div><h3>چیدمان سایدبار</h3></div>
+            <p>حالت نمایش منو را انتخاب کنید: عمودی (کلاسیک) یا افقی (فشرده).</p>
+            <div class="module-footer">
+              <span class="mono" id="layoutLabel" style="font-family:var(--mono);font-size:11px">عمودی</span>
+              <button class="btn btn-outline btn-xs" onclick="toggleLayout()">تغییر چیدمان</button>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-head"><div class="module-icon" style="background:linear-gradient(135deg,#0e3a24,#1a5a3a)">🔔</div><h3>اعلان‌ها</h3></div>
+            <p>مدیریت اعلان‌های سیستمی و هشدارهای پروژه‌ها.</p>
+            <div class="module-footer">
+              <span id="notifStatus">وضعیت: فعال</span>
+              <button class="btn btn-outline btn-xs" onclick="toggleNotifications()">تغییر وضعیت</button>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-head"><div class="module-icon" style="background:var(--grad-navy)">🔐</div><h3>امنیت حساب</h3></div>
+            <p>تغییر رمز عبور، فعال‌سازی ورود دو مرحله‌ای و مدیریت نشست‌ها.</p>
+            <div class="module-footer">
+              <span>آخرین ورود: ۰۹:۲۴</span>
+              <button class="btn btn-outline btn-xs" onclick="openModal('securityModal')">مدیریت</button>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-head"><div class="module-icon" style="background:linear-gradient(135deg,#2a3342,#3f4a5c)">💾</div><h3>پشتیبان‌گیری</h3></div>
+            <p>تهیه نسخه پشتیبان از داده‌های سامانه و بازیابی اطلاعات.</p>
+            <div class="module-footer">
+              <span>آخرین: ۱۴۰۵/۰۷/۱۰</span>
+              <button class="btn btn-outline btn-xs" onclick="backupData()">پشتیبان‌گیری</button>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-head"><div class="module-icon" style="background:var(--grad-navy)">🌐</div><h3>زبان و منطقه</h3></div>
+            <p>تنظیمات زبان، تقویم و منطقه زمانی سامانه.</p>
+            <div class="module-footer">
+              <span>فارسی · شمسی · IRST</span>
+              <button class="btn btn-outline btn-xs" onclick="showToast('تنظیمات زبان تغییر کرد')">تغییر</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <div class="modal-head"><div class="m-title"><span class="m-ico">📁</span> ثبت پروژه جدید</div><button class="modal-close" onclick="closeModal('projectModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-field full"><label>عنوان پروژه <span class="req">*</span></label><input type="text" id="pTitle" placeholder="عنوان کامل پروژه"></div>
+        <div class="form-field"><label>مجری <span class="req">*</span></label><select id="pManager"><option>دکتر احمدی</option><option>دکتر کریمی</option><option>دکتر موسوی</option><option>مهندس رضایی</option></select></div>
+        <div class="form-field"><label>پژوهشکده / مرکز</label><input type="text" id="pInstitute" placeholder="پژوهشکده امنیت شبکه"></div>
+        <div class="form-field"><label>گروه تخصصی</label><input type="text" id="pGroup" placeholder="امنیت شبکه"></div>
+        <div class="form-field"><label>مدت (ماه)</label><input type="number" id="pDuration" placeholder="12"></div>
+        <div class="form-field"><label>بودجه (میلیون ریال)</label><input type="number" id="pBudget" placeholder="1500"></div>
+        <div class="form-field"><label>وضعیت</label><select id="pStatus"><option>در حال اجرا</option><option>در انتظار تایید</option><option>متوقف شده</option></select></div>
+        <div class="form-field full"><label>متن پروپوزال</label><textarea id="pProposal" placeholder="توضیحات کامل پروپوزال..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" onclick="saveProject()">💾 ذخیره پروژه</button>
+      <button class="btn btn-outline" onclick="closeModal('projectModal')">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="userModal">
+  <div class="modal">
+    <div class="modal-head"><div class="m-title"><span class="m-ico">👤</span> ایجاد کاربر جدید</div><button class="modal-close" onclick="closeModal('userModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-field"><label>نام و نام خانوادگی <span class="req">*</span></label><input type="text" id="uName" placeholder="نام کامل"></div>
+        <div class="form-field"><label>کد ملی <span class="req">*</span></label><input type="text" id="uNational" placeholder="۱۰ رقم"></div>
+        <div class="form-field"><label>ایمیل</label><input type="email" id="uEmail" placeholder="user@research.ir"></div>
+        <div class="form-field"><label>شماره تماس</label><input type="text" id="uPhone" placeholder="0912..."></div>
+        <div class="form-field"><label>نوع استخدام</label><select id="uEmployment"><option>رسمی</option><option>پیمانی</option><option>قراردادی</option></select></div>
+        <div class="form-field"><label>مدرک تحصیلی</label><select id="uDegree"><option>کارشناسی</option><option>کارشناسی ارشد</option><option>دکتری</option></select></div>
+        <div class="form-field full"><label>نقش سازمانی <span class="req">*</span></label><select id="uRole"><option>مدیر پژوهشکده</option><option>معاون پژوهشکده</option><option>قائم‌مقام</option><option>کنترل پروژه</option><option>پژوهشگر / مجری</option><option>همکار پروژه</option><option>سرباز</option><option>کارآموز</option></select></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" onclick="saveUser()">💾 ذخیره کاربر</button>
+      <button class="btn btn-outline" onclick="closeModal('userModal')">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="collabModal">
+  <div class="modal">
+    <div class="modal-head"><div class="m-title"><span class="m-ico">🤝</span> افزودن همکار پروژه</div><button class="modal-close" onclick="closeModal('collabModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-field"><label>نام و نام خانوادگی <span class="req">*</span></label><input type="text" id="cName" placeholder="نام کامل"></div>
+        <div class="form-field"><label>نوع همکار <span class="req">*</span></label><select id="cType"><option>داخلی</option><option>خارجی</option></select></div>
+        <div class="form-field"><label>سازمان</label><input type="text" id="cOrg" placeholder="نام سازمان"></div>
+        <div class="form-field"><label>سمت</label><input type="text" id="cPosition" placeholder="سمت"></div>
+        <div class="form-field"><label>ایمیل</label><input type="email" id="cEmail" placeholder="email@org.ir"></div>
+        <div class="form-field"><label>تلفن</label><input type="text" id="cPhone" placeholder="021..."></div>
+        <div class="form-field full"><label>پروژه مرتبط <span class="req">*</span></label><select id="cProject"><option>سامانه تشخیص نفوذ</option><option>بلاکچین و احراز هویت</option><option>امنیت اینترنت اشیا</option><option>تحلیل بدافزار</option></select></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" onclick="saveCollab()">💾 ذخیره همکار</button>
+      <button class="btn btn-outline" onclick="closeModal('collabModal')">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="sarbazModal">
+  <div class="modal">
+    <div class="modal-head"><div class="m-title"><span class="m-ico">🎖️</span> ثبت سرباز جدید</div><button class="modal-close" onclick="closeModal('sarbazModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-field"><label>نام و نام خانوادگی <span class="req">*</span></label><input type="text" id="sName" placeholder="نام کامل"></div>
+        <div class="form-field"><label>کد ملی <span class="req">*</span></label><input type="text" id="sNational" placeholder="۱۰ رقم"></div>
+        <div class="form-field"><label>تاریخ شروع خدمت <span class="req">*</span></label><input type="text" id="sStart" placeholder="1405/01/15"></div>
+        <div class="form-field"><label>تاریخ پایان خدمت</label><input type="text" id="sEnd" placeholder="1405/10/15"></div>
+        <div class="form-field full"><label>پروژه مرتبط <span class="req">*</span></label><select id="sProject"><option>سامانه تشخیص نفوذ</option><option>بلاکچین و احراز هویت</option><option>امنیت اینترنت اشیا</option><option>تحلیل بدافزار</option></select></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" onclick="saveSarbaz()">💾 ذخیره سرباز</button>
+      <button class="btn btn-outline" onclick="closeModal('sarbazModal')">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="karamoozModal">
+  <div class="modal">
+    <div class="modal-head"><div class="m-title"><span class="m-ico">🎓</span> ثبت کارآموز جدید</div><button class="modal-close" onclick="closeModal('karamoozModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-field"><label>نام و نام خانوادگی <span class="req">*</span></label><input type="text" id="kName" placeholder="نام کامل"></div>
+        <div class="form-field"><label>کد ملی <span class="req">*</span></label><input type="text" id="kNational" placeholder="۱۰ رقم"></div>
+        <div class="form-field"><label>دانشگاه</label><input type="text" id="kUniversity" placeholder="دانشگاه"></div>
+        <div class="form-field"><label>مقطع</label><select id="kDegree"><option>کارشناسی</option><option>کارشناسی ارشد</option><option>دکتری</option></select></div>
+        <div class="form-field"><label>رشته و گرایش</label><input type="text" id="kField" placeholder="مهندسی کامپیوتر - امنیت"></div>
+        <div class="form-field"><label>معدل</label><input type="text" id="kGpa" placeholder="18.5"></div>
+        <div class="form-field full"><label>پروژه مرتبط <span class="req">*</span></label><select id="kProject"><option>سامانه تشخیص نفوذ</option><option>بلاکچین و احراز هویت</option><option>امنیت اینترنت اشیا</option><option>تحلیل بدافزار</option></select></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" onclick="saveKaramooz()">💾 ذخیره کارآموز</button>
+      <button class="btn btn-outline" onclick="closeModal('karamoozModal')">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="profileModal">
+  <div class="modal">
+    <div class="modal-head"><div class="m-title"><span class="m-ico">👤</span> پروفایل کاربری</div><button class="modal-close" onclick="closeModal('profileModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-field"><label>نام کاربری</label><input type="text" value="admin" readonly></div>
+        <div class="form-field"><label>ایمیل</label><input type="email" value="admin@research.ir"></div>
+        <div class="form-field"><label>نقش سازمانی</label><input type="text" value="مدیر پژوهشکده" readonly></div>
+        <div class="form-field"><label>آخرین ورود</label><input type="text" value="1405/07/12 - 09:24" readonly></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" onclick="closeModal('profileModal');showToast('پروفایل با موفقیت ذخیره شد ✓')">💾 ذخیره</button>
+      <button class="btn btn-outline" onclick="closeModal('profileModal')">بستن</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="viewModal">
+  <div class="modal">
+    <div class="modal-head"><div class="m-title"><span class="m-ico" id="viewIcon">👁️</span> <span id="viewTitle">جزئیات</span></div><button class="modal-close" onclick="closeModal('viewModal')">✕</button></div>
+    <div class="modal-body"><div class="detail-grid" id="viewContent"></div></div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal('viewModal')">بستن</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="securityModal">
+  <div class="modal">
+    <div class="modal-head"><div class="m-title"><span class="m-ico">🔐</span> امنیت حساب</div><button class="modal-close" onclick="closeModal('securityModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-field full"><label>رمز عبور فعلی</label><input type="password" placeholder="••••••••"></div>
+        <div class="form-field"><label>رمز عبور جدید</label><input type="password" placeholder="••••••••"></div>
+        <div class="form-field"><label>تکرار رمز جدید</label><input type="password" placeholder="••••••••"></div>
+        <div class="form-field full" style="flex-direction:row;align-items:center;gap:10px">
+          <input type="checkbox" id="twoFactor" style="width:auto">
+          <label for="twoFactor" style="font-size:12.5px;cursor:pointer">فعال‌سازی ورود دو مرحله‌ای</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" onclick="closeModal('securityModal');showToast('تنظیمات امنیتی ذخیره شد ✓')">💾 ذخیره</button>
+      <button class="btn btn-outline" onclick="closeModal('securityModal')">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="helpModal">
+  <div class="modal">
+    <div class="modal-head"><div class="m-title"><span class="m-ico">📖</span> راهنمای کاربری</div><button class="modal-close" onclick="closeModal('helpModal')">✕</button></div>
+    <div class="modal-body">
+      <div style="font-size:13px;line-height:2;color:var(--text-2)">
+        <p style="margin-bottom:12px"><strong>۱. داشبورد:</strong> نمای کلی آماری از وضعیت پژوهشکده.</p>
+        <p style="margin-bottom:12px"><strong>۲. پروژه‌ها:</strong> مدیریت کامل پروژه‌ها، مشاهده جزئیات، ویرایش و حذف.</p>
+        <p style="margin-bottom:12px"><strong>۳. کاربران:</strong> ایجاد و مدیریت کاربران با نقش‌های سازمانی.</p>
+        <p style="margin-bottom:12px"><strong>۴. همکاران:</strong> مدیریت همکاران داخلی و خارجی پروژه‌ها.</p>
+        <p style="margin-bottom:12px"><strong>۵. سربازان:</strong> ثبت دوره خدمت و گزارش‌های دوره‌ای.</p>
+        <p style="margin-bottom:12px"><strong>۶. کارآموزان:</strong> مدیریت کارآموزان و مشخصات تحصیلی.</p>
+        <p><strong>۷. تنظیمات:</strong> تغییر تم، چیدمان، و امنیت حساب.</p>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" onclick="closeModal('helpModal')">متوجه شدم</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="toast-ico" id="toastIco">✓</span><span id="toastMsg">پیام</span></div>
+
+<script>
+/* ═══════ STATE ═══════ */
+let currentTheme = localStorage.getItem('theme') || 'light';
+let currentLayout = localStorage.getItem('layout') || 'vertical';
+let notificationsEnabled = true;
+
+/* ═══════ DOM ═══════ */
+const loginPage = document.getElementById('loginPage');
+const dashboard = document.getElementById('dashboard');
+const loginBtn = document.getElementById('loginBtn');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+const loginError = document.getElementById('loginError');
+const sidebar = document.getElementById('sidebar');
+const appLayout = document.getElementById('appLayout');
+const mainContent = document.getElementById('mainContent');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const layoutToggle = document.getElementById('layoutToggle');
+const toastEl = document.getElementById('toast');
+const toastMsg = document.getElementById('toastMsg');
+const toastIco = document.getElementById('toastIco');
+const userChip = document.getElementById('userChip');
+const userDropdown = document.getElementById('userDropdown');
+const globalSearch = document.getElementById('globalSearch');
+
+/* ═══════ THEME ═══════ */
+const themeNames = {light:'روشن',dark:'شبانه',royal:'سرمه‌ای سلطنتی',burgundy:'زرشکی کلاسیک',emerald:'زمردی دولتی',slate:'خاکستری رسمی'};
+function setTheme(theme){
+  document.body.setAttribute('data-theme', theme);
+  currentTheme = theme;
+  localStorage.setItem('theme', theme);
+  document.querySelectorAll('.theme-dot[data-theme]').forEach(d => d.classList.toggle('active', d.dataset.theme === theme));
+  const lbl = document.getElementById('currentThemeLabel');
+  if(lbl) lbl.textContent = themeNames[theme] || theme;
+}
+
+/* ═══════ LAYOUT ═══════ */
+function toggleLayout(){
+  currentLayout = currentLayout === 'vertical' ? 'horizontal' : 'vertical';
+  sidebar.classList.toggle('horizontal', currentLayout === 'horizontal');
+  appLayout.classList.toggle('layout-horizontal', currentLayout === 'horizontal');
+  localStorage.setItem('layout', currentLayout);
+  const lbl = document.getElementById('layoutLabel');
+  if(lbl) lbl.textContent = currentLayout === 'horizontal' ? 'افقی' : 'عمودی';
+  showToast(currentLayout === 'horizontal' ? 'چیدمان افقی فعال شد ⇄' : 'چیدمان عمودی فعال شد ⇅');
+}
+
+/* ═══════ LOGIN ═══════ */
+function handleLogin(){
+  const u = usernameInput.value.trim();
+  const p = passwordInput.value.trim();
+  if((u === 'admin' && p === 'admin') || (u === 'user' && p === 'user')){
+    loginPage.classList.add('hidden');
+    dashboard.classList.add('active');
+    showToast('خوش آمدید! ورود موفقیت‌آمیز بود ✓');
+    setTimeout(() => { animateCounters(); buildChart(); }, 400);
+    if(u === 'user'){
+      document.getElementById('userAvatar').textContent = 'ک';
+      document.getElementById('userName').textContent = 'کاربر عادی';
+      document.getElementById('userRole').textContent = 'USER';
+      document.getElementById('ddName').textContent = 'کاربر عادی';
+      document.getElementById('ddRole').textContent = 'user@research.ir';
+    }
+  } else {
+    loginError.textContent = 'نام کاربری یا رمز عبور اشتباه است.';
+    loginError.classList.add('show');
+    setTimeout(() => loginError.classList.remove('show'), 2500);
+  }
+}
+loginBtn.addEventListener('click', handleLogin);
+loginPage.addEventListener('keydown', e => { if(e.key === 'Enter') handleLogin(); });
+function logout(){
+  dashboard.classList.remove('active');
+  loginPage.classList.remove('hidden');
+  userDropdown.classList.remove('show');
+  showToast('از سامانه با موفقیت خارج شدید','warn');
+}
+
+/* ═══════ COUNTERS ═══════ */
+function animateCounters(){
+  document.querySelectorAll('.stat-value[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    let current = 0;
+    const step = Math.max(1, Math.ceil(target / 45));
+    clearInterval(el._timer);
+    el._timer = setInterval(() => {
+      current += step;
+      if(current >= target){ current = target; clearInterval(el._timer); }
+      el.textContent = current.toLocaleString('fa-IR');
+    }, 28);
+  });
+}
+
+/* ═══════ CHART ═══════ */
+function buildChart(){
+  const chart = document.getElementById('projectChart');
+  if(!chart) return;
+  const data = [{label:'فروردین',value:8},{label:'اردیبهشت',value:12},{label:'خرداد',value:15},{label:'تیر',value:18},{label:'مرداد',value:21},{label:'شهریور',value:24}];
+  const max = Math.max(...data.map(d => d.value));
+  chart.innerHTML = data.map((d,i) => {
+    const h = (d.value / max) * 100;
+    return `<div class="bar" style="height:${h}%;animation-delay:${i*60}ms" title="${d.label}: ${d.value}" onclick="showToast('${d.label}: ${d.value} پروژه','warn')">
+      <span class="bar-value">${d.value}</span><span class="bar-label">${d.label}</span></div>`;
+  }).join('');
+}
+
+/* ═══════ SECTION NAV ═══════ */
+function switchSection(id){
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('section-' + id);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.section === id));
+  if(window.innerWidth <= 920) sidebar.classList.remove('open');
+  mainContent.scrollTop = 0;
+  if(id === 'dashboard') setTimeout(buildChart, 100);
+  setTimeout(animateCounters, 150);
+}
+document.querySelectorAll('.nav-item[data-section]').forEach(item => {
+  item.addEventListener('click', () => switchSection(item.dataset.section));
+});
+
+/* ═══════ MOBILE ═══════ */
+mobileMenuBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
+layoutToggle.addEventListener('click', toggleLayout);
+
+/* ═══════ USER DROPDOWN ═══════ */
+userChip.addEventListener('click', e => { e.stopPropagation(); userDropdown.classList.toggle('show'); });
+document.addEventListener('click', () => userDropdown.classList.remove('show'));
+userDropdown.addEventListener('click', e => e.stopPropagation());
+
+/* ═══════ NOTIFICATIONS ═══════ */
+document.getElementById('notifBtn').addEventListener('click', () => {
+  if(notificationsEnabled) showToast('🔔 ۳ اعلان جدید دارید','warn');
+  else showToast('اعلان‌ها غیرفعال است','warn');
+});
+function toggleNotifications(){
+  notificationsEnabled = !notificationsEnabled;
+  document.getElementById('notifStatus').textContent = notificationsEnabled ? 'وضعیت: فعال' : 'وضعیت: غیرفعال';
+  showToast(notificationsEnabled ? 'اعلان‌ها فعال شد' : 'اعلان‌ها غیرفعال شد','warn');
+}
+
+/* ═══════ MODAL ═══════ */
+function openModal(id){ const m = document.getElementById(id); if(m) m.classList.add('show'); }
+function closeModal(id){ const m = document.getElementById(id); if(m) m.classList.remove('show'); }
+document.querySelectorAll('.modal-overlay').forEach(ov => {
+  ov.addEventListener('click', e => { if(e.target === ov) ov.classList.remove('show'); });
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') document.querySelectorAll('.modal-overlay.show').forEach(m => m.classList.remove('show'));
+});
+
+/* ═══════ CRUD OPERATIONS ═══════ */
+function saveProject(){
+  const title = document.getElementById('pTitle').value.trim();
+  const manager = document.getElementById('pManager').value;
+  if(!title){ showToast('عنوان پروژه الزامی است','error'); return; }
+  const status = document.getElementById('pStatus').value;
+  const statusCls = status === 'در حال اجرا' ? 'active' : status === 'در انتظار تایید' ? 'pending' : 'inactive';
+  const code = 'P-1405-' + String(Date.now()).slice(-3);
+  const row = document.createElement('tr');
+  row.setAttribute('data-status', status);
+  row.innerHTML = `
+    <td class="mono">${code}</td><td class="primary">${title}</td><td>${manager}</td>
+    <td><span class="status-badge ${statusCls}">${status}</span></td><td class="mono">۰٪</td>
+    <td class="table-actions">
+      <button class="btn btn-outline btn-xs" onclick="viewItem('project','${title}',{code:'${code}',manager:'${manager}',status:'${status}',progress:'۰٪'})">جزئیات</button>
+      <button class="btn btn-outline btn-xs" onclick="editItem('projectModal','پروژه')">ویرایش</button>
+      <button class="btn btn-danger btn-xs" onclick="deleteItem('projectsTable',this,'${title}')">حذف</button>
+    </td>`;
+  document.getElementById('projectsTable').insertBefore(row, document.getElementById('projectsTable').firstChild);
+  updateCount('projectsTable','countProjects');
+  closeModal('projectModal');
+  showToast(`✓ پروژه «${title}» با موفقیت ذخیره شد`);
+  addAuditLog('ایجاد', `پروژه ${title}`);
+  document.getElementById('pTitle').value = '';
+}
+
+function saveUser(){
+  const name = document.getElementById('uName').value.trim();
+  const national = document.getElementById('uNational').value.trim();
+  const role = document.getElementById('uRole').value;
+  if(!name || !national){ showToast('نام و کد ملی الزامی است','error'); return; }
+  const row = document.createElement('tr');
+  row.setAttribute('data-status', role);
+  row.innerHTML = `
+    <td class="primary">${name}</td><td class="mono">${national}</td><td>${role}</td>
+    <td><span class="status-badge active">فعال</span></td>
+    <td class="table-actions">
+      <button class="btn btn-outline btn-xs" onclick="viewItem('user','${name}',{role:'${role}',national:'${national}'})">مشاهده</button>
+      <button class="btn btn-outline btn-xs" onclick="editItem('userModal','کاربر')">ویرایش</button>
+    </td>`;
+  document.getElementById('usersTable').insertBefore(row, document.getElementById('usersTable').firstChild);
+  updateCount('usersTable','countUsers');
+  closeModal('userModal');
+  showToast(`✓ کاربر «${name}» با موفقیت ذخیره شد`);
+  addAuditLog('ایجاد', `کاربر ${name}`);
+  document.getElementById('uName').value = '';
+  document.getElementById('uNational').value = '';
+}
+
+function saveCollab(){
+  const name = document.getElementById('cName').value.trim();
+  const type = document.getElementById('cType').value;
+  const org = document.getElementById('cOrg').value.trim() || '—';
+  const project = document.getElementById('cProject').value;
+  if(!name){ showToast('نام همکار الزامی است','error'); return; }
+  const typeCls = type === 'داخلی' ? 'info' : 'pending';
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td class="primary">${name}</td><td><span class="status-badge ${typeCls}">${type}</span></td>
+    <td>${org}</td><td>${project}</td><td><span class="status-badge active">فعال</span></td>
+    <td class="table-actions">
+      <button class="btn btn-outline btn-xs" onclick="viewItem('collaborator','${name}',{type:'${type}',org:'${org}',project:'${project}'})">مشاهده</button>
+      <button class="btn btn-outline btn-xs" onclick="editItem('collabModal','همکار')">ویرایش</button>
+    </td>`;
+  document.getElementById('collabTable').insertBefore(row, document.getElementById('collabTable').firstChild);
+  updateCount('collabTable','countCollab');
+  closeModal('collabModal');
+  showToast(`✓ همکار «${name}» با موفقیت ذخیره شد`);
+  addAuditLog('ایجاد', `همکار ${name}`);
+  document.getElementById('cName').value = '';
+  document.getElementById('cOrg').value = '';
+}
+
+function saveSarbaz(){
+  const name = document.getElementById('sName').value.trim();
+  const start = document.getElementById('sStart').value.trim();
+  const project = document.getElementById('sProject').value;
+  if(!name || !start){ showToast('نام و تاریخ شروع الزامی است','error'); return; }
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td class="primary">${name}</td><td class="mono">${start}</td><td>${project}</td>
+    <td class="mono">—</td><td><span class="status-badge active">فعال</span></td>
+    <td class="table-actions">
+      <button class="btn btn-outline btn-xs" onclick="viewItem('sarbaz','${name}',{start:'${start}',project:'${project}'})">مشاهده</button>
+      <button class="btn btn-outline btn-xs" onclick="editItem('sarbazModal','سرباز')">ویرایش</button>
+    </td>`;
+  document.getElementById('sarbazTable').insertBefore(row, document.getElementById('sarbazTable').firstChild);
+  updateCount('sarbazTable','countSarbaz');
+  closeModal('sarbazModal');
+  showToast(`✓ سرباز «${name}» با موفقیت ذخیره شد`);
+  addAuditLog('ایجاد', `سرباز ${name}`);
+  document.getElementById('sName').value = '';
+  document.getElementById('sStart').value = '';
+}
+
+function saveKaramooz(){
+  const name = document.getElementById('kName').value.trim();
+  const university = document.getElementById('kUniversity').value.trim() || '—';
+  const degree = document.getElementById('kDegree').value;
+  const project = document.getElementById('kProject').value;
+  if(!name){ showToast('نام کارآموز الزامی است','error'); return; }
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td class="primary">${name}</td><td>${university}</td><td>${degree}</td><td>${project}</td>
+    <td><span class="status-badge active">فعال</span></td>
+    <td class="table-actions">
+      <button class="btn btn-outline btn-xs" onclick="viewItem('karamooz','${name}',{university:'${university}',degree:'${degree}',project:'${project}'})">مشاهده</button>
+      <button class="btn btn-outline btn-xs" onclick="editItem('karamoozModal','کارآموز')">ویرایش</button>
+    </td>`;
+  document.getElementById('karamoozTable').insertBefore(row, document.getElementById('karamoozTable').firstChild);
+  updateCount('karamoozTable','countKaramooz');
+  closeModal('karamoozModal');
+  showToast(`✓ کارآموز «${name}» با موفقیت ذخیره شد`);
+  addAuditLog('ایجاد', `کارآموز ${name}`);
+  document.getElementById('kName').value = '';
+  document.getElementById('kUniversity').value = '';
+}
+
+/* ═══════ VIEW / EDIT / DELETE ═══════ */
+const typeConfig = {
+  project:{icon:'📁',title:'جزئیات پروژه'},
+  user:{icon:'👤',title:'جزئیات کاربر'},
+  collaborator:{icon:'🤝',title:'جزئیات همکار'},
+  sarbaz:{icon:'🎖️',title:'جزئیات سرباز'},
+  karamooz:{icon:'🎓',title:'جزئیات کارآموز'}
+};
+const fieldLabels = {
+  code:'کد',manager:'مجری',status:'وضعیت',progress:'پیشرفت',institute:'پژوهشکده',budget:'بودجه',duration:'مدت',
+  role:'نقش سازمانی',national:'کد ملی',email:'ایمیل',phone:'تلفن',degree:'مدرک',
+  type:'نوع',org:'سازمان',project:'پروژه',start:'تاریخ شروع',end:'تاریخ پایان',reports:'گزارش‌ها',
+  university:'دانشگاه',field:'رشته و گرایش',gpa:'معدل'
+};
+function viewItem(type, name, data){
+  const cfg = typeConfig[type] || {icon:'👁️',title:'جزئیات'};
+  document.getElementById('viewIcon').textContent = cfg.icon;
+  document.getElementById('viewTitle').textContent = `${cfg.title} — ${name}`;
+  const content = document.getElementById('viewContent');
+  content.innerHTML = '';
+  if(data){
+    Object.keys(data).forEach(key => {
+      const label = fieldLabels[key] || key;
+      const item = document.createElement('div');
+      item.className = 'detail-item';
+      item.innerHTML = `<div class="d-label">${label}</div><div class="d-value">${data[key]}</div>`;
+      content.appendChild(item);
+    });
+  }
+  openModal('viewModal');
+}
+
+function editItem(modalId, type){
+  showToast(`فرم ویرایش ${type} باز می‌شود`, 'warn');
+  openModal(modalId);
+}
+
+function deleteItem(tableId, btn, name){
+  if(!confirm(`آیا از حذف «${name}» مطمئن هستید؟`)) return;
+  const row = btn.closest('tr');
+  if(row){
+    row.style.transition = 'all 0.3s ease';
+    row.style.opacity = '0';
+    row.style.transform = 'translateX(-20px)';
+    setTimeout(() => {
+      row.remove();
+      updateCount(tableId);
+      showToast(`🗑️ «${name}» حذف شد`, 'warn');
+      addAuditLog('حذف', name);
+    }, 300);
+  }
+}
+
+function updateCount(tableId, countId){
+  const tbody = document.getElementById(tableId);
+  if(!tbody) return;
+  const n = tbody.querySelectorAll('tr').length;
+  const countEl = countId ? document.getElementById(countId) : document.getElementById(tableId.replace('Table','').replace('projects','countProjects'));
+  const map = {
+    projectsTable:'countProjects', usersTable:'countUsers', collabTable:'countCollab',
+    sarbazTable:'countSarbaz', karamoozTable:'countKaramooz', auditTable:'countAudit'
+  };
+  const targetId = countId || map[tableId];
+  const el = document.getElementById(targetId);
+  if(el) el.textContent = n.toLocaleString('fa-IR') + ' مورد';
+  // Update sidebar badges
+  const badgeMap = {
+    projectsTable:'badgeProjects', usersTable:'badgeUsers', collabTable:'badgeCollab',
+    sarbazTable:'badgeSarbaz', karamoozTable:'badgeKaramooz'
+  };
+  const badgeId = badgeMap[tableId];
+  if(badgeId){
+    const b = document.getElementById(badgeId);
+    if(b) b.textContent = n.toLocaleString('fa-IR');
+  }
+}
+
+/* ═══════ FILTER ═══════ */
+function filterTable(tableId, value, colIndex){
+  const tbody = document.getElementById(tableId);
+  if(!tbody) return;
+  const rows = tbody.querySelectorAll('tr');
+  let visible = 0;
+  rows.forEach(row => {
+    const status = row.getAttribute('data-status') || '';
+    const cellText = row.querySelectorAll('td')[colIndex-1]?.textContent.trim() || '';
+    const match = !value || status.includes(value) || cellText.includes(value);
+    row.style.display = match ? '' : 'none';
+    if(match) visible++;
+  });
+  const map = {projectsTable:'countProjects', usersTable:'countUsers', collabTable:'countCollab', sarbazTable:'countSarbaz', karamoozTable:'countKaramooz'};
+  const el = document.getElementById(map[tableId]);
+  if(el) el.textContent = visible.toLocaleString('fa-IR') + ' مورد';
+}
+
+/* ═══════ EXPORT / DOWNLOAD ═══════ */
+function exportData(name){
+  showToast(`📥 خروجی «${name}» در حال آماده‌سازی...`, 'warn');
+  setTimeout(() => showToast(`✓ خروجی «${name}» دانلود شد`), 1200);
+}
+function exportDashboard(){
+  showToast('📥 گزارش روزانه در حال آماده‌سازی...', 'warn');
+  setTimeout(() => showToast('✓ گزارش روزانه دانلود شد'), 1200);
+}
+function downloadReport(name, format, size){
+  showToast(`📥 گزارش «${name}» (${format} · ${size}) در حال دانلود...`, 'warn');
+  setTimeout(() => showToast(`✓ گزارش «${name}» دانلود شد`), 1400);
+}
+function backupData(){
+  showToast('💾 در حال تهیه نسخه پشتیبان...', 'warn');
+  setTimeout(() => showToast('✓ نسخه پشتیبان با موفقیت تهیه شد'), 1500);
+}
+
+/* ═══════ REFRESH ═══════ */
+function refreshDashboard(){
+  showToast('🔄 در حال به‌روزرسانی...', 'warn');
+  setTimeout(() => {
+    animateCounters();
+    buildChart();
+    showToast('✓ داشبورد به‌روز شد');
+  }, 700);
+}
+
+/* ═══════ AUDIT LOG ═══════ */
+function addAuditLog(action, entity){
+  const tbody = document.getElementById('auditTable');
+  if(!tbody) return;
+  const now = new Date();
+  const time = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const cls = action === 'ایجاد' ? 'active' : action === 'ویرایش' ? 'pending' : 'inactive';
+  const row = document.createElement('tr');
+  row.innerHTML = `<td class="mono">${time}</td><td>مدیر پژوهشکده</td><td><span class="status-badge ${cls}">${action}</span></td><td>${entity}</td><td class="mono">192.168.1.10</td>`;
+  tbody.insertBefore(row, tbody.firstChild);
+  updateCount('auditTable','countAudit');
+}
+function clearAuditLog(){
+  if(!confirm('آیا از پاک‌سازی لاگ‌ها مطمئن هستید؟')) return;
+  const tbody = document.getElementById('auditTable');
+  tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:30px;color:var(--text-mute)">لاگ‌ها پاک‌سازی شد</td></tr>';
+  updateCount('auditTable','countAudit');
+  showToast('🧹 لاگ‌ها پاک‌سازی شدند','warn');
+}
+
+/* ═══════ TOAST ═══════ */
+let toastTimer;
+function showToast(msg, type){
+  toastMsg.textContent = msg;
+  toastEl.classList.remove('warn','error');
+  toastIco.textContent = '✓';
+  if(type === 'warn'){ toastEl.classList.add('warn'); toastIco.textContent = '!'; }
+  if(type === 'error'){ toastEl.classList.add('error'); toastIco.textContent = '✕'; }
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3000);
+}
+
+/* ═══════ SEARCH ═══════ */
+if(globalSearch){
+  globalSearch.addEventListener('keydown', e => {
+    if(e.key === 'Enter'){
+      const q = e.target.value.trim();
+      if(q) showToast(`🔍 جستجو برای: «${q}»`, 'warn');
+    }
+  });
+}
+document.addEventListener('keydown', e => {
+  if((e.ctrlKey || e.metaKey) && e.key === 'k'){
+    e.preventDefault();
+    if(globalSearch) globalSearch.focus();
+  }
+});
+
+/* ═══════ INIT ═══════ */
+setTheme(currentTheme);
+if(currentLayout === 'horizontal'){
+  sidebar.classList.add('horizontal');
+  appLayout.classList.add('layout-horizontal');
+  const lbl = document.getElementById('layoutLabel');
+  if(lbl) lbl.textContent = 'افقی';
+}
+
+document.querySelectorAll('.theme-picker .theme-dot').forEach(dot => {
+  dot.addEventListener('click', () => {
+    setTheme(dot.dataset.theme);
+    showToast(`تم ${themeNames[dot.dataset.theme]} اعمال شد`);
+  });
+});
+</script>
+</body>
+</html>
